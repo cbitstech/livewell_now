@@ -1,0 +1,12 @@
+<div ng-include="'views/partials/navbar.html'"></div>
+
+<div ng-bind-html="instructionsContent"></div>
+
+<div ng-controller="FetchContentCtrl">
+	<button ng-click="fetchContent()" ng-controller="FetchContentCtrl" class="btn btn-primary">Update Application Content</button>
+
+	<div id="update-summary">
+		<div ng-repeat="item in summary">{{item.label}</div>
+	</div>
+
+</div>

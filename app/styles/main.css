@@ -1,0 +1,25 @@
+.btn-full {width:100%; margin-top:.5em; display:block;}
+
+.navbar-header h1,h2,h3 {width:80%; float:left;  margin-top:.5em; }
+
+.logo {width:50px; float:right; margin-top:1em;}
+
+.row.header {position:absolute; top:0; left:0; width:100%; background-color: #4E5D6C}
+
+.wide {width:100%;}
+
+.bgcolor1{background-color: #BF5052;}
+.bgcolor2{background-color: #C56564;}
+.bgcolor3{background-color: #D89494;}
+.bgcolor4{background-color: #E4B8B8;}
+.bgcolor5{background-color: #C2D49D;}
+.bgcolor6{background-color: #94CDDB;}
+.bgcolor7{background-color: #5DA9BA;}
+.bgcolor8{background-color: #368498;}
+.bgcolor9{background-color: #145F79;}
+
+h4{margin-top:.75em !important;}
+
+.btn-group-radio{padding:.25em 0; text-align: center;}
+
+.center-form {text-align: center;}
