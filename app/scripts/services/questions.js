@@ -12,18 +12,30 @@ angular.module('livewellApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
 
   var content = {};
-  var COLLECTION_KEY = 'questions';
+  var QUESTIONS_COLLECTION_KEY = 'questions';
+  var RESPONSES_COLLECTION_KEY = 'question-responses';
 
   content.query = function(questionGroup){
 
-  if (localStorage[COLLECTION_KEY] != undefined){
-  content.items = JSON.parse(localStorage[COLLECTION_KEY]); 
+  if (localStorage[QUESTIONS_COLLECTION_KEY] != undefined){
+  //grab from synched local storage
+  content.items = JSON.parse(localStorage[QUESTIONS_COLLECTION_KEY]);
+  //filter to show only one question group
+  content.items = _.where(content.items, {questionGroup:questionGroup});
+  
+  //attach response groups to questions
+  var responses_collection = JSON.parse(localStorage['question-responses']);
+
+  _.each(content.items, function(el,idx){
+      content.items[idx].responses = _.where(responses_collection, {responseGroupId: el.responseGroupId});
+  });
+
+  content.items = _.sortBy(content.items,"order");
+
 	}
 	else{
 		content.items = [];
 	}
-
-  content.items = _.where(content.items, {questionGroup:questionGroup})
 
  	return content.items
 

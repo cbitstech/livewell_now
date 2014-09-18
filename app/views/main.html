@@ -1,3 +1,15 @@
 <h3>{{pageTitle}}</h3><img src="images/logo.png" class="logo">
 
 <a ng-repeat="link in mainLinks" ng-href="#/{{link.href}}" class="btn btn-info btn-full">{{link.name}}</a>
+<br/><br/>
+<div class="col-xs-12 col-sm-12 col-md-12">
+
+<div ng-controller="FetchContentCtrl">
+	<button ng-click="fetchContent()" class="btn btn-primary">Update Application Content</button>
+
+	<div id="update-summary">
+		<div ng-repeat="item in summary">{{item.label}</div>
+	</div>
+
+</div>
+</div>

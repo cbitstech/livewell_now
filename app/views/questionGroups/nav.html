@@ -1,0 +1,17 @@
+<div class="question-nav ">
+	<div class="nav-left">
+		<button class="btn btn-lg btn-warning" ng-click='back()' ng-if="$index != 0" ng-bind-html="label('back')"></button>
+		&nbsp;
+	</div>
+	<div class="nav-center">
+
+  <div class="question-group-progress">
+  	{{$index+1}} / {{numberOfQuestions}}
+  </div>
+	</div>
+	<div class="nav-right">
+		&nbsp;
+		<button class="btn btn-lg btn-warning" ng-click='next()' ng-if="$index != numberOfQuestions -1" ng-bind-html="label('next')"></button>
+	<button type="submit" class="btn btn-lg btn-warning" ng-click='submit()' ng-if="$index == numberOfQuestions - 1" ng-bind-html="label('submit')"></button>
+	</div>
+</div>

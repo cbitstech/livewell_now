@@ -91,9 +91,17 @@ angular
         templateUrl: 'views/weekly_check_in.html',
         controller: 'WeeklyCheckInCtrl'
       })
+      .when('/weekly_check_in/:questionIndex', {
+        templateUrl: 'views/weekly_check_in.html',
+        controller: 'WeeklyCheckInCtrl'
+      })
       .when('/daily_check_in', {
         templateUrl: 'views/daily_check_in.html',
         controller: 'DailyCheckInCtrl'
+      })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl'
       })
       .otherwise({
         redirectTo: '/'

@@ -11,7 +11,6 @@ angular.module('livewellApp')
   .controller('MedicationsCtrl', function ($scope,UserData) {
     $scope.pageTitle = "My Medications";
     $scope.medications = UserData.query('medications');
-
-
     
+
   });

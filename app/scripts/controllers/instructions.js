@@ -7,9 +7,8 @@
  * # InstructionsCtrl
  * Controller of the livewellApp
  */
-angular.module('livewellApp')
-  .controller('InstructionsCtrl', function ($scope, StaticContent) {
-    $scope.pageTitle = "Instructions & Settings";
-    $scope.instructionsContent = StaticContent.query('instructions');
+	angular.module('livewellApp')
+	  .controller('InstructionsCtrl', function ($scope, StaticContent) {
+	    $scope.pageTitle = "Instructions";
 
-  });
+	  });

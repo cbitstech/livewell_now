@@ -1,4 +1,23 @@
-<h4>Awareness</h4>
-	<table class="col-md-12 col-sm-12" ng-controller="AwarenessCtrl">
+
+<div ng-controller="AwarenessCtrl">
+<a ng-click="scrollTo('action')" class="btn btn-warning">Action</a>
+<a ng-click="scrollTo('anchors')" class="btn btn-warning">Anchors</a>
+<a ng-click="scrollTo('plan')" class="btn btn-warning">Plan</a>
+
+
+<h5 id="action">Action</h5>
+	<table class="col-md-12 col-sm-12" >
 		<tr ng-repeat="element in awareness"><th class="col-md-1 col-xs-1 col-sm-1 bgcolor{{element.order}}">{{element.value}}</th><th class="col-xs-2 col-md-2 col-sm-2 bgcolor{{element.order}}">{{element.name}}</th><td class="col-xs-9 col-md-9 col-sm-9" ng-bind-html="element.response"></td></tr>
 	</table>
+
+<h5 id="anchors">Anchors</h5>
+	<table class="col-md-12 col-sm-12">
+		<tr ng-repeat="element in awareness"><th class="col-md-1 col-xs-1 col-sm-1 bgcolor{{element.order}}">{{element.value}}</th><th class="col-xs-2 col-md-2 col-sm-2 bgcolor{{element.order}}">{{element.name}}</th><td class="col-xs-9 col-md-9 col-sm-9" ng-bind-html="element.response"></td></tr>
+	</table>
+
+<h5 id="plan">Plan</h5>
+	<table class="col-md-12 col-sm-12">
+		<tr ng-repeat="element in awareness"><th class="col-md-1 col-xs-1 col-sm-1 bgcolor{{element.order}}">{{element.value}}</th><th class="col-xs-2 col-md-2 col-sm-2 bgcolor{{element.order}}">{{element.name}}</th><td class="col-xs-9 col-md-9 col-sm-9" ng-bind-html="element.response"></td></tr>
+	</table>
+
+</div>

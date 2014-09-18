@@ -8,7 +8,7 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, UserDetails) {
 
   	$scope.pageTitle = 'LiveWell';
 
@@ -17,7 +17,14 @@ angular.module('livewellApp')
     {name:"Check Ins", href:"checkins"},
     {name:"Daily Review", href:"daily_review"},
     {name:"Wellness Plan", href:"wellness"},
-    {name:"Instructions & Settings", href:"instructions"}
+    {name:"Instructions", href:"instructions"},
+    {name:"Settings", href:"settings"}
+
     ];
-    
+
+    console.log(UserDetails.find);
+
+    debugger;
+
+
   });
