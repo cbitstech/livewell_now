@@ -12,7 +12,7 @@ angular.module('livewellApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
  	
   var content = {};
-  var _COLLECTION_KEY = 'static-content';
+  var _COLLECTION_KEY = 'staticContent';
   var _NULL_COLLECTION_MESSAGE = '<div class="alert alert-warning">No content has been provided for this section.</div>';
 
   if (localStorage[_COLLECTION_KEY] != undefined){

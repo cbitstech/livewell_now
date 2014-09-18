@@ -11,7 +11,7 @@
  .controller('FetchContentCtrl', function ($scope,$http) {
 
  	var SERVER_LOCATION = 'http://localhost:2403/';
- 	var APP_COLLECTIONS_ROUTE = 'app-collections';
+ 	var APP_COLLECTIONS_ROUTE = 'appcollections';
  	var USER_ID = 'test';
 
  	var downloadContent = function(app_collections){

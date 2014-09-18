@@ -13,8 +13,9 @@ angular.module('livewellApp')
 
   var content = {};
   var _QUESTIONS_COLLECTION_KEY = 'questions';
-  var _RESPONSES_COLLECTION_KEY = 'question-responses';
-  var _QUESTION_CRITERIA_COLLECTION_KEY = 'question-criteria';
+  var _RESPONSES_COLLECTION_KEY = 'questionresponses';
+  var _QUESTION_CRITERIA_COLLECTION_KEY = 'questioncriteria';
+  var _RESPONSE_CRITERIA_COLLECTION_KEY = 'responsecriteria';
 
   content.query = function(questionGroup){
 

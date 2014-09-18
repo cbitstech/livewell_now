@@ -13,11 +13,18 @@ angular.module('livewellApp')
 
 
   	$scope.initiateLocalBackup = function(){
-  		  	$scope.localStorageContents = JSON.stringify(localStorage);
+  		  	$scope.localStorageContents = JSON.stringify(JSON.stringify(localStorage));
   	}
 
   	$scope.restoreLocalBackup = function(){
+  		var restoreContent = JSON.parse(JSON.parse($scope.localStorageContents));
 
+  		_.each(_.keys(restoreContent), function(el){
+
+  			debugger;
+  			localStorage[el] = eval("restoreContent." + el);
+
+  		});
   		localStorage = JSON.parse($scope.localStorageContents);
   		//open file or copy and paste string and replace localStorage
 
