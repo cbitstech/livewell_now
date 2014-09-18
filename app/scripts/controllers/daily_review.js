@@ -8,15 +8,14 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('DailyReviewCtrl', function ($scope,$sanitize) {
+  .controller('DailyReviewCtrl', function ($scope) {
     $scope.pageTitle = "Daily Review";
 
-    $scope.medicationPercentage = .3;
-    $scope.sleepPercentage = .8;
-    $scope.routinePercentage = .4;
-    $scope.wellnessPercentage = .1;
+    $scope.medicationPercentage = 0;
+    $scope.sleepPercentage = 0;
+    $scope.routinePercentage = 0;
+    $scope.wellnessPercentage = 0;
 
-
-    $scope.reviewResponse ='Sorry to hear you\'re not taking all of your medications. <Br/>How about using LiveWell to help?';
+    $scope.reviewResponse = '<div class="alert-warning alert">No response exists</div>'
 
   });

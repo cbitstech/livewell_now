@@ -22,4 +22,15 @@ angular.module('livewellApp')
 
     ];
 
+    // $scope.showLogin = function(){
+
+    //   if (UserDetails.find.id == null){
+    //     return true
+    //   }
+    //   else {
+    //     return false
+    //   }
+
+    // }
+
   });

@@ -5,7 +5,7 @@
  * @name livewellApp.Questions
  * @description
  * # Questions
- * Service in the livewellApp.
+ * accesses locally stored questions that were provided over the questions / question-responses routes
  */
 angular.module('livewellApp')
   .service('Questions', function Questions() {

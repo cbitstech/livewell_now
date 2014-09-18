@@ -20,7 +20,6 @@ angular.module('livewellApp')
     	userID: null,
     	groupID: null,
     	loginKey: null
-
     }
 
     //if there is no user, create a dummy user object based on the above model

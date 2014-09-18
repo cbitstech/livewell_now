@@ -5,17 +5,18 @@
  * @name livewellApp.StaticContent
  * @description
  * # StaticContent
- * Service in the livewellApp.
+ * accesses general purpose locally stored static content
  */
 angular.module('livewellApp')
   .service('StaticContent', function StaticContent() {
     // AngularJS will instantiate a singleton by calling "new" on this function
  	
   var content = {};
-  var COLLECTION_KEY = 'static-content';
+  var _COLLECTION_KEY = 'static-content';
+  var _NULL_COLLECTION_MESSAGE = '<div class="alert alert-warning">No content has been provided for this section.</div>';
 
-  if (localStorage[COLLECTION_KEY] != undefined){
-  content.items = JSON.parse(localStorage[COLLECTION_KEY]); 
+  if (localStorage[_COLLECTION_KEY] != undefined){
+  content.items = JSON.parse(localStorage[_COLLECTION_KEY]); 
 	}
 	else{
 		content.items = [];
@@ -29,7 +30,7 @@ angular.module('livewellApp')
   return queryResponse[0].content
   }
   else{
- 	return '<div class="alert alert-warning">No content has been provided for this section.</div>';
+ 	return _NULL_COLLECTION_MESSAGE;
 
   }}
 

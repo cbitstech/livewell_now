@@ -5,7 +5,8 @@
  * @name livewellApp.Pound
  * @description
  * # Pound
- * Service in the livewellApp.
+ * acts as an interface to localStorage 
+ * TODO, use localForage, but gracefully degrade to localStorage if it doesn't exist
  */
 angular.module('livewellApp')
   .service('Pound', function Pound() {

@@ -5,7 +5,7 @@
  * @name livewellApp.Guid
  * @description
  * # Guid
- * Service in the livewellApp.
+ * provides the capacity to generate a guid as needed,
  */
 angular.module('livewellApp')
   .service('Guid', function Guid() {
