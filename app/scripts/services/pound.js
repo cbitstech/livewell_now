@@ -14,6 +14,8 @@ angular.module('livewellApp')
 
     var pound = {};
 
+    console.warn('CAUTION: localForage does not exist');
+
 		//pound.insert(key, object)
 		//adds to or CREATES a store
 		//key: name of thing to store

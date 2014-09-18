@@ -103,6 +103,10 @@ angular
         templateUrl: 'views/settings.html',
         controller: 'SettingsCtrl'
       })
+      .when('/localStorageBackupRestore', {
+        templateUrl: 'views/localstoragebackuprestore.html',
+        controller: 'LocalstoragebackuprestoreCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

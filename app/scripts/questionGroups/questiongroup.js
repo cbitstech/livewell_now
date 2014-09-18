@@ -24,17 +24,26 @@ angular.module('livewellApp')
             scope.questionGroups = _.flatten(scope.questionGroups);
 
             scope.surveyFailure = function(){
+
+                  var error = {};
                   //there are no questions
                   if (scope.questionGroups.length == 0 && _.isArray(scope.questionGroups)) {
-                        return { error:true, message:"There are no questions available." }
+                        error = { error:true, message:"There are no questions available." }
                   }
                   //questions are not in an array
                   else if (_.isArray(scope.questionGroups) == false){
-                        return { error:true, message:"Questions are not properly formatted." }
+                        error = { error:true, message:"Questions are not properly formatted." }
                   }
                   else {
-                        return { error:false }
+                        error = { error:false }
                   }
+
+                  if (error.error == true){
+                        console.error(error);
+                  }
+
+                  return error
+
             }
 
       	scope.label = function(labelName){
@@ -48,7 +57,6 @@ angular.module('livewellApp')
 
       	scope.showQuestion = function(questionIndex){
       		return questionIndex == scope.currentIndex;
-
       	}
 
       	scope.next = function(){
@@ -56,20 +64,15 @@ angular.module('livewellApp')
       	};
 
       	scope.back = function(){
-
       		scope.currentIndex--;
-
       	};
 
 
       	//is overridden by scope.complete function if different action is desired at the end of survey
       	scope.submit = scope.submit || function(){
-
       		console.log('OVERRIDE THIS IN YOUR CONTROLLER SCOPE: ',$('form').serializeArray());
-			$location.path('#/');
-      		
+			$location.path('#/');      		
       	}
-
 
       	scope.questionViewType = function(questionType){
 
