@@ -22,9 +22,4 @@ angular.module('livewellApp')
 
     ];
 
-    console.log(UserDetails.find);
-
-    debugger;
-
-
   });
