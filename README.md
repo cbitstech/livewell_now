@@ -1,6 +1,5 @@
 livewell_now
 ============
-
 Required dependencies:
 - Node.js
 - Bower
@@ -9,7 +8,6 @@ Required dependencies:
 
 Build and Install Process
 -------------------------
-
 1. Install Node.JS from http://nodejs.org/download/
 2. Clone the repo
 3. Run `npm install npm install --g bower grunt-cli yo generator-angular`
@@ -21,7 +19,6 @@ http://yeoman.io/codelab/setup.html
 
 To seed the application:
 ------------------------
-
 1. Visit the http://localhost:9000/#/localStorageBackupRestore route in the application
-2. Copy and paste the contents of the `backup` file into the text box
+2. Copy and paste the contents of the `backup` file from the root of this repository into the text box
 3. Restore using the restore button
