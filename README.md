@@ -19,4 +19,4 @@ Build and Install Process
 
 Need help or having issues? Take a look at:
 -------------------------------------------
-[http://yeoman.io/codelab/setup.html]
+http://yeoman.io/codelab/setup.html
