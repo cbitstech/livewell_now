@@ -19,6 +19,6 @@ http://yeoman.io/codelab/setup.html
 
 To seed the application:
 ------------------------
-1. Visit the http://localhost:9000/#/localStorageBackupRestore route in the application
+1. Visit the `/localStorageBackupRestore` route in the application
 2. Copy and paste the contents of the `backup` file from the root of this repository into the text box
 3. Restore using the restore button
