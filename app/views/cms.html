@@ -1,0 +1,54 @@
+<div class="navbar navbar-fixed">
+  <form class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+      <select class="form-control" ng-model="questionGroup" ng-change="showGroup()" ng-options="x.id as x.name for x in questionGroups">
+        <option value="">choose a question group</option>
+      </select>
+      <select class="form-control" ng-model="viewType" ng-options="x.value as x.name for x in viewTypes">
+        <option value="">select a view</option>
+      </select>
+    </div>
+  </form>
+</div>
+<div ng-if="viewType == 'table'">
+  <button ng-if="questionGroup != ''" class="btn btn-primary" ng-click="addQuestion()"> + Add Question</button>
+  <table style="width:100%;"  class="table table-striped">
+    <tr ng-repeat="question in selectedQuestions">
+      <td class="col-md-1">{{$index}}</td>
+      <td class="col-md-7"> <span class="label label-info">{{question.type}}</span><div ng-bind-html="question.content" ng-click="editQuestion('{{question.id}}')" contenteditable="true" ng-model="question.content"></div></td>
+      <td class="col-md-4">
+        <table class="table table-striped">
+          <tr ng-repeat="response in question.responses">
+            <td ng-click="editResponse('{{response.id}}')" class="col-md-1">{{response.value}}</td>
+            <td ng-click="editResponse('{{response.id}}')" class="col-md-10">{{response.label}}</td>
+            <td class="col-md-1"><button class="btn btn-danger" ng-click="deleteResponse('{{response.id}}')"> - </button></td>
+          </tr>
+        </table>
+        <button class="btn btn-success" ng-click="addResponse('{{question.id}}')"> + Add Response </button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div ng-if="viewType == 'map'" class="row">
+
+</div>
+
+
+<!-- <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">{{modalTitle}}</h4>
+      </div>
+      <div class="modal-body" ng-bind-html="modalContents">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->

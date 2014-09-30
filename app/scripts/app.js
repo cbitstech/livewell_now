@@ -107,6 +107,14 @@ angular
         templateUrl: 'views/localstoragebackuprestore.html',
         controller: 'LocalstoragebackuprestoreCtrl'
       })
+      .when('/cms', {
+        templateUrl: 'views/cms.html',
+        controller: 'CmsCtrl'
+      })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -23,8 +23,10 @@ angular.module('livewellApp')
   //grab from synched local storage
   content.items = JSON.parse(localStorage[_QUESTIONS_COLLECTION_KEY]);
   //filter to show only one question group
+  if (questionGroup != undefined){
   content.items = _.where(content.items, {questionGroup:questionGroup});
-  
+  }
+
   //attach response groups to questions
   var responses_collection = JSON.parse(localStorage[_RESPONSES_COLLECTION_KEY]);
   var criteria_collection = JSON.parse(localStorage[_QUESTION_CRITERIA_COLLECTION_KEY]);
@@ -45,6 +47,17 @@ angular.module('livewellApp')
  	return content.items
 
 	}
+
+  content.uniqueQuestionGroups = function(){
+
+    var uniqueQuestionGroups = [];
+    _.each(_.uniq(content.query(),"questionGroup"), function(el){
+        uniqueQuestionGroups.push({name: el.questionGroup, id: el.questionGroup});
+    });
+
+    return _.uniq(uniqueQuestionGroups,"name")
+
+  }
 
   return content
   });
