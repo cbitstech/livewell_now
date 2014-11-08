@@ -16,7 +16,7 @@ angular.module('livewellApp')
     var userDetails = {};
 
     var userDetailsModel = {
-    	id: 1,
+    	uid: 1,
     	userID: null,
     	groupID: null,
     	loginKey: null
@@ -24,11 +24,11 @@ angular.module('livewellApp')
 
     //if there is no user, create a dummy user object based on the above model
     if (localStorage[_USER_LOCAL_COLLECTION_KEY] == undefined){
-    	Pound.save(_USER_LOCAL_COLLECTION_KEY,userDetailsModel);
+    	// Pound.save(_USER_LOCAL_COLLECTION_KEY,userDetailsModel);
     }
 
     //return the current user object
-    userDetails.find = Pound.find(_USER_LOCAL_COLLECTION_KEY,{id:1})[0];
+    userDetails.find = Pound.find(_USER_LOCAL_COLLECTION_KEY,{uid:'1'})[0];
 
     //updates the whole user object
     userDetails.update = function(userObject){

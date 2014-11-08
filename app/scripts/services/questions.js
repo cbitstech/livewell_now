@@ -29,13 +29,25 @@ angular.module('livewellApp')
 
   //attach response groups to questions
   var responses_collection = JSON.parse(localStorage[_RESPONSES_COLLECTION_KEY]);
-  var criteria_collection = JSON.parse(localStorage[_QUESTION_CRITERIA_COLLECTION_KEY]);
+  var question_criteria_collection = JSON.parse(localStorage[_QUESTION_CRITERIA_COLLECTION_KEY]);
+  var response_criteria_collection = JSON.parse(localStorage[_RESPONSE_CRITERIA_COLLECTION_KEY]);
 
   _.each(content.items, function(el,idx){
       content.items[idx].responses = _.where(responses_collection, {responseGroupId: el.responseGroupId});
-      content.items[idx].criteria = _.where(criteria_collection, {questionCriteriaId: el.questionCriteriaId});
+      content.items[idx].criteria = _.where(question_criteria_collection, {questionCriteriaId: el.questionCriteriaId});
+      _.each(content.items[idx].responses, function(el2,idx2){
+        content.items[idx].responses[idx2].criteria = _.where(response_criteria_collection,{responseId:el2.id});
+      });
 
   });
+
+
+
+  content.responses = responses_collection;
+
+  content.questions = JSON.parse(localStorage[_QUESTIONS_COLLECTION_KEY]);
+  content.questionCriteria = question_criteria_collection;
+  content.responseCriteria = response_criteria_collection;
 
   content.items = _.sortBy(content.items,"order");
 

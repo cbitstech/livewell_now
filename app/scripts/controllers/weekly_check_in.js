@@ -29,15 +29,16 @@ angular.module('livewellApp')
 
     		var responses = $('form').serializeArray();
 
-    		_.each(responses, function(el){
+            var sessionID = Guid.create();
 
+    		_.each(responses, function(el){
 
     			var payload = {
     				userId: UserDetails.find,
     				survey: $scope.pageTitle,
     				questionDataLabel: el.name,
     				questionValue: el.value,
-    				sessionGUID: Guid.create(),
+    				sessionGUID: sessionID,
     				savedAt: new Date()
     			};
 

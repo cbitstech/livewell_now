@@ -16,6 +16,10 @@ angular.module('livewellApp')
     $scope.routinePercentage = 0;
     $scope.wellnessPercentage = 0;
 
+ 
+    
+
+
     $scope.reviewResponse = '<div class="alert-warning alert">No response exists</div>'
 
   });

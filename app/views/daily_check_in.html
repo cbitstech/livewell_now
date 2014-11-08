@@ -9,23 +9,11 @@
         <input type="radio" ng-model="medications" value="some"> Some</label>
     <label class="btn btn-danger">
         <input type="radio" ng-model="medications" value="none"> None</label>
+        <h4>Went To Bed</h4>
+        <input type="time" ng-model="toBed">
 
-    <h4>Sleep</h4>
-    
-    <label>
-        <select ng-model="toBed">
-            <option value="">To Bed</option>
-            <option ng-repeat="option in dailyHourRange" value="{{option.value}}">{{option.label}}
-            </option>
-        </select>
-    </label>
-    <label>
-        <select ng-model="gotUp">
-            <option value="">Got Up</option>	
-            <option ng-repeat="option in dailyHourRange" value="{{option.value}}">{{option.label}}
-            </option>
-        </select>
-    </label>
+        <h4>Got Up</h4>
+        <input type="time" ng-model="gotUp">
 
     <h4>Wellness</h4>
     <div class="btn-group btn-group-justified" data-toggle="buttons">

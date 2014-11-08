@@ -1,15 +1,13 @@
 <div ng-include="'views/partials/navbar.html'"></div>
 
+<h3>Royal Oak Rules</h3>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
-<h3>When would you like your first reminder of the day for the daily check-in?</h3>
-<br/>
-<br/>
-    <label>
-        <select ng-model="firstPrompt">
-            <option value="">First Prompt</option>
-            <option ng-repeat="option in dailyHourRange" value="{{option.value}}">{{option.label}}
-            </option>
-        </select>
-    </label>
+
+<h4>Daily Check-In Prompt Time</h4>
+
+        <input type="time" ng-model="checkinPrompt" ng-change="checkinPromptSchedule()">
+
+<h4>Daily Review Prompt Time</h4>
+        <input type="time" ng-model="reviewPrompt" ng-change="reviewPromptSchedule()">
 </div>
