@@ -36,9 +36,17 @@ $scope.editResponses = function(id){
     $scope.modalTitle = 'Edit Responses';
     $scope.responseGroupId = id;
     $scope.showResponses = _.where($scope.responses,{responseGroupId:$scope.responseGroupId});
-    $scope.uniqueResponseGroups = _.uniq($scope.responses,'respnoseGroupId');
+    $scope.uniqueResponseGroups = _.pluck(_.uniq($scope.responses,'responseGroupId'),'responseGroupId');
+    $scope.goesToOptions = $scope.selectedQuestions;
     $("#responseModal").modal();
 }
+
+$scope.saveResponses = function(id){
+  $("#responseModal").modal('toggle');
+  Questions.save('responses',$scope.responses);
+  Questions.save('responseCriteria',$scope.responseCriteria);
+}
+
 
 
 $scope.editQuestion = function(id){

@@ -8,10 +8,11 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('InterventionCtrl', function ($scope, Questions) {
+  .controller('InterventionCtrl', function ($scope, $routeParams,Questions) {
     $scope.pageTitle = "Intervention";
 
-    $scope.questionGroups = Questions.query('cyoa');
+    console.log($routeParams);
+    $scope.questionGroups = Questions.query($routeParams.code);
 
     $scope.hideProgressBar = true;
     console.log($scope.questionGroups);

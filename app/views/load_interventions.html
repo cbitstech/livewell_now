@@ -1,0 +1,7 @@
+<h1>Selection Menu</h1>
+
+ <a ng-hide="intervention.disabled == 'disabled'" ng-repeat="intervention in hierarchy | orderBy:'code'" class="btn wide btn-info {{intervention.disabled}}" href="#/intervention/{{intervention.code}}">{{intervention.code}} {{intervention.category}}</a>
+
+<ol>
+	<li></li>
+</ol>

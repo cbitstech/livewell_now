@@ -79,6 +79,10 @@ angular
         templateUrl: 'views/intervention.html',
         controller: 'InterventionCtrl'
       })
+      .when('/intervention/:code', {
+        templateUrl: 'views/intervention.html',
+        controller: 'InterventionCtrl'
+      })
       .when('/exit', {
         templateUrl: 'views/exit.html',
         controller: 'ExitCtrl'
@@ -114,6 +118,18 @@ angular
       .when('/admin', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl'
+      })
+      .when('/load_interventions', {
+        templateUrl: 'views/load_interventions.html',
+        controller: 'LoadInterventionsCtrl'
+      })
+      .when('/lesson_player/:id', {
+        templateUrl: 'views/lesson_player.html',
+        controller: 'LessonPlayerCtrl'
+      })
+      .when('/lesson_player/', {
+        templateUrl: 'views/lesson_player.html',
+        controller: 'LessonPlayerCtrl'
       })
       .otherwise({
         redirectTo: '/'

@@ -10,7 +10,7 @@
  angular.module('livewellApp')
  .controller('FetchContentCtrl', function ($scope,$http) {
 
- 	var SERVER_LOCATION = 'https://livewellnew.firebaseio.com/';
+ 	var SERVER_LOCATION = 'https://livewell2.firebaseio.com/';
  	var APP_COLLECTIONS_ROUTE = 'appcollections';
  	var USER_ID = 'test';
     var ROUTE_SUFFIX = '.json';

@@ -8,8 +8,10 @@
  * accesses locally stored questions that were provided over the questions / question-responses routes
  */
 angular.module('livewellApp')
-  .service('Questions', function Questions() {
+  .service('Questions', function Questions($http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
+
+  var _CONTENT_SERVER_URL = 'https://livewellnew.firebaseio.com';
 
   var content = {};
   var _QUESTIONS_COLLECTION_KEY = 'questions';
@@ -59,6 +61,12 @@ angular.module('livewellApp')
  	return content.items
 
 	}
+
+  content.save = function(collectionToSave,collection){
+    debugger;
+    localStorage[collectionToSave] = JSON.stringify(collection);
+    $http.put(_CONTENT_SERVER_URL + "/" + collectionToSave).success(alert("Data saved to server"));
+  }
 
   content.uniqueQuestionGroups = function(){
 
