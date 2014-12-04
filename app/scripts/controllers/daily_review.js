@@ -8,12 +8,13 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('DailyReviewCtrl', function ($scope) {
+  .controller('DailyReviewCtrl', function ($scope,$routeParams) {
     $scope.pageTitle = "Daily Review";
 
-$scope.percentageGroups = [
+
+$scope.interventionGroups = [
 {
-		code:5,
+	code:5,
     medicationPercentage : .88,
     sleepPercentage : .65,
     routinePercentage : .88,
@@ -25,7 +26,7 @@ $scope.percentageGroups = [
     response: 'Glad to see you\'re doing well. That\'s great! Keep up the good work. Try getting a bit more sleep in order to stay well.'
  },
  {
-		code:11,
+	code:11,
     medicationPercentage : .88,
     sleepPercentage : .81,
     routinePercentage : .88,
@@ -33,7 +34,8 @@ $scope.percentageGroups = [
     medicationClass : 'success',
     sleepClass : 'success',
     routineClass : 'success',
-    wellnessClass : 'warning'
+    wellnessClass : 'warning',
+    response: 'Sorry to hear you\'re down. You\'re doing the right thing by participating in this program! Things can get better.'
  },
  {
 		code:8,
@@ -44,7 +46,8 @@ $scope.percentageGroups = [
     medicationClass : 'warning',
     sleepClass : 'success',
     routineClass : 'success',
-    wellnessClass : 'success'
+    wellnessClass : 'success',
+    response: 'I see you\'re well, which is great! Let\'s keep that going. Looks like you may need to adjust your medication schedule in order to do so.'
  },
 {
 		code:2,
@@ -55,28 +58,28 @@ $scope.percentageGroups = [
     medicationClass : 'success',
     sleepClass : 'success',
     routineClass : 'warning',
-    wellnessClass : 'success'
+    wellnessClass : 'success',
+    response: 'I see you\'re doing well. That\'s fantastic! Keep it up. Try getting your routine more consistent in order to stay well.'
+ },
+{
+        code:1,
+    medicationPercentage : 1,
+    sleepPercentage : 1,
+    routinePercentage : 1,
+    wellnessPercentage : 1,
+    medicationClass : 'success',
+    sleepClass : 'success',
+    routineClass : 'success',
+    wellnessClass : 'success',
+    response: 'I see you\'ve been well for several days now. Your medications, sleep, and routine are in order. Keep up the good work!'
  }
 
 ];
  
     
 
-//cat 8
+    $scope.id = $routeParams.id;
+    $scope.selectedIntervention = _.where($scope.interventionGroups, {code:parseInt($routeParams.id)})[0];
 
-    $scope.medicationPercentage = $scope.percentageGroups[0].medicationPercentage;
-    $scope.sleepPercentage = $scope.percentageGroups[0].sleepPercentage;
-    $scope.routinePercentage = $scope.percentageGroups[0].routinePercentage;
-    $scope.wellnessPercentage = $scope.percentageGroups[0].wellnessPercentage;
-
-    $scope.medicationClass = $scope.percentageGroups[0].medicationClass;
-    $scope.sleepClass = $scope.percentageGroups[0].sleepClass;
-    $scope.routineClass = $scope.percentageGroups[0].routineClass;
-    $scope.wellnessClass = $scope.percentageGroups[0].wellnessClass;
- 
-    
-
-
-    $scope.reviewResponse = $scope.percentageGroups[0].response;
 
   });

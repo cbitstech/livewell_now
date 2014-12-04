@@ -39,6 +39,10 @@ angular
         templateUrl: 'views/daily_review.html',
         controller: 'DailyReviewCtrl'
       })
+      .when('/daily_review/:questionIndex', {
+        templateUrl: 'views/daily_review.html',
+        controller: 'DailyReviewCtrl'
+      })
       .when('/wellness', {
         templateUrl: 'views/wellness.html',
         controller: 'WellnessCtrl'
@@ -60,6 +64,14 @@ angular
         controller: 'DailyReviewSummaryCtrl'
       })
       .when('/daily_review_conclusion', {
+        templateUrl: 'views/daily_review_conclusion.html',
+        controller: 'DailyReviewConclusionCtrl'
+      })
+      .when('/daily_review_conclusion/:id', {
+        templateUrl: 'views/daily_review_conclusion.html',
+        controller: 'DailyReviewConclusionCtrl'
+      })
+      .when('/daily_review_conclusion/:intervention_set/:id', {
         templateUrl: 'views/daily_review_conclusion.html',
         controller: 'DailyReviewConclusionCtrl'
       })

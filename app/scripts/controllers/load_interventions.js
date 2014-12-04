@@ -8,7 +8,7 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('LoadInterventionsCtrl', function ($scope) {
+  .controller('LoadInterventionsCtrl', function ($scope, $location) {
     
   	$scope.hierarchy = [
   		
@@ -127,6 +127,7 @@ angular.module('livewellApp')
     "disabled":""
   }
 ];
+
 
 
   });
