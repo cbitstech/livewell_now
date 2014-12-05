@@ -1,26 +1,27 @@
-    <div class="row-fluid mainContainer">
-        <div class="span1">
+    <div class="row-fluid mainContainer" >
+        <div class="col-md-1 col-sm-1 col-xs-1">
         </div>
-        <div class="span10 mainContent">
-        </div>
-        <div class="span1">
+        <div class="col-md-10 col-sm-10 col-xs-10 mainContent" ng-bind-html="currentSlideContents" style="margin-bottom:100px;">
+                    </div>
+        <div class="col-md-1 col-sm-1 col-xs-1">
         </div>
       
     </div>
-    
-    <div class="row-fluid bottom">
-        <div class="span4">
-            <button class="pageBack btn"></button>
+
+    <div style="position:fixed; bottom:0; left:0; width:100%; text-align:center; background-color: dark-blue">
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            <button class="{{backButtonClass}}" ng-click="back()" ng-bind-html="backButton"></button>
         </div>
 
-        <div class="span4">
-            <div class="currentSlideCount"></div>
-            <div class="progress progress-striped chapterProgress">
-                <div class="bar chapterProgressBar" ></div>
-            </div>
+        <div class="col-md-4 col-sm-4 col-xs-4" >
+            <div class="currentSlideCount">{{currentSlideIndex+1}} out of {{currentChapterContents.length}}</div>
+            <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="{{((currentSlideIndex+1)/currentChapterContents.length)*100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{((currentSlideIndex+1)/currentChapterContents.length)*100}}%;">
+  </div>
+</div>
         </div>
 
-        <div class="span4">
-            <button class="pageNext btn"></button>
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            <button class="{{nextButtonClass}}" ng-click="next()" ng-bind-html="nextButton"></button>
         </div>
     </div>

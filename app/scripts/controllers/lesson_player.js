@@ -8,16 +8,16 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('LessonPlayerCtrl', function ($scope, $routeParams) {
+  .controller('LessonPlayerCtrl', function ($scope, $routeParams, $sce, $location) {
 
-$scope.appContent = JSON.parse(localStorage['lessons']);
 
 $scope.getChapterContents = function (chapter_id, appContent) {
     var search_criteria = {
-        id: chapter_id
+        id: parseInt(chapter_id)
     };
-        chapter_contents_list = _.where(appContent, search_criteria)[0].element_list.toString().split(",");
-        chapter_contents = [];
+
+    var chapter_contents_list = _.where(appContent, search_criteria)[0].element_list.toString().split(",");
+    var chapter_contents = [];
 
     // console.log("Chapter selected:",_.where(appContent, search_criteria)[0]);
     // console.log("Chapter contents list:",chapter_contents_list);
@@ -31,8 +31,43 @@ $scope.getChapterContents = function (chapter_id, appContent) {
     return chapter_contents;
 };
 
-$scope.loadChapter = $scope.getChapterContents()
+$scope.lessons = JSON.parse(localStorage['lessons']);
+
+$scope.backButton = 'Back';
+$scope.backButtonClass = 'btn btn-default';
+$scope.nextButton = 'Next';
+$scope.nextButtonClass = 'btn btn-primary';
+$scope.currentSlideIndex = 0;
 
 
+$scope.currentChapterContents = $scope.getChapterContents($routeParams.id,$scope.lessons);
+
+$scope.currentSlideContents = $scope.currentChapterContents[$scope.currentSlideIndex].main_content;
+
+$scope.next = function(){
+    if ($scope.currentSlideIndex+1 < $scope.currentChapterContents.length){
+    $scope.currentSlideIndex++;
+    $scope.currentSlideContents = $scope.currentChapterContents[$scope.currentSlideIndex].main_content;
+    }
+    else {
+    window.location.href = '#/';
+    }
+
+    if ($scope.currentSlideIndex+1 == $scope.currentChapterContents.length){
+        $scope.nextButton = 'Home';
+    }
+    else{
+        $scope.nextButton = 'Next';
+
+    }
+}
+
+$scope.back = function(){
+    if ($scope.currentSlideIndex > 0){
+    $scope.currentSlideIndex--;
+    $scope.currentSlideContents = $scope.currentChapterContents[$scope.currentSlideIndex].main_content;
+    }
+
+}
 
 });
