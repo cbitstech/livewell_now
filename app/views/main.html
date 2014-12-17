@@ -2,14 +2,23 @@
 
 <a ng-repeat="link in mainLinks" ng-href="#/{{link.href}}" class="btn btn-info btn-full">{{link.name}}</a>
 <br/><br/>
-<div class="col-xs-12 col-sm-12 col-md-12">
+
+
+
 
 <div ng-controller="FetchContentCtrl">
-	<button ng-click="fetchContent()" class="btn btn-primary">Update Application Content</button>
+	<div class="col-xs-12 col-sm-12 col-md-12">
+	<div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center;">
+		<a ng-href="#/settings"><i class="glyphicon glyphicon-cog" style="font-size:2em; color:white !important;"></i></a> 
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center;"><a ng-click="fetchContent()">
+<i class="glyphicon glyphicon-refresh"  style="font-size:2em"></i></a></div>
+		<div class="col-md-4 col-sm-4 col-xs-4" style="text-align:center;"><a ng-href="#/instructions"><i class="glyphicon glyphicon-question-sign"  style="font-size:2em; color:white !important;"></i></a></div>
+		</div>
 
 	<div id="update-summary">
 		<div ng-repeat="item in summary">{{item.label}</div>
 	</div>
 
-</div>
+
 </div>

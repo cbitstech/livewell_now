@@ -2,30 +2,36 @@
 <div ng-controller="AwarenessCtrl">
 
 <div class="btn-group btn-group-justified">
-	<div class="btn-group">
-	<button class="btn-default btn" ng-click="scrollTo('action')">Action</button>
-	</div>
-	<div class="btn-group">
-	<button ng-click="scrollTo('anchors')" class="btn btn-default col-md-4 col-sm-4 col-xs-4">Anchors</button>
-	</div>
-	<div class="btn-group">
+		<div class="btn-group">
 
-	<button ng-click="scrollTo('plan')" class="btn btn-default col-md-4 col-sm-4 col-xs-4">Plan</button>
-</div>
+	<button ng-click="loadPlan()" class="btn btn-default col-md-4 col-sm-4 col-xs-4">Plan</button>
 </div>
 
-<h5 id="action">Action</h5>
+	<div class="btn-group">
+	<button ng-click="loadAnchors()" class="btn btn-default col-md-4 col-sm-4 col-xs-4">Anchors</button>
+	</div>
+	<div class="btn-group">
+	<button class="btn-default btn" ng-click="loadAction()">Description</button>
+	</div>
+
+
+</div>
+
+<div ng-show="showAction">
 	<table class="col-md-12 col-sm-12 table table-striped" >
 		<tr ng-repeat="element in awareness | orderBy:order"><th class="col-md-1 col-xs-1 col-sm-1 bgcolor{{element.order}}">{{element.value}}</th><th class="col-xs-2 col-md-2 col-sm-2 bgcolor{{element.order}}">{{element.name}}</th><td class="col-xs-9 col-md-9 col-sm-9" ng-bind-html="element.response"></td></tr>
 	</table>
+</div>
 
-<h5 id="anchors">Anchors</h5>
+<div ng-show="showAnchors">
 	<table class="col-md-12 col-sm-12 table table-striped">
 		<tr ng-repeat="element in intervention_anchors | orderBy:order"><th class="col-md-1 col-xs-1 col-sm-1 bgcolor{{element.order}}">{{element.value}}</th><th class="col-xs-2 col-md-2 col-sm-2 bgcolor{{element.order}}">{{element.name}}</th><td class="col-xs-9 col-md-9 col-sm-9" ng-bind-html="element.response"></td></tr>
 	</table>
+</div>
 
-<h5 id="plan">Plan</h5>
+<div ng-show="showPlan">
 	<table class="col-md-12 col-sm-12 table table-striped">
 		<tr ng-repeat="element in plan | orderBy:order"><th class="col-md-1 col-xs-1 col-sm-1 bgcolor{{element.order}}">{{element.value}}</th><th class="col-xs-2 col-md-2 col-sm-2 bgcolor{{element.order}}">{{element.name}}</th><td class="col-xs-9 col-md-9 col-sm-9" ng-bind-html="element.response"></td></tr>
 	</table>
+</div>
 </div>

@@ -9,7 +9,7 @@
  */
 angular.module('livewellApp')
   .controller('InterventionCtrl', function ($scope, $routeParams,Questions) {
-    $scope.pageTitle = "Intervention";
+    $scope.pageTitle = "Daily Review";
 
     console.log($routeParams);
     $scope.questionGroups = Questions.query($routeParams.code);

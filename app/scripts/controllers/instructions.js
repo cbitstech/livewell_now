@@ -12,17 +12,17 @@
 	$scope.pageTitle = "Instructions";
 
     $scope.mainLinks = [
-           {id:198,name:"Introduction"},
-            {id:199,name:"Schedule"},
-            {id:201,name:"Settings"},
-            {id:202,name:"Coach"},
-            {id:203,name:"Psychiatrist"},
-            {id:204,name:"Foundations"},
-            {id:205,name:"Daily Check In"},
-            {id:372,name:"Weekly Check In"},
-            {id:369,name:"Daily Review"},
-            {id:370,name:"Charts"},
-            {id:371,name:"Wellness Plan"}]
+           {id:198,name:"Introduction", post:"instructions"},
+            {id:199,name:"Schedule", post:"instructions"},
+            {id:201,name:"Settings", post:"instructions"},
+            {id:202,name:"Coach", post:"instructions"},
+            {id:203,name:"Psychiatrist", post:"instructions"},
+            {id:204,name:"Foundations", post:"instructions"},
+            {id:205,name:"Daily Check In", post:"instructions"},
+            {id:372,name:"Weekly Check In", post:"instructions"},
+            {id:369,name:"Daily Review", post:"instructions"},
+            {id:370,name:"Charts", post:"instructions"},
+            {id:371,name:"Wellness Plan", post:"instructions"}]
 
 
 	  });

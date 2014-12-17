@@ -12,11 +12,10 @@ angular.module('livewellApp')
     $scope.pageTitle = "My Skills";
 
         $scope.mainLinks = [
-           {id:190,name:"Fundamentals"},
-           {id:193,name:"Awareness"},
-           {id:191,name:"Lifestyle"},
-           {id:192,name:"Coping"},
-           {id:195,name:"Team"}
+           {id:'awareness',name:"Awareness"},
+           {id:'lifestyle',name:"Lifestyle"},
+           {id:'coping',name:"Coping"},
+           {id:'team',name:"Team"}
 
            ]
     

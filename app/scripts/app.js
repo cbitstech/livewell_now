@@ -147,6 +147,30 @@ angular
         templateUrl: 'views/lesson_player.html',
         controller: 'LessonPlayerCtrl'
       })
+      .when('/lesson_player/:id/:post', {
+        templateUrl: 'views/lesson_player.html',
+        controller: 'LessonPlayerCtrl'
+      })
+      .when('/skills_fundamentals', {
+        templateUrl: 'views/skills_fundamentals.html',
+        controller: 'SkillsFundamentalsCtrl'
+      })
+      .when('/skills_awareness', {
+        templateUrl: 'views/skills_awareness.html',
+        controller: 'SkillsAwarenessCtrl'
+      })
+      .when('/skills_lifestyle', {
+        templateUrl: 'views/skills_lifestyle.html',
+        controller: 'SkillsLifestyleCtrl'
+      })
+      .when('/skills_coping', {
+        templateUrl: 'views/skills_coping.html',
+        controller: 'SkillsCopingCtrl'
+      })
+      .when('/skills_team', {
+        templateUrl: 'views/skills_team.html',
+        controller: 'SkillsTeamCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

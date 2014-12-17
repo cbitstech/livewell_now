@@ -51,7 +51,11 @@ $scope.next = function(){
     $scope.currentSlideContents = $scope.currentChapterContents[$scope.currentSlideIndex].main_content;
     }
     else {
-    window.location.href = '#/';
+        if ($routeParams.post == undefined)
+        { window.location.href = '#/';}
+        else {
+            window.location.href = '#/' + $routeParams.post;
+        }
     }
 
     if ($scope.currentSlideIndex+1 == $scope.currentChapterContents.length){

@@ -14,17 +14,21 @@
 
 <br/><br/>
         <h4>Went To Bed</h4>
-        <input type="time" ng-model="toBed">
+        <select ng-model="toBed" name="toBed">
+            <option ng-repeat="time in times" value="{{time.value}}" style="color:black !important;">{{time.label}}</option> 
+        </select>
 
         <h4>Got Up</h4>
-        <input type="time" ng-model="gotUp">
+        <select ng-model="gotUp"name="gotUp">
+                    <option ng-repeat="time in times" value="{{time.value}}"  style="color:black !important;">{{time.label}}</option> 
+        </select>
 
     <h4>Wellness</h4>
     <div class="btn-group btn-group-justified" data-toggle="buttons">
-        <label class="btn bgcolor{{response.order}} btn-group-radio" ng-repeat="response in responses">{{response.label}}
+        <label ng-click="highlight('#button{{response.order}}')" id="button{{response.order}}" class="btn bgcolor{{response.order}} btn-group-radio" ng-repeat="response in responses">{{response.label}}
             <input type="radio">
     </div>
 
     <br/>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary btn-full">Continue</button>
 </form>
