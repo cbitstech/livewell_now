@@ -39,7 +39,7 @@ angular
         templateUrl: 'views/daily_review.html',
         controller: 'DailyReviewCtrl'
       })
-      .when('/daily_review/:questionIndex', {
+      .when('/daily_review/:id', {
         templateUrl: 'views/daily_review.html',
         controller: 'DailyReviewCtrl'
       })
@@ -112,6 +112,10 @@ angular
         controller: 'WeeklyCheckInCtrl'
       })
       .when('/daily_check_in', {
+        templateUrl: 'views/daily_check_in.html',
+        controller: 'DailyCheckInCtrl'
+      })
+      .when('/daily_check_in/:id', {
         templateUrl: 'views/daily_check_in.html',
         controller: 'DailyCheckInCtrl'
       })

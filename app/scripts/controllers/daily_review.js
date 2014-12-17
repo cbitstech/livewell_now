@@ -12,9 +12,11 @@ angular.module('livewellApp')
     $scope.pageTitle = "Daily Review";
 
 
+
 $scope.interventionGroups = [
 {
 	code:5,
+    questionSet:"sleep",
     medicationPercentage : .88,
     sleepPercentage : .65,
     routinePercentage : .88,
@@ -27,6 +29,7 @@ $scope.interventionGroups = [
  },
  {
 	code:11,
+    questionSet:'symptom-milddown-prodself',
     medicationPercentage : .88,
     sleepPercentage : .81,
     routinePercentage : .88,
@@ -38,7 +41,8 @@ $scope.interventionGroups = [
     response: 'Sorry to hear you\'re down. You\'re doing the right thing by participating in this program! Things can get better.'
  },
  {
-		code:8,
+	code:8,
+    questionSet:'at-risk-medications',
     medicationPercentage : .60,
     sleepPercentage : .80,
     routinePercentage : .75,
@@ -50,7 +54,8 @@ $scope.interventionGroups = [
     response: 'I see you\'re well, which is great! Let\'s keep that going. Looks like you may need to adjust your medication schedule in order to do so.'
  },
 {
-		code:2,
+	code:2,
+    questionSet:'at-risk-routine',
     medicationPercentage : .88,
     sleepPercentage : .81,
     routinePercentage : .70,
@@ -63,6 +68,7 @@ $scope.interventionGroups = [
  },
 {
         code:1,
+        questionSet:'well',
     medicationPercentage : 1,
     sleepPercentage : 1,
     routinePercentage : 1,
@@ -75,11 +81,8 @@ $scope.interventionGroups = [
  }
 
 ];
- 
-    
 
-    $scope.id = $routeParams.id;
-    $scope.selectedIntervention = _.where($scope.interventionGroups, {code:parseInt($routeParams.id)})[0];
-
+    $scope.code = parseInt($routeParams.id) || 1;
+    $scope.selectedIntervention = _.where($scope.interventionGroups, {code:$scope.code})[0];
 
   });

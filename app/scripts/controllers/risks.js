@@ -8,16 +8,10 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('RisksCtrl', function ($scope) {
+  .controller('RisksCtrl', function ($scope,UserData) {
     //risk variables
-    $scope.smarts = [
-    {name:"Sleep",value:""},
-    {name:"Medicine",value:"something"},
-    {name:"Abstinence",value:""},
-    {name:"Routine",value:""},
-    {name:"Tranquil",value:""},
-    {name:"Social",value:""}
-    ];
+    $scope.smarts = UserData.query('smarts');
+
 
 
   });

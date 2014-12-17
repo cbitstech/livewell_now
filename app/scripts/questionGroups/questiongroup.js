@@ -23,6 +23,8 @@ angular.module('livewellApp')
 
             scope.questionGroups = _.flatten(scope.questionGroups);
 
+            console.log(scope.questionGroups);
+
             scope.surveyFailure = function(){
 
                   var error = {};
@@ -59,8 +61,36 @@ angular.module('livewellApp')
       		return questionIndex == scope.currentIndex;
       	}
 
-      	scope.next = function(){
-      		scope.currentIndex++;
+            scope.goesToIndex = "";
+
+            scope.goesTo = function(goesToId){
+
+                  for (var index = 0; index < scope.questionGroups.length; index++) { 
+                      if (scope.questionGroups[index].questionDataLabel == goesToId){
+                        scope.goesToIndex = index;
+                      }
+                  }
+
+                  alert(scope.goesToIndex,goesToId );
+
+            }
+
+      	scope.next = function(question){
+                  console.log(question);
+
+                  debugger;
+                  if (question.responses.length == 1 && question.responses[0].goesTo != "")
+                        {
+                              scope.goesTo(question.responses[0].goesTo);
+                        }
+
+                  if (scope.goesToIndex != "")
+                  {     alert("Going to " + scope.goesToIndex);
+                        scope.currentIndex = scope.goesToIndex; }
+                  else {
+                  scope.currentIndex++;
+                  }
+                  scope.goesToIndex = "";
       	};
 
       	scope.back = function(){
@@ -73,6 +103,7 @@ angular.module('livewellApp')
       		console.log('OVERRIDE THIS IN YOUR CONTROLLER SCOPE: ',$('form').serializeArray());
 			$location.path('#/');      		
       	}
+
 
       	scope.questionViewType = function(questionType){
 

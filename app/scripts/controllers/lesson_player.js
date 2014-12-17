@@ -44,6 +44,7 @@ $scope.currentChapterContents = $scope.getChapterContents($routeParams.id,$scope
 
 $scope.currentSlideContents = $scope.currentChapterContents[$scope.currentSlideIndex].main_content;
 
+
 $scope.next = function(){
     if ($scope.currentSlideIndex+1 < $scope.currentChapterContents.length){
     $scope.currentSlideIndex++;
@@ -54,7 +55,7 @@ $scope.next = function(){
     }
 
     if ($scope.currentSlideIndex+1 == $scope.currentChapterContents.length){
-        $scope.nextButton = 'Home';
+        $scope.nextButton = 'Next';
     }
     else{
         $scope.nextButton = 'Next';

@@ -12,7 +12,9 @@ angular.module('livewellApp')
 
     //awareness variables
     $scope.awareness = UserData.query('awareness');
+    $scope.intervention_anchors =  UserData.query('anchors');
+    $scope.plan =  UserData.query('plan');
     
-
+   
 
   });

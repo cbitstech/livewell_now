@@ -8,7 +8,7 @@
  * Controller of the livewellApp
  */
  angular.module('livewellApp')
- .controller('DailyCheckInCtrl', function ($scope, $location) {
+ .controller('DailyCheckInCtrl', function ($scope, $location, $routeParams) {
  	$scope.pageTitle = 'Daily Check In';
 
 
@@ -26,7 +26,7 @@
 
  	$scope.saveCheckIn = function(){
 
- 		$location.path('/daily_review');
+ 		$location.path('/daily_review/' + $routeParams.id);
 
  	}
 
