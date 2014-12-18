@@ -71,7 +71,7 @@ angular.module('livewellApp')
                       }
                   }
 
-                  alert(scope.goesToIndex,goesToId );
+                  // alert(scope.goesToIndex,goesToId );
 
             }
 
@@ -85,7 +85,8 @@ angular.module('livewellApp')
                         }
 
                   if (scope.goesToIndex != "")
-                  {     alert("Going to " + scope.goesToIndex);
+                  {     
+                        // alert("Going to " + scope.goesToIndex);
                         scope.currentIndex = scope.goesToIndex; }
                   else {
                   scope.currentIndex++;
