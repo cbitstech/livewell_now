@@ -19,22 +19,31 @@ angular.module('livewellApp')
     $scope.showAction = false;
     $scope.showPlan = true;
 
+    $('.btn-default').removeClass('active');
+    $('#load-plan').addClass('active');
+
     $scope.loadAnchors = function(){
     $scope.showAnchors = true;
     $scope.showAction = false;
     $scope.showPlan = false;
+    $('.btn-default').removeClass('active');
+    $('#load-anchors').addClass('active');
     }
 
- 		$scope.loadAction = function(){
+ 	$scope.loadAction = function(){
     $scope.showAnchors = false;
     $scope.showAction = true;
     $scope.showPlan = false;
+    $('.btn-default').removeClass('active');
+    $('#load-action').addClass('active');
     }
   
     $scope.loadPlan = function(){
     $scope.showAnchors = false;
     $scope.showAction = false;
     $scope.showPlan = true;
+    $('.btn-default').removeClass('active');
+    $('#load-plan').addClass('active');
     }
      
 

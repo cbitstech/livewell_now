@@ -47,8 +47,9 @@ angular.module('livewellApp')
 
     		});
 
-    		alert('Thank you, your results have been saved');
-    		$location.path("/");
+    		// alert('Thank you, your results have been saved');
+            debugger;
+    		$location.path("/ews");
 
     }
 

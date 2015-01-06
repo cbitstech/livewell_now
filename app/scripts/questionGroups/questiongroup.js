@@ -78,7 +78,6 @@ angular.module('livewellApp')
       	scope.next = function(question){
                   console.log(question);
 
-                  debugger;
                   if (question.responses.length == 1 && question.responses[0].goesTo != "")
                         {
                               scope.goesTo(question.responses[0].goesTo);

@@ -171,6 +171,18 @@ angular
         templateUrl: 'views/skills_team.html',
         controller: 'SkillsTeamCtrl'
       })
+      .when('/skills_fundamentals', {
+        templateUrl: 'views/skills_fundamentals.html',
+        controller: 'SkillsFundamentalsCtrl'
+      })
+      .when('/ews', {
+        templateUrl: 'views/ews.html',
+        controller: 'EwsCtrl'
+      })
+      .when('/ews2', {
+        templateUrl: 'views/ews2.html',
+        controller: 'Ews2Ctrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

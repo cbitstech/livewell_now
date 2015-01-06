@@ -1,0 +1,16 @@
+<div ng-include="'views/partials/navbar.html'"></div>
+
+<h4>Check all signs of depression you experienced most every day, nearly all day this past week:</h4>
+
+<div ng-controller="Ews2Ctrl" class="row-group">
+<br/>
+<table class="table table-striped col-md-12 col-xs-12 col-sm-12">
+<tr ng-repeat="element in ews2"><td class="col-xs-4 col-sm-4 col-md-4" style="vertical-align:middle;">
+<input name="ews2" value="{element.value}" type="checkbox">
+</td>
+<td class="col-sm-8 col-xs-8 col-md-8" ng-bind-html="element.value"></td>
+</tr>
+</table>
+</div>
+
+<a ng-href="#/" class="wide btn-lg btn btn-warning">Complete</a>

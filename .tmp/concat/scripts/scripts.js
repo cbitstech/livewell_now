@@ -131,6 +131,15 @@ angular.module('livewellApp', [
     }).when('/skills_team', {
       templateUrl: 'views/skills_team.html',
       controller: 'SkillsTeamCtrl'
+    }).when('/skills_fundamentals', {
+      templateUrl: 'views/skills_fundamentals.html',
+      controller: 'SkillsFundamentalsCtrl'
+    }).when('/ews', {
+      templateUrl: 'views/ews.html',
+      controller: 'EwsCtrl'
+    }).when('/ews2', {
+      templateUrl: 'views/ews2.html',
+      controller: 'Ews2Ctrl'
     }).otherwise({ redirectTo: '/' });
   }
 ]);
@@ -669,20 +678,28 @@ angular.module('livewellApp').controller('AwarenessCtrl', [
     $scope.showAnchors = false;
     $scope.showAction = false;
     $scope.showPlan = true;
+    $('.btn-default').removeClass('active');
+    $('#load-plan').addClass('active');
     $scope.loadAnchors = function () {
       $scope.showAnchors = true;
       $scope.showAction = false;
       $scope.showPlan = false;
+      $('.btn-default').removeClass('active');
+      $('#load-anchors').addClass('active');
     };
     $scope.loadAction = function () {
       $scope.showAnchors = false;
       $scope.showAction = true;
       $scope.showPlan = false;
+      $('.btn-default').removeClass('active');
+      $('#load-action').addClass('active');
     };
     $scope.loadPlan = function () {
       $scope.showAnchors = false;
       $scope.showAction = false;
       $scope.showPlan = true;
+      $('.btn-default').removeClass('active');
+      $('#load-plan').addClass('active');
     };
   }
 ]);
@@ -729,8 +746,9 @@ angular.module('livewellApp').controller('WeeklyCheckInCtrl', [
         // (new PurpleRobot()).emitReading(_SAVE_LOCATION,payload).execute();
         console.log(payload);
       });
-      alert('Thank you, your results have been saved');
-      $location.path('/');
+      // alert('Thank you, your results have been saved');
+      debugger;
+      $location.path('/ews');
     };
   }
 ]);
@@ -1009,6 +1027,38 @@ angular.module('livewellApp').controller('DailyCheckInCtrl', [
 ]);
 'use strict';
 /**
+ * @ngdoc function
+ * @name livewellApp.controller:SkillsFundamentalsCtrl
+ * @description
+ * # SkillsFundamentalsCtrl
+ * Controller of the livewellApp
+ */
+angular.module('livewellApp').controller('EwsCtrl', [
+  '$scope',
+  'UserData',
+  function ($scope, UserData) {
+    $scope.pageTitle = 'Weekly Check In';
+    $scope.ews = UserData.query('ews');
+  }
+]);
+'use strict';
+/**
+ * @ngdoc function
+ * @name livewellApp.controller:SkillsFundamentalsCtrl
+ * @description
+ * # SkillsFundamentalsCtrl
+ * Controller of the livewellApp
+ */
+angular.module('livewellApp').controller('Ews2Ctrl', [
+  '$scope',
+  'UserData',
+  function ($scope, UserData) {
+    $scope.pageTitle = 'Weekly Check In';
+    $scope.ews2 = UserData.query('ews2');
+  }
+]);
+'use strict';
+/**
  * @ngdoc service
  * @name livewellApp.StaticContent
  * @description
@@ -1230,7 +1280,6 @@ angular.module('livewellApp').directive('questionGroup', [
         };
         scope.next = function (question) {
           console.log(question);
-          debugger;
           if (question.responses.length == 1 && question.responses[0].goesTo != '') {
             scope.goesTo(question.responses[0].goesTo);
           }
@@ -1725,7 +1774,7 @@ angular.module('livewellApp').controller('LoadInterventionsCtrl', [
       {
         'category': 'Symptomatic-Moderate Up-Onset-Self',
         'code': 20,
-        'disabled': 'disabled'
+        'disabled': ''
       },
       {
         'category': 'Symptomatic-Moderate Up-Chronic-Self',
@@ -1739,7 +1788,7 @@ angular.module('livewellApp').controller('LoadInterventionsCtrl', [
       {
         'category': 'Symptomatic-Moderate Down-Onset-Self',
         'code': 17,
-        'disabled': 'disabled'
+        'disabled': ''
       },
       {
         'category': 'Symptomatic-Moderate Down-Chronic-Self',
@@ -1754,7 +1803,7 @@ angular.module('livewellApp').controller('LoadInterventionsCtrl', [
       {
         'category': 'Symptomatic-Mild Up-Prodromal-Self',
         'code': 14,
-        'disabled': 'disabled'
+        'disabled': ''
       },
       {
         'category': 'Symptomatic-Mild Up-Residual-Self',
@@ -1809,7 +1858,7 @@ angular.module('livewellApp').controller('LoadInterventionsCtrl', [
       {
         'category': 'AtRisk-Sleep More',
         'code': 3,
-        'disabled': 'disabled'
+        'disabled': ''
       },
       {
         'category': 'AtRisk-Routine',
@@ -1835,10 +1884,23 @@ angular.module('livewellApp').controller('LoadInterventionsCtrl', [
 angular.module('livewellApp').controller('SkillsFundamentalsCtrl', [
   '$scope',
   function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $scope.pageTitle = 'Fundamentals';
+    $scope.mainLinks = [
+      {
+        name: 'Prepare',
+        id: 537,
+        post: 'skills_fundamentals'
+      },
+      {
+        name: 'Plan',
+        id: 538,
+        post: 'skills_fundamentals'
+      },
+      {
+        name: 'Perform',
+        id: 539,
+        post: 'skills_fundamentals'
+      }
     ];
   }
 ]);
@@ -1853,10 +1915,23 @@ angular.module('livewellApp').controller('SkillsFundamentalsCtrl', [
 angular.module('livewellApp').controller('SkillsAwarenessCtrl', [
   '$scope',
   function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $scope.pageTitle = 'Awareness';
+    $scope.mainLinks = [
+      {
+        name: 'Life Chart',
+        id: 540,
+        post: 'skills_awareness'
+      },
+      {
+        name: 'Signs Checklist',
+        id: 541,
+        post: 'skills_awareness'
+      },
+      {
+        name: 'Triggers Checklist',
+        id: 542,
+        post: 'skills_awareness'
+      }
     ];
   }
 ]);
@@ -1871,10 +1946,38 @@ angular.module('livewellApp').controller('SkillsAwarenessCtrl', [
 angular.module('livewellApp').controller('SkillsLifestyleCtrl', [
   '$scope',
   function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $scope.pageTitle = 'Lifestyle';
+    $scope.mainLinks = [
+      {
+        name: 'Sleep',
+        id: 543,
+        post: 'skills_lifestyle'
+      },
+      {
+        name: 'Medications',
+        id: 544,
+        post: 'skills_lifestyle'
+      },
+      {
+        name: 'Abstinence',
+        id: 545,
+        post: 'skills_lifestyle'
+      },
+      {
+        name: 'Routine',
+        id: 546,
+        post: 'skills_lifestyle'
+      },
+      {
+        name: 'Tranquility',
+        id: 547,
+        post: 'skills_lifestyle'
+      },
+      {
+        name: 'Socialization',
+        id: 562,
+        post: 'skills_lifestyle'
+      }
     ];
   }
 ]);
@@ -1889,10 +1992,28 @@ angular.module('livewellApp').controller('SkillsLifestyleCtrl', [
 angular.module('livewellApp').controller('SkillsCopingCtrl', [
   '$scope',
   function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $scope.pageTitle = 'Coping';
+    $scope.mainLinks = [
+      {
+        name: 'Bipolar Coping Questionnaire',
+        id: 548,
+        post: 'skills_coping'
+      },
+      {
+        name: 'Bipolar Recovery Questionnaire',
+        id: 549,
+        post: 'skills_coping'
+      },
+      {
+        name: 'Depression - Dial Up',
+        id: 550,
+        post: 'skills_coping'
+      },
+      {
+        name: 'Mania - Dial Down',
+        id: 551,
+        post: 'skills_coping'
+      }
     ];
   }
 ]);
@@ -1907,10 +2028,53 @@ angular.module('livewellApp').controller('SkillsCopingCtrl', [
 angular.module('livewellApp').controller('SkillsTeamCtrl', [
   '$scope',
   function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $scope.pageTitle = 'Team';
+    $scope.mainLinks = [
+      {
+        name: 'Duality',
+        id: 553,
+        post: 'skills_team'
+      },
+      {
+        name: 'Humilty',
+        id: 554,
+        post: 'skills_team'
+      },
+      {
+        name: 'Obligation',
+        id: 555,
+        post: 'skills_team'
+      },
+      {
+        name: 'Sacrifice',
+        id: 556,
+        post: 'skills_team'
+      },
+      {
+        name: 'Asking for Help',
+        id: 557,
+        post: 'skills_team'
+      },
+      {
+        name: 'Giving Back',
+        id: 558,
+        post: 'skills_team'
+      },
+      {
+        name: 'Doctor Checklist',
+        id: 559,
+        post: 'skills_team'
+      },
+      {
+        name: 'Support Checklist',
+        id: 560,
+        post: 'skills_team'
+      },
+      {
+        name: 'Hospital Checklist',
+        id: 561,
+        post: 'skills_team'
+      }
     ];
   }
 ]);

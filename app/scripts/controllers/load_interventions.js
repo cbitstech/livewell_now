@@ -30,7 +30,7 @@ angular.module('livewellApp')
   {
     "category":"Symptomatic-Moderate Up-Onset-Self",
     "code":20,
-    "disabled":"disabled"
+    "disabled":""
   },
   {
     "category":"Symptomatic-Moderate Up-Chronic-Self",
@@ -44,7 +44,7 @@ angular.module('livewellApp')
   {
     "category":"Symptomatic-Moderate Down-Onset-Self",
     "code":17,
-    "disabled":"disabled"
+    "disabled":""
   },
   {
     "category":"Symptomatic-Moderate Down-Chronic-Self",
@@ -59,7 +59,7 @@ angular.module('livewellApp')
   {
     "category":"Symptomatic-Mild Up-Prodromal-Self",
     "code":14,
-    "disabled":"disabled"
+    "disabled":""
   },
   {
     "category":"Symptomatic-Mild Up-Residual-Self",
@@ -114,7 +114,7 @@ angular.module('livewellApp')
   {
     "category":"AtRisk-Sleep More",
     "code":3,
-    "disabled":"disabled"
+    "disabled":""
   },
   {
     "category":"AtRisk-Routine",
