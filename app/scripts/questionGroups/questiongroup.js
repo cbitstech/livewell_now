@@ -123,6 +123,12 @@ angular.module('livewellApp')
 
       	}
 
+//            scope.showEndNav = function(length,pageTitle) {
+//                  if (length == 0 && pageTitle = 'Daily Review'){
+//                        return true}
+//                  }
+//            }
+
       }
     };
   });

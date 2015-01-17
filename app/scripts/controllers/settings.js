@@ -15,18 +15,13 @@ angular.module('livewellApp')
     $scope.reviewPrompt = null;
 
 
-    $scope.checkinPromptSchedule = function(){
-    	alert('Daily Check-In set for ' + $scope.checkinPrompt);
-    	//TODO Schedule a check prompt in 
-    	//Set an onload override to go to checkin
+    $scope.savePromptSchedule = function(){
+
+        $("form").append('<div class="alert alert-success">Your prompt times have been updated.</div>')
+
     };
 
 
-    $scope.reviewPromptSchedule = function(){
-    	alert('Daily Review set for ' + $scope.reviewPrompt);
-    	//TODO Schedule a check prompt in 
-    	//Set an onload override to go to checkin
-    };
 
 
       });

@@ -1,5 +1,3 @@
-<h1>Selection Menu</h1>
-
- <a ng-hide="intervention.disabled == 'disabled'" ng-repeat="intervention in hierarchy | orderBy:'code'" class="btn wide btn-info {{intervention.disabled}}" ng-href="#/daily_check_in/{{intervention.code}}">{{intervention.code}} {{intervention.category}}</a>
-
-<h3>This menu is for demonstration purposes ONLY.</h3>
+<h2>Select a topic you'd like to learn more about:</h2>
+<div ng-repeat="intervention in hierarchy | orderBy:'code'">
+ <a ng-hide="intervention.disabled == 'disabled'" class="btn wide btn-info {{intervention.disabled}}" style="margin-bottom:.5em;" ng-href="#/daily_check_in/{{intervention.code}}">{{intervention.category}}</a></div>

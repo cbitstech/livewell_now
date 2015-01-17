@@ -28,9 +28,9 @@ angular.module('livewellApp')
     "disabled":"disabled"
   },
   {
-    "category":"Symptomatic-Moderate Up-Onset-Self",
+    "category":"Symptoms of mania",
     "code":20,
-    "disabled":""
+    "disabled":"disabled"
   },
   {
     "category":"Symptomatic-Moderate Up-Chronic-Self",
@@ -42,9 +42,9 @@ angular.module('livewellApp')
     "disabled":"disabled"
   },
   {
-    "category":"Symptomatic-Moderate Down-Onset-Self",
+    "category":"Symptoms of depression",
     "code":17,
-    "disabled":""
+    "disabled":"disabled"
   },
   {
     "category":"Symptomatic-Moderate Down-Chronic-Self",
@@ -57,9 +57,9 @@ angular.module('livewellApp')
     "disabled":"disabled"
   },
   {
-    "category":"Symptomatic-Mild Up-Prodromal-Self",
+    "category":"Early warning signs of mania",
     "code":14,
-    "disabled":""
+    "disabled":"disabled"
   },
   {
     "category":"Symptomatic-Mild Up-Residual-Self",
@@ -72,7 +72,7 @@ angular.module('livewellApp')
     "disabled":"disabled"
   },
   {
-    "category":"Symptomatic-Mild Down-Prodromal-Self",
+    "category":"Early warning signs of depression",
     "code":11,
     "disabled":""
   },
@@ -87,7 +87,7 @@ angular.module('livewellApp')
     "disabled":"disabled"
   },
   {
-    "category":"AtRisk-Medications",
+    "category":"Taking medications",
     "code":8,
     "disabled":""
   },
@@ -102,7 +102,7 @@ angular.module('livewellApp')
     "disabled":"disabled"
   },
   {
-    "category":"AtRisk-Sleep Less",
+    "category":"Sleeping too little",
     "code":5,
     "disabled":""
   },
@@ -112,17 +112,17 @@ angular.module('livewellApp')
     "disabled":"disabled"
   },
   {
-    "category":"AtRisk-Sleep More",
+    "category":"Sleeping too much",
     "code":3,
-    "disabled":""
+    "disabled":"disabled"
   },
   {
-    "category":"AtRisk-Routine",
+    "category":"Maintaining a routine",
     "code":2,
     "disabled":""
   },
   {
-    "category":"Well",
+    "category":"Doing well",
     "code":1,
     "disabled":""
   }

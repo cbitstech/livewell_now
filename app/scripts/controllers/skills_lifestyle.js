@@ -17,6 +17,6 @@ angular.module('livewellApp')
     {name:"Abstinence", id:545, post:'skills_lifestyle'},
     {name:"Routine", id:546, post:'skills_lifestyle'},    
   	{name:"Tranquility", id:547, post:'skills_lifestyle'},
-  	{name:"Socialization", id:562, post:'skills_lifestyle'},    
-		];
+  	{name:"Socialization", id:562, post:'skills_lifestyle'}
+	];
   });

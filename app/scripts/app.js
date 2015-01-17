@@ -183,6 +183,18 @@ angular
         templateUrl: 'views/ews2.html',
         controller: 'Ews2Ctrl'
       })
+      .when('/schedule', {
+        templateUrl: 'views/schedule.html',
+        controller: 'ScheduleCtrl'
+      })
+      .when('/summary_player', {
+        templateUrl: 'views/summary_player.html',
+        controller: 'SummaryPlayerCtrl'
+      })
+      .when('/summary_player/:id/:post', {
+            templateUrl: 'views/summary_player.html',
+            controller: 'SummaryPlayerCtrl'
+        })
       .otherwise({
         redirectTo: '/'
       });
