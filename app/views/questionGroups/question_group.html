@@ -15,13 +15,17 @@
     <div ng-show="question.responses.length == 0 && pageTitle == 'Daily Review'">
     <a ng-href="#/wellness/resources" class="btn btn-info btn-full">Resources</a><br/>
     <a ng-href="#/wellness/risk" class="btn btn-info btn-full">Reduce Risks</a><br/>
-    <a ng-href="#/wellness/awareness" class="btn btn-info btn-full">Awareness &amp; Action</a><br/>
+    <a ng-href="#/wellness/awareness" class="btn btn-info btn-full">Awareness &amp; Action</a><br/><br/>
     <a ng-href="#/charts" class="btn btn-info btn-full">My Charts</a><br/><br/>
   
-    <a ng-href="#/daily_review" class="btn btn-default btn-full">Review something Else</a><br/>
+    <a ng-href="#/load_interventions" class="btn btn-default btn-full">Review Something Else</a><br/>
 
-    </div>
+    </div>    
+
+    <div ng-hide="question.responses.length == 0 && pageTitle == 'Daily Review'">
+
 	  <div ng-include="'views/questionGroups/nav.html'"></div>
+    </div>
     </div>
 </form>
 <div ng-show="surveyFailure().error" >

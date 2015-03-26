@@ -20,7 +20,7 @@ angular.module('livewellApp')
     {name:"Giving Back", id:558, post:'skills_team'},
     {name:"Doctor Checklist", id:559, post:'skills_team'},     
 	  {name:"Support Checklist", id:560, post:'skills_team'},
-	   {name:"Hospital Checklist", id:561, post:'skills_team'}
+	  {name:"Hospital Checklist", id:561, post:'skills_team'}
 		];
   
   });

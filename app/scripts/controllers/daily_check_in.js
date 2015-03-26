@@ -8,9 +8,16 @@
  * Controller of the livewellApp
  */
  angular.module('livewellApp')
- .controller('DailyCheckInCtrl', function ($scope, $location, $routeParams) {
+ .controller('DailyCheckInCtrl', function ($scope, $location, $routeParams, Pound) {
  	$scope.pageTitle = 'Daily Check In';
 
+ 	$scope.dailyCheckIn = {
+ 		gotUp:'',
+ 		toBed:'',
+ 		wellness:'',
+ 		medications:'',
+ 		startTime: new Date()
+ 	};
 
  	$scope.responses = [
  	{order:1,response:'-4', label:'-4',tailoredMessage:'some message'},
@@ -75,14 +82,17 @@
 
  	$scope.saveCheckIn = function(){
 
+ 		$scope.dailyCheckIn.endTime = new Date();
+ 		Pound.add('dailyCheckIn',$scope.dailyCheckIn);
  		$location.path('/daily_review/' + $routeParams.id);
 
  	}
 
- 	$scope.highlight = function(id){
+ 	$scope.highlight = function(id,response){
 
  		$('label').removeClass('highlight');
  		$(id).addClass('highlight');
+ 		$scope.dailyCheckIn.wellness = response;
 
  	}
 

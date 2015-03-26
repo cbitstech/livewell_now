@@ -13,13 +13,18 @@
  	var SERVER_LOCATION = 'https://livewell2.firebaseio.com/';
  	var APP_COLLECTIONS_ROUTE = 'appcollections';
  	var USER_ID = 'test';
-    var ROUTE_SUFFIX = '.json';
+  var ROUTE_SUFFIX = '.json';
 
  	var downloadContent = function(app_collections){
  		_.each(app_collections,function(el){
  			$http.get(SERVER_LOCATION + el.route + ROUTE_SUFFIX + "?userId=" + USER_ID)
  			.success(function(response) {
+ 				if (response.length != undefined){
  				localStorage[el.route] = JSON.stringify(_.compact(response));
+ 				}
+ 				else {
+ 				localStorage[el.route] = JSON.stringify(response);
+ 				}
  				$("#update-summary").append("<div class='alert alert-sm alert-success'>Updating " + el.label + ' successful!</div>')
  			}).error(function(err) {
  				$("#update-summary").append("<div class='alert alert-sm alert-danger'>Unable to update " + el.label)

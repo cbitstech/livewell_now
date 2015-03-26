@@ -13,6 +13,7 @@
     "angular-touch": "1.2.16",
     "angular-route": "1.2.16",
     "lodash":"~2.4.1",
+    "highcharts-ng":"0.0.8",
     "PurpleRobotClient": "git@github.com:cbitstech/PurpleRobotClient.git#1.5.10.0"
   },
   "devDependencies": {

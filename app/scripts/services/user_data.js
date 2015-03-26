@@ -10,7 +10,6 @@
 angular.module('livewellApp')
   .service('UserData', function UserData() {
     // AngularJS will instantiate a singleton by calling "new" on this function
-
 	
   var content = {};
 

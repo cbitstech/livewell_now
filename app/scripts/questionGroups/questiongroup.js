@@ -23,8 +23,6 @@ angular.module('livewellApp')
 
             scope.questionGroups = _.flatten(scope.questionGroups);
 
-            console.log(scope.questionGroups);
-
             scope.surveyFailure = function(){
 
                   var error = {};
@@ -56,8 +54,31 @@ angular.module('livewellApp')
 
 
       	scope.currentIndex = scope.questionIndex || 0;
+            scope.randomizationScheme = {};
+
 
       	scope.showQuestion = function(questionIndex){
+
+                  var dataLabelToRandomize = scope.questionGroups[scope.currentIndex].questionDataLabel;
+                  var numResponsesToRandomize = _.where(scope.questionGroups,{questionDataLabel:dataLabelToRandomize}).length;
+                  
+                  if(scope.randomizationScheme[dataLabelToRandomize] == undefined){
+                        scope.randomizationScheme[dataLabelToRandomize] = Math.floor(Math.random() * (numResponsesToRandomize)) + 1;
+                  }
+
+
+
+                  if (numResponsesToRandomize > 1){
+                        debugger;
+                        var iterator = 0;
+                        for (iterator = 0; iterator < scope.questionGroups.length; iterator++) { 
+                            if ((scope.randomizationScheme[dataLabelToRandomize] - 1 == 0) && scope.questionGroups[iterator].questionDataLabel == dataLabelToRandomize){
+                              scope.currentIndex = iterator;
+                              console.log(scope.questionGroups,dataLabelToRandomize,numResponsesToRandomize,scope.iterator,questionIndex == scope.currentIndex);
+
+                            }
+                        }
+                  }
       		return questionIndex == scope.currentIndex;
       	}
 
@@ -86,7 +107,9 @@ angular.module('livewellApp')
                   if (scope.goesToIndex != "")
                   {     
                         // alert("Going to " + scope.goesToIndex);
-                        scope.currentIndex = scope.goesToIndex; }
+                        scope.currentIndex = scope.goesToIndex; 
+
+                  }
                   else {
                   scope.currentIndex++;
                   }

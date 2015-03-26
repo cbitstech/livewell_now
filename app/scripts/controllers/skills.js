@@ -15,8 +15,6 @@ angular.module('livewellApp')
            {id:'awareness',name:"Awareness"},
            {id:'lifestyle',name:"Lifestyle"},
            {id:'coping',name:"Coping"},
-           {id:'team',name:"Team"}
-
            ]
     
 

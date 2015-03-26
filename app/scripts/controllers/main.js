@@ -16,7 +16,9 @@ angular.module('livewellApp')
     {name:"Foundations", href:"foundations"},
     {name:"Check Ins", href:"checkins"},
     {name:"Daily Review", href:"daily_review"},
-    {name:"Wellness Plan", href:"wellness/resources"}
+    {name:"Wellness Plan", href:"wellness/resources"},
+    {name:"Skills", href:"skills"}
+
 
     ];
 

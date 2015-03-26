@@ -42,4 +42,20 @@ angular.module('livewellApp')
 
         $scope.page = $scope.chapter.contents[0];
 
+
+        $scope.addToMySkills = function(id){
+
+        if (localStorage['mySkills'] == undefined){
+                localStorage['mySkills'] = [parseInt(id)]
+        }
+        else {
+                    var mySkills = JSON.parse(localStorage['mySkills']);
+
+                    mySkills.push(parseInt(id));
+        }
+
+            window.location.href = '#/mySkills'
+
+        }
+
     });

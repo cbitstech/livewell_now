@@ -10,7 +10,7 @@
 angular.module('livewellApp')
   .controller('ScheduleCtrl', function ($scope,UserData) {
     $scope.pageTitle = "My Schedule";
-    $scope.medications = UserData.query('schedule');
+    $scope.schedules = UserData.query('schedule');
     
 
   });
