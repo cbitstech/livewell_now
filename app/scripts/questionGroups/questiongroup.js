@@ -52,34 +52,35 @@ angular.module('livewellApp')
 
       	scope.numberOfQuestions = scope.questionGroups.length;
 
-
-      	scope.currentIndex = scope.questionIndex || 0;
             scope.randomizationScheme = {};
 
+      	scope.currentIndex = scope.questionIndex || 0;
 
-      	scope.showQuestion = function(questionIndex){
+      	scope.showQuestion = function(questionPosition){
 
                   var dataLabelToRandomize = scope.questionGroups[scope.currentIndex].questionDataLabel;
+
                   var numResponsesToRandomize = _.where(scope.questionGroups,{questionDataLabel:dataLabelToRandomize}).length;
-                  
-                  if(scope.randomizationScheme[dataLabelToRandomize] == undefined){
-                        scope.randomizationScheme[dataLabelToRandomize] = Math.floor(Math.random() * (numResponsesToRandomize)) + 1;
-                  }
-
-
 
                   if (numResponsesToRandomize > 1){
-                        debugger;
-                        var iterator = 0;
-                        for (iterator = 0; iterator < scope.questionGroups.length; iterator++) { 
-                            if ((scope.randomizationScheme[dataLabelToRandomize] - 1 == 0) && scope.questionGroups[iterator].questionDataLabel == dataLabelToRandomize){
-                              scope.currentIndex = iterator;
-                              console.log(scope.questionGroups,dataLabelToRandomize,numResponsesToRandomize,scope.iterator,questionIndex == scope.currentIndex);
 
-                            }
+                        var questionsToRandomize = _.where(scope.questionGroups,{questionDataLabel:dataLabelToRandomize});
+
+                        if(scope.randomizationScheme[dataLabelToRandomize] == undefined){
+                          scope.randomizationScheme[dataLabelToRandomize] = Math.floor(Math.random() * (numResponsesToRandomize));
                         }
+
+
+                        var randomQuestionToPick = questionsToRandomize[scope.randomizationScheme[dataLabelToRandomize]];
+
+                        scope.currentIndex = _.findIndex(scope.questionGroups,{id:randomQuestionToPick.id});
+
+                        console.log(questionPosition, scope.currentIndex,questionPosition == scope.currentIndex,scope.questionGroups,{id:randomQuestionToPick.id});
+
                   }
-      		return questionIndex == scope.currentIndex;
+                  
+
+      		return questionPosition == scope.currentIndex;
       	}
 
             scope.goesToIndex = "";
