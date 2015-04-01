@@ -14,7 +14,7 @@ angular.module('livewellApp')
 
     $scope.mainLinks = [
     {name:"Prepare", id:537, post:'skills_fundamentals'},
-	{name:"Plan", id:538, post:'skills_fundamentals'},
-	{name:"Perform",id:539,post:'skills_fundamentals'}
-	];
+		{name:"Plan", id:538, post:'skills_fundamentals'},
+		{name:"Perform",id:539,post:'skills_fundamentals'}
+		];
   });

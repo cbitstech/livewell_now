@@ -25,7 +25,7 @@ h4{margin-top:.75em !important;}
 .btn-group-radio{padding:.25em 0; text-align: center;}
 .center-form {text-align: center;}
 .question_number {font-size:1.5em;}
-.question-content {margin-bottom:.75em;}
+.question-content {margin-bottom:.75em; font-size:.8em;}
 .question-group {text-align: center; display:block; margin-top:.25em;}
 .question-group label {display:block; text-align: left; margin:auto;  font-size:1.3em; margin-bottom:.5em;}
 .question-group .response-label{font-weight: normal;font-size:1.1em;}
