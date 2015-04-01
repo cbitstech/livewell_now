@@ -13,8 +13,8 @@ angular.module('livewellApp')
   	$scope.pageTitle = "Awareness";
 
     $scope.mainLinks = [
-    {name:"Life Chart", id:540, post:'skills_awareness'},
-    {name:"Signs Checklist", id:541, post:'skills_awareness'},
-	{name:"Triggers Checklist", id:542, post:'skills_awareness'}
+    {name:"Self-Assessment", id:194, post:'skills_awareness'},
+    {name:"Psychiatrist Feedback", id:196, post:'skills_awareness'},
+		{name:"Support Feedback", id:197, post:'skills_awareness'}
 		]
   });
