@@ -13,7 +13,7 @@ angular.module('livewellApp')
 
     var contents = {};
 
-    var reformatter = {}, history= {}, historySeed = {};
+    var recoder = {}, history= {}, historySeed = {}, dailyCheckInData = {};
     var conditions = [];
 
     var sleepRoutineRanges = UserData.query('sleepRoutineRanges');
@@ -25,19 +25,23 @@ angular.module('livewellApp')
 		historySeed.sleep										= [0,0,0,0,0,0,0]; 	// in baseline range 7 days
 		historySeed.routine			 						= [2,2,2,2,2,2,2]; 	// in both windows 7 days
 
-    reformatter.wellness = function(){
+
+		dailyCheckInData.
+
+
+    recoder.wellness = function(){
     	var code = null;
 
     	return code
     }
 
-    reformatter.medications = function(){
+    recoder.medications = function(){
     	var code = null;
 
     	return code
     }
 
-   	reformatter.sleep = function(toBed,gotUp,sleepRoutineRanges){
+   	recoder.sleep = function(toBed,gotUp,sleepRoutineRanges){
     	var score = 0;
 
     	// duration = gotUp - toBed
@@ -62,8 +66,10 @@ angular.module('livewellApp')
     	return score
     }
 
-    reformatter.routine = function(){
+    recoder.routine = function(){
     	var sum = 0;
+
+
     	//look at rise time, is it in in rise time window defined in sleepRoutineRanges, if so, add 1 to sum
 			//look at to bed time, is it in in to bed time window defined in sleepRoutineRanges, if so, add 1 to sum
 

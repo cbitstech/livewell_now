@@ -1,0 +1,1 @@
+<div ng-include="'views/partials/navbar.html'"></div> <br> <select ng-model="page" ng-options="item.pretty_name for item in chapter.contents track by item.id" class="wide"> </select> <br><br> <div ng-bind-html="page.main_content"></div> <br><button ng-click="addToMySkills({{page.id}})" class="btn btn-default">Add to My Skills</button>

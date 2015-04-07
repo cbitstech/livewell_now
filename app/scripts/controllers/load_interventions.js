@@ -2,16 +2,15 @@
 
 /**
  * @ngdoc function
- * @name livewellApp.controller:LoadInterventionsCtrl
+ * @name livewellApp.controller:LoadInterventionsReviewCtrl
  * @description
- * # LoadInterventionsCtrl
+ * # LoadInterventionsReviewCtrl
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('LoadInterventionsCtrl', function ($scope, $location, UserData) {
-    
+  .controller('LoadInterventionsCtrl', function ($scope, UserData) {
+
     $scope.pageTitle = 'Topics';
 
-  	$scope.hierarchy = UserData.query('interventionLabels');
-
+    $scope.hierarchy = UserData.query('interventionLabels');
   });
