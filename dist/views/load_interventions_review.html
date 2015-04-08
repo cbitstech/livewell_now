@@ -1,1 +1,0 @@
-<div ng-include="'views/partials/navbar.html'"></div> <h2>Select a topic you'd like to learn more about:</h2> <div ng-repeat="intervention in hierarchy | orderBy:'code'"> <a class="btn wide btn-info" style="margin-bottom:.5em" ng-href="#/daily_check_in/{{intervention.code}}">{{intervention.category}}</a></div>

@@ -13,9 +13,20 @@ angular.module('livewellApp')
 
     $scope.interventionGroups = UserData.query('dailyReview');
 
+    $scope.code = parseInt($routeParams.id) || 22;
     debugger;
-
-    $scope.code = parseInt($routeParams.id) || 1;
     $scope.selectedIntervention = _.where($scope.interventionGroups, {code:$scope.code})[0];
+
+		$scope.interventionResponse = function(){ 
+
+			if (typeof($scope.selectedIntervention.response) == 'object'){
+
+					return $scope.selectedIntervention.response[Math.floor((Math.random() * $scope.selectedIntervention.response.length) + 1)]
+			}
+				else{
+					return $scope.selectedIntervention.response
+				}
+			
+		}
 
   });
