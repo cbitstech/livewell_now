@@ -8,7 +8,7 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('SummaryPlayerCtrl', function ($scope, $routeParams) {
+  .controller('SummaryPlayerCtrl', function ($scope, $routeParams, $location) {
 
         $scope.getChapterContents = function (chapter_id, appContent) {
             var search_criteria = {
@@ -33,29 +33,34 @@ angular.module('livewellApp')
             return chapter;
         };
 
+        $scope.showAddSkills = false;
+
         $scope.lessons = JSON.parse(localStorage['lessons']);
 
         $scope.chapter = $scope.getChapterContents($routeParams.id,$scope.lessons);
 
         $scope.pageTitle = $scope.chapter.pretty_name;
-        debugger;
 
-        $scope.page = $scope.chapter.contents[0];
+        $scope.page = $scope.chapter.contents;
 
+        $scope.addToMySkills = function(){
 
-        $scope.addToMySkills = function(id){
+        var id = $scope.page.id;
 
         if (localStorage['mySkills'] == undefined){
-                localStorage['mySkills'] = [parseInt(id)]
+
+            localStorage['mySkills'] = JSON.stringify([id]);
         }
         else {
-                    var mySkills = JSON.parse(localStorage['mySkills']);
+            var mySkills = JSON.parse(localStorage['mySkills']);
 
-                    mySkills.push(parseInt(id));
+            mySkills.push(parseInt(id));
+            localStorage['mySkills'] = JSON.stringify(mySkills);
         }
 
-            window.location.href = '#/mySkills'
+            $location.path('/mySkills');
 
         }
+        debugger;
 
     });

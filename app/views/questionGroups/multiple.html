@@ -2,7 +2,7 @@
 
 <div ng-hide="question.responses.length == 1">
 <div class="response-group">
-	<label for="q{{question.questionDataLabel}}{{response.value}}" ng-repeat="response in question.responses | orderBy : 'order' " class="btn btn-info wide btn-sm response-label" style="font-size:.8em;">
+	<label ng-repeat="response in question.responses | orderBy : 'order' " class="btn btn-info wide btn-sm response-label" style="font-size:.8em;">
 		<input type="{{question.type}}" name="{{question.questionDataLabel}}" id="q{{question.questionDataLabel}}{{response.value}}" value="{{response.value}}" ng-click="goesTo('{{response.goesTo}}')" data-goto="{{response.goesTo}}"> 
 		{{response.label}} 
 	</label>

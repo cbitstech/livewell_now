@@ -8,10 +8,51 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('MyskillsCtrl', function ($scope,$location) {
+  .controller('MyskillsCtrl', function ($scope,$location,$filter) {
 
     $scope.pageTitle = 'My Skills';
 
-    $scope.mySkills = JSON.parse(localStorage['mySkills']);
+    $scope.currentSkillId = null;
+
+    $scope.currentSkillContent = null;
+
+
+    $scope.lessons = JSON.parse(localStorage['lessons']);
+
+		$scope.mySkills = _.uniq(JSON.parse(localStorage['mySkills']));
+
+ 		$scope.skill = function(id){
+
+ 			return $filter('filter')($scope.lessons,{id:id},true)
+ 		};
+
+ 		$scope.showSkill = function(id){
+ 			$scope.currentSkillId = id;
+ 			$scope.currentSkillContent = $scope.skill(id)[0].main_content;
+
+ 		}
+
+		$scope.removeSkill = function () {
+
+			var id = $scope.currentSkillId;
+			var array = $scope.mySkills;
+			var index = array.indexOf(id);
+
+			debugger;
+
+			if (index > -1) {
+			    array.splice(index, 1);
+			}
+
+			$scope.mySkills = array;
+
+			localStorage['mySkills'] = JSON.stringify($scope.mySkills);
+
+			$location.refresh('/mySkills');
+
+		}
+
+
+
 
   });

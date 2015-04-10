@@ -1,7 +1,5 @@
 .btn-full {width:100%; margin-top:.5em; display:block;}
 
-.navbar-header h1,h2,h3 {width:80%; float:left;  margin-top:.5em; }
-
 .logo {width:50px; float:right; margin-top:1em;}
 
 .row.header {position:absolute; top:0; left:0; width:100%; background-color: #4E5D6C}
@@ -42,4 +40,7 @@ option {color:black !important;}
 
 /*.mainContent h1 {font-size:1.9em;margin:0!important;margin-left:1.5em !important; padding:0 !important;}
 */
+
 .highlight {background-color:white !important; color:#1e497c !important;}
+
+body div,p {    text-indent: 0 !important;}
