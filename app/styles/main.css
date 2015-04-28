@@ -44,3 +44,15 @@ option {color:black !important;}
 .highlight {background-color:white !important; color:#1e497c !important;}
 
 body div,p {    text-indent: 0 !important;}
+
+table.rounded-cells{    border-spacing: 10px;
+    border-collapse: separate;}
+
+.rounded-cells td { border-radius: .25em; background-color: gray;height:20px; display:block; float:left; width:14.08%; margin:.1%}
+
+td.a{background-color:#BF5052;}
+
+td.b{background-color:#C2D49D;}
+
+td.c{background-color:#145F79}
+

@@ -18,9 +18,6 @@ angular.module('livewellApp')
     {name:"Check Ins", href:"checkins"},
     {name:"Daily Review", href:"daily_review"},
     {name:"Wellness Plan", href:"wellness/resources"}
-
-
-
     ];
 
     // $scope.showLogin = function(){
