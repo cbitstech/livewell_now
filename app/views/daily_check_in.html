@@ -1,5 +1,20 @@
 <div ng-include="'views/partials/navbar.html'"></div>
 
+<div id="warning" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body alert-danger">
+        <h4>Warning:</h4>
+       {{selectedWarningMessage}}<br/><br/>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <form ng-submit="saveCheckIn()" class="center-form">
     <h4>Medications</h4>
 
@@ -25,7 +40,7 @@
 
     <h4>Wellness</h4>
     <div class="btn-group btn-group-justified" data-toggle="buttons">
-        <label ng-click="highlight('#button{{response.order}}','{{response.response}}')" id="button{{response.order}}" class="btn bgcolor{{response.order}} btn-group-radio" ng-repeat="response in responses">{{response.label}}
+        <label ng-click="highlight('#button{{response.order}}','{{response.response}}');warning('{{response.warningMessage}}')" id="button{{response.order}}" class="btn bgcolor{{response.order}} btn-group-radio" ng-repeat="response in responses">{{response.label}}
 
     </div>
 

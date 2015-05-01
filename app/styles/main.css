@@ -48,11 +48,11 @@ body div,p {    text-indent: 0 !important;}
 table.rounded-cells{    border-spacing: 10px;
     border-collapse: separate;}
 
-.rounded-cells td { border-radius: .25em; background-color: gray;height:20px; display:block; float:left; width:14.08%; margin:.1%}
+.rounded-cells td { border-radius: .25em; background-color: gray;height:20px; display:block; float:left; width:13.08%; margin:.6%}
 
-td.a{background-color:#BF5052;}
+td.a{background-color:#50BF52;}
 
-td.b{background-color:#C2D49D;}
+td.b{background-color:#CCCC00;}
 
-td.c{background-color:#145F79}
+td.c{background-color:#FF9900}
 

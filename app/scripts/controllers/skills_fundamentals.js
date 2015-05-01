@@ -10,7 +10,7 @@
 angular.module('livewellApp')
   .controller('SkillsFundamentalsCtrl', function ($scope) {
 
-  	$scope.pageTitle = "Fundamentals";
+  	$scope.pageTitle = "Building Skills";
 
     $scope.mainLinks = [
     {name:"Prepare", id:537, post:'skills_fundamentals'},

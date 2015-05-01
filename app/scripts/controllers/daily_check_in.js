@@ -20,7 +20,7 @@
  	};
 
  	$scope.responses = [
- 	{order:1,response:'-4', label:'-4',tailoredMessage:'some message'},
+ 	{order:1,response:'-4', label:'-4',tailoredMessage:'some message',warningMessage:'You rated yourself as being in a crisis with a -4, if this is correct, close and press continue.'},
  	{order:2,response:'-3', label:'-3',tailoredMessage:'some message'},
  	{order:3,response:'-2', label:'-2',tailoredMessage:'some message'},
  	{order:4,response:'-1', label:'-1',tailoredMessage:'some message'},
@@ -28,7 +28,7 @@
  	{order:6,response:'1', label:'+1',tailoredMessage:'some message'},
  	{order:7,response:'2', label:'+2',tailoredMessage:'some message'},
  	{order:8,response:'3', label:'+3',tailoredMessage:'some message'},
- 	{order:9,response:'4', label:'+4',tailoredMessage:'some message'}
+ 	{order:9,response:'4', label:'+4',tailoredMessage:'some message',warningMessage:'You rated yourself as being in a crisis with a +4, if this is correct, close and press continue.'}
  	];
 
  	$scope.times = [ 	{value:"0000", label:"12:00AM"},
@@ -93,6 +93,16 @@
  		$('label').removeClass('highlight');
  		$(id).addClass('highlight');
  		$scope.dailyCheckIn.wellness = response;
+
+ 	}
+
+ 	$scope.warning = function(warningMessage){
+
+ 		if (warningMessage.length > 0){
+ 			$("#warning").modal();
+ 			$scope.selectedWarningMessage = warningMessage;
+ 		}
+
 
  	}
 
