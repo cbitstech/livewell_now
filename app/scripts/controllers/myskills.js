@@ -10,7 +10,7 @@
 angular.module('livewellApp')
   .controller('MyskillsCtrl', function ($scope,$location,$filter,$route) {
 
-    $scope.pageTitle = 'My Skills';
+    $scope.pageTitle = 'Skills';
 
     $scope.currentSkillId = null;
 

@@ -1,12 +1,12 @@
 <div ng-include="'views/partials/navbar.html'"></div>
 
-<div class="row-group">
+<div class="row-group row-group-wide">
 <div class="row">
 <div  ng-repeat="person in team">
 
 <h5>{{person.role}}</h5>
-<table class="well col-md-12 col-xs-12 col-sm-1">
-<tr><td class="col-md-6 col-sm-6 col-xs-6"><h4>{{person.name}}</h4></td><td class="col-md-6 col-sm-6 col-xs-6"> <a href="tel:{{person.phone}}" class="btn btn-info btn-sm">{{person.phone}}</a></td></tr></table>
+<table class="well col-md-12 col-xs-12 col-sm-1" >
+<tr><td class="col-md-6 col-sm-6 col-xs-6">{{person.name}}</td><td class="col-md-6 col-sm-6 col-xs-6"> <a href="tel:{{person.phone}}" class="btn btn-primary btn-sm">{{person.phone}}</a></td></tr></table>
 </div></div>
 
 </div>

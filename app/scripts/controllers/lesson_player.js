@@ -33,12 +33,13 @@ $scope.getChapterContents = function (chapter_id, appContent) {
 
 $scope.lessons = JSON.parse(localStorage['lessons']);
 
-$scope.backButton = 'Back';
-$scope.backButtonClass = 'btn btn-default';
-$scope.nextButton = 'Next';
+$scope.backButton = '';
+$scope.backButtonClass = 'btn btn-info';
+$scope.nextButton = '&gt;';
 $scope.nextButtonClass = 'btn btn-primary';
 $scope.currentSlideIndex = 0;
 
+$scope.pageTitle = _.where($scope.lessons, {id:parseInt($routeParams.id)})[0].pretty_name;
 
 $scope.currentChapterContents = $scope.getChapterContents($routeParams.id,$scope.lessons);
 
@@ -59,10 +60,10 @@ $scope.next = function(){
     }
 
     if ($scope.currentSlideIndex+1 == $scope.currentChapterContents.length){
-        $scope.nextButton = 'Next';
+        $scope.nextButton = '&gt;';
     }
     else{
-        $scope.nextButton = 'Next';
+        $scope.nextButton = '&gt;';
 
     }
 }

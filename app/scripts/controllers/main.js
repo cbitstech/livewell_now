@@ -10,14 +10,13 @@
 angular.module('livewellApp')
   .controller('MainCtrl', function ($scope, UserDetails) {
 
-  	$scope.pageTitle = 'LiveWell';
+  	$scope.pageTitle = 'Main Menu';
 
     $scope.mainLinks = [
     {name:"Foundations", href:"foundations"},
     {name:"Skills", href:"skills"},
-    {name:"Check Ins", href:"checkins"},
-    {name:"Daily Review", href:"daily_review"},
-    {name:"Wellness Plan", href:"wellness/resources"}
+    {name:"Wellness Plan", href:"wellness/resources"},
+    {name:"Instructions", href:"instructions"}
     ];
 
     // $scope.showLogin = function(){

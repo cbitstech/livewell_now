@@ -15,6 +15,10 @@
  	var USER_ID = 'test';
   var ROUTE_SUFFIX = '.json';
 
+  $scope.error = '';
+  $scope.errorColor = 'white';
+  $scope.errorClass = '';
+
  	var downloadContent = function(app_collections){
  		_.each(app_collections,function(el){
  			$http.get(SERVER_LOCATION + el.route + ROUTE_SUFFIX + "?userId=" + USER_ID)
@@ -25,20 +29,21 @@
  				else {
  				localStorage[el.route] = JSON.stringify(response);
  				}
- 				$("#update-summary").append("<div class='alert alert-sm alert-success'>Updating " + el.label + ' successful!</div>')
  			}).error(function(err) {
- 				$("#update-summary").append("<div class='alert alert-sm alert-danger'>Unable to update " + el.label)
+ 				$scope.error = 'Error on: ' + el.label;
+ 				$scope.errorColor = 'red';
  			});
  		})
  	}
 
  	$scope.fetchContent = function(){
- 			$("#update-summary").html("<br/><br/>");
+ 			$scope.errorColor = 'green';
  			$http.get(SERVER_LOCATION + APP_COLLECTIONS_ROUTE + ROUTE_SUFFIX)
  			.success(function(app_collections) {
  				downloadContent(_.compact(app_collections));
  			}).error(function(err) {
- 				$("#update-summary").append("<div class='alert alert-sm alert-danger'>Unable to access content server, please make sure that you hav access to internet connection.<br/>If you continue to have difficulties please contact the study coordination staff.</div>")
+ 				$scope.error = 'No internet connection!';
+ 				$scope.errorColor = 'red';
  			});
  	}
 

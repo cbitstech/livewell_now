@@ -10,11 +10,15 @@
 angular.module('livewellApp')
   .controller('SkillsAwarenessCtrl', function ($scope) {
 
-  	$scope.pageTitle = "Awareness";
+  	$scope.pageTitle = "Self-Assessment";
 
     $scope.mainLinks = [
-    {name:"Self-Assessment", id:194, post:'skills_awareness'},
-    {name:"Psychiatrist Feedback", id:196, post:'skills_awareness'},
-		{name:"Support Feedback", id:197, post:'skills_awareness'}
+    {name:"Symptoms and Triggers", id:194, post:'skills_awareness'},
+    {name:"Skills and Strengths", id:196, post:'skills_awareness'},
+		{name:"Supports and Environment", id:197, post:'skills_awareness'}
 		]
   });
+
+
+
+

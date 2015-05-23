@@ -222,7 +222,7 @@ Highcharts.setOptions(Highcharts.theme);
             x: -20
         },
         xAxis: {
-            categories: ['4/21','4/22','4/23','4/24','4/25','4/26','4/27',]
+            categories: ['5/16','5/17','5/18','5/19','5/20','5/21','5/22',]
         },
         yAxis: {
             title: {
@@ -251,6 +251,6 @@ Highcharts.setOptions(Highcharts.theme);
         series: [{
              showInLegend: false,
             name: 'Wellness',
-            data: [-4,1,2,4,3,1,-3]
+            data: [0,0,0,0,0,0,0]
         }]};
   });
