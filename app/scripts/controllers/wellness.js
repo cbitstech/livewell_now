@@ -17,27 +17,27 @@ angular.module('livewellApp')
         $scope.riskVisible = false;
         $scope.awarenessVisible = false;
         $scope.resourcesVisible = true;
-        $('button#awareness').removeClass('active');
-        $('button#risk').removeClass('active');
-        $('button#resources').addClass('active');
+        $('button#awareness').removeClass('btn-active');
+        $('button#risk').removeClass('btn-active');
+        $('button#resources').addClass('btn-active');
     }
 
     $scope.showRisk = function(){
         $scope.awarenessVisible = false;
         $scope.resourcesVisible = false;
         $scope.riskVisible = true;
-        $('button#awareness').removeClass('active');
-        $('button#risk').addClass('active');
-        $('button#resources').removeClass('active');
+        $('button#awareness').removeClass('btn-active');
+        $('button#risk').addClass('btn-active');
+        $('button#resources').removeClass('btn-active');
     }
 
     $scope.showAwareness = function(){
         $scope.resourcesVisible = false;
         $scope.riskVisible = false;
         $scope.awarenessVisible = true;
-        $('button#resources').removeClass('active');
-        $('button#risk').removeClass('active');
-        $('button#awareness').addClass('active');
+        $('button#resources').removeClass('btn-active');
+        $('button#risk').removeClass('btn-active');
+        $('button#awareness').addClass('btn-active');
 
     }
 

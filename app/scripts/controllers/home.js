@@ -8,7 +8,7 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('HomeCtrl', function ($scope) {
+  .controller('HomeCtrl', function ($scope, Pound) {
 
   	var possibleGreetings = ['Welcome back!','Hello!','Greetings!','Good to see you!'];
 
@@ -26,9 +26,38 @@ angular.module('livewellApp')
   		window.location.href = "";
   	}
 
-  	$scope.dailyCheckInComplete = false;
-  	$scope.weeklyCheckInComplete = false;
-  	$scope.showDailyReview = true;
-    $scope.greeting = possibleGreetings[Math.floor(Math.random()*possibleGreetings.length)];;
+  	$scope.dailyCheckInCompleteToday = function(){
+
+      var collection                 = Pound.find('dailyCheckIn');
+      var mostRecentResponse         = collection[collection.length-1] || 0;
+      var mostRecentResponseDateTime = new Date(Date.parse(mostRecentResponse.created_at));
+      var differenceInDays           = parseInt((mostRecentResponseDateTime - new Date())/(24*3600*1000))
+
+      if (differenceInDays < 1){
+        return true
+      } else {
+        return false
+      }
+
+    };
+
+  	$scope.weeklyCheckInCompleteThisWeek = function(){
+
+      var collection = Pound.find('weeklyCheckIn');
+      var mostRecentResponse         = collection[collection.length-1] || 0;
+      var mostRecentResponseDateTime = new Date(Date.parse(mostRecentResponse.created_at));
+      var differenceInDays           = parseInt((mostRecentResponseDateTime - new Date())/(24*3600*1000))
+
+      if (differenceInDays < 7){
+        return true
+      } else {
+        return false
+      }
+      
+    };
+
+    $scope.greeting = possibleGreetings[Math.floor(Math.random()*possibleGreetings.length)];
+
+    $(".modal-backdrop").remove();
 
   });

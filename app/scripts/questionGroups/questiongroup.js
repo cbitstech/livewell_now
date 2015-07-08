@@ -75,7 +75,7 @@ angular.module('livewellApp')
 
                         scope.currentIndex = _.findIndex(scope.questionGroups,{id:randomQuestionToPick.id});
 
-                        console.log(questionPosition, scope.currentIndex,questionPosition == scope.currentIndex,scope.questionGroups,{id:randomQuestionToPick.id});
+                        // console.log(questionPosition, scope.currentIndex,questionPosition == scope.currentIndex,scope.questionGroups,{id:randomQuestionToPick.id});
 
                   }
                   
@@ -98,7 +98,7 @@ angular.module('livewellApp')
             }
 
       	scope.next = function(question){
-                  console.log(question);
+                  // console.log(question);
 
                   if (question.responses.length == 1 && question.responses[0].goesTo != "")
                         {

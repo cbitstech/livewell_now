@@ -19,31 +19,31 @@ angular.module('livewellApp')
     $scope.showAction = false;
     $scope.showPlan = true;
 
-    $('.btn-default').removeClass('active');
-    $('#load-plan').addClass('active');
+    $('.awareness-btn').removeClass('btn-active');
+    $('#load-plan').addClass('btn-active');
 
     $scope.loadAnchors = function(){
     $scope.showAnchors = true;
     $scope.showAction = false;
     $scope.showPlan = false;
-    $('.btn-default').removeClass('active');
-    $('#load-anchors').addClass('active');
+    $('.awareness-btn').removeClass('btn-active');
+    $('#load-anchors').addClass('btn-active');
     }
 
  	$scope.loadAction = function(){
     $scope.showAnchors = false;
     $scope.showAction = true;
     $scope.showPlan = false;
-    $('.btn-default').removeClass('active');
-    $('#load-action').addClass('active');
+    $('.awareness-btn').removeClass('btn-active');
+    $('#load-action').addClass('btn-active');
     }
   
     $scope.loadPlan = function(){
     $scope.showAnchors = false;
     $scope.showAction = false;
     $scope.showPlan = true;
-    $('.btn-default').removeClass('active');
-    $('#load-plan').addClass('active');
+    $('.awareness-btn').removeClass('btn-active');
+    $('#load-plan').addClass('btn-active');
     }
      
 

@@ -8,7 +8,7 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('WeeklyCheckInCtrl', function ($scope, $location, $routeParams, Questions, Guid, UserDetails) {
+  .controller('WeeklyCheckInCtrl', function ($scope, $location, $routeParams, Questions, Guid, UserDetails, Pound) {
 
 
     $scope.pageTitle = 'Weekly Check In';
@@ -31,24 +31,35 @@ angular.module('livewellApp')
 
             var sessionID = Guid.create();
 
-    		_.each(responses, function(el){
+    		// _.each(responses, function(el){
 
-    			var payload = {
-    				userId: UserDetails.find,
-    				survey: $scope.pageTitle,
-    				questionDataLabel: el.name,
-    				questionValue: el.value,
-    				sessionGUID: sessionID,
-    				savedAt: new Date()
-    			};
+    		// 	var payload = {
+    		// 		userId: UserDetails.find,
+    		// 		survey: $scope.pageTitle,
+    		// 		questionDataLabel: el.name,
+    		// 		questionValue: el.value,
+    		// 		sessionGUID: sessionID,
+    		// 		savedAt: new Date()
+    		// 	};
 
-    			// (new PurpleRobot()).emitReading(_SAVE_LOCATION,payload).execute();
-    			console.log(payload);
+    		// 	// (new PurpleRobot()).emitReading(_SAVE_LOCATION,payload).execute();
+    		// 	console.log(payload);
 
-    		});
+    		// });
 
     		// alert('Thank you, your results have been saved');
-            debugger;
+
+            var responsePayload = {
+                sessionID   : sessionID,
+                responses   : responses
+            };
+
+
+            Pound.add('weeklyCheckIn',responsePayload);
+                        debugger;
+
+
+
     		$location.path("/ews");
 
     }

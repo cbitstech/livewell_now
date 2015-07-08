@@ -13,9 +13,11 @@ echo 'Starting server'
 cp app/styles/bootstrap.min.css dist/styles
 cp app/images/logo.png dist/images
 
-cd dist
-firebase init
-firebase deploy
+rm -rf cordova/www
+mkdir cordova/www
+cp dist/. cordova/www/
+cd cordova
+cordova run android
 cd ..
 
-echo 'done building and deploying to firebase'
+echo 'done building and deploying to phone'

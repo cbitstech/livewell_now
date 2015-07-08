@@ -21,8 +21,9 @@
             {id:205,name:"Daily Check In", post:"instructions"},
             {id:372,name:"Weekly Check In", post:"instructions"},
             {id:369,name:"Daily Review", post:"instructions"},
-            {id:370,name:"Charts", post:"instructions"},
-            {id:371,name:"Wellness Plan", post:"instructions"}]
+            {id:371,name:"Wellness Plan", post:"instructions"},
+            {id:370,name:"Charts", post:"instructions"}
+            ]
 
 
 	  });

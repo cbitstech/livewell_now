@@ -84,8 +84,8 @@
 
  		$scope.dailyCheckIn.endTime = new Date();
  		Pound.add('dailyCheckIn',$scope.dailyCheckIn);
- 		$location.path('/daily_review/' + $routeParams.id);
-
+ 		$scope.nextId = $routeParams.id;
+ 		$("#continue").modal();
  	}
 
  	$scope.highlight = function(id,response){

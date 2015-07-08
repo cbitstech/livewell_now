@@ -2,4 +2,4 @@
 
 <h4>Select a topic you'd like to learn more about:</h4>
 <div ng-repeat="intervention in hierarchy | orderBy:'code':true">
- <a class="btn wide btn-info" style="margin-bottom:.5em;" ng-href="#/daily_check_in/{{intervention.code}}">{{intervention.category}}</a></div>
+ <a class="btn wide btn-info" style="margin-bottom:.5em;" ng-click="goToIntervention({{intervention.code}})">{{intervention.category}}</a></div>

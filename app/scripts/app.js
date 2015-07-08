@@ -240,6 +240,10 @@ angular
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
       })
+      .when('/usereditor', {
+        templateUrl: 'views/usereditor.html',
+        controller: 'UsereditorCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -2,10 +2,9 @@
 <div ng-controller="AwarenessCtrl">
 
 
-	<button ng-click="loadPlan()" class="btn btn-info col-md-4 col-sm-4 col-xs-4" id="load-plan">Plan</button>
-
-	<button ng-click="loadAnchors()" class="btn btn-info col-md-4 col-sm-4 col-xs-4" id="load-anchors">Anchors</button>
-	<button class="btn-primary btn  col-md-4 col-sm-4 col-xs-4" ng-click="loadAction()" id="load-action">Definition</button>
+	<button ng-click="loadPlan()" class="btn btn-info col-md-4 col-sm-4 col-xs-4 awareness-btn" id="load-plan">Plan</button>
+	<button ng-click="loadAnchors()" class="btn btn-info col-md-4 col-sm-4 col-xs-4 awareness-btn" id="load-anchors">Anchors</button>
+	<button class="btn-info btn col-md-4 col-sm-4 col-xs-4 awareness-btn" ng-click="loadAction()" id="load-action">Definition</button>
 
 <div ng-show="showAction">
 	<table class="col-md-12 col-sm-12 table" >

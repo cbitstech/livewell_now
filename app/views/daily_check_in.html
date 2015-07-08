@@ -5,9 +5,21 @@
     <div class="modal-content">
 
       <div class="modal-body alert-danger">
-        <h4>Warning:</h4>
        {{selectedWarningMessage}}<br/><br/>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="continue" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body alert-warning">
+        <a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full">Continue to Daily Review</a><Br/>
+        <a ng-href="#/" class="btn btn-primary btn-full" >Return Home</a>
       </div>
 
     </div><!-- /.modal-content -->
@@ -45,5 +57,6 @@
     </div>
 
     <br/>
-    <button type="submit" class="btn btn-primary btn-full">Continue</button>
+    <button type="submit" class="btn btn-primary btn-full">Submit</button>
 </form>
+
