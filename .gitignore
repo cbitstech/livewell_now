@@ -36,6 +36,9 @@
 ehthumbs.db
 Thumbs.db
 
+
+# Project-specific folders #
+############################
 .idea
 .tmp
 bower_components/

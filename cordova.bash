@@ -17,7 +17,16 @@ rm -rf cordova/www
 mkdir cordova/www
 cp dist/. cordova/www/
 cd cordova
-cordova run android
-cd ..
+cordova build android --release
+cd platforms/android/ant-build
 
-echo 'done building and deploying to phone'
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore LiveWell.keystore CordovaApp-release-unsigned.apk LiveWell
+
+echo 'type the keystore password'
+
+zipalign -f -v 4 CordovaApp-release-unsigned.apk LiveWell.apk
+
+cd ..
+cd ..
+cd ..
+cd ..

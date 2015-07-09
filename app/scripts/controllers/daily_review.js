@@ -14,7 +14,7 @@ angular.module('livewellApp')
     $scope.interventionGroups = UserData.query('dailyReview');
     console.log($scope.interventionGroups);
 
-    $scope.code = parseInt($routeParams.id) || 22;
+    $scope.code = parseInt($routeParams.id) || 4;
     $scope.selectedIntervention = _.where($scope.interventionGroups, {code:$scope.code})[0];
 
     $(".modal-backdrop").remove();
@@ -32,5 +32,7 @@ angular.module('livewellApp')
 				}
 			
 		}
+
+		  (new PurpleRobot()).disableTrigger('dailyReview').execute();
 
   });
