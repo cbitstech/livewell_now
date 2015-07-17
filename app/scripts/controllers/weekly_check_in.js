@@ -55,8 +55,8 @@ angular.module('livewellApp')
             };
 
 
+            debugger;
             Pound.add('weeklyCheckIn',responsePayload);
-                        debugger;
 
 
 

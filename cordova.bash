@@ -15,7 +15,7 @@ cp app/images/logo.png dist/images
 
 rm -rf cordova/www
 mkdir cordova/www
-cp dist/. cordova/www/
+cp -r dist/* cordova/www/
 cd cordova
 cordova build android --release
 cd platforms/android/ant-build

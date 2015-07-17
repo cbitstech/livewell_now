@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * @ngdoc service
@@ -30,8 +29,6 @@ angular.module('livewellApp')
 		        object.id = collection.length+1;
 		        object.timestamp = new Date();
 		        object.created_at = new Date();
-		        console.log(object);
-
 		        collection.push(object);
 		        localStorage[key] = JSON.stringify(collection);
 		    }
@@ -40,7 +37,6 @@ angular.module('livewellApp')
 		        object.id = 1;
 		        object.timestamp = new Date();
 		        object.created_at = new Date();
-		        console.log(object);
 		        collection = [object];
 		        localStorage[key] = JSON.stringify(collection);
 		        pound.add("pound",key);

@@ -33,7 +33,7 @@ $scope.getChapterContents = function (chapter_id, appContent) {
 
 $scope.lessons = JSON.parse(localStorage['lessons']);
 
-$scope.backButton = '';
+$scope.backButton = '&lt;';
 $scope.backButtonClass = 'btn btn-info';
 $scope.nextButton = '&gt;';
 $scope.nextButtonClass = 'btn btn-primary';

@@ -4,7 +4,7 @@
 </div>
 <div >
     <div class="col-md-3 col-sm-3 col-xs-3">
-        <button class="{{backButtonClass}}" ng-click="back()" ng-bind-html="backButton" ng-show="backButton !=''"></button>
+        <button class="{{backButtonClass}}" ng-click="back()" ng-bind-html="backButton" ng-show="currentSlideIndex > 0"></button>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-6 text-center">
         <div class="currentSlideCount">{{currentSlideIndex+1}} out of {{currentChapterContents.length}}</div>

@@ -8,13 +8,13 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('DailyReviewCtrl', function ($scope,$routeParams,UserData,Pound) {
+  .controller('DailyReviewCtrl', function ($scope,$routeParams,UserData,Pound,DailyReviewAlgorithm) {
     $scope.pageTitle = "Daily Review";
 
     $scope.interventionGroups = UserData.query('dailyReview');
     console.log($scope.interventionGroups);
 
-    $scope.code = parseInt($routeParams.id) || 4;
+    $scope.code = parseInt($routeParams.id) || DailyReviewAlgorithm.getCode();
     $scope.selectedIntervention = _.where($scope.interventionGroups, {code:$scope.code})[0];
 
     $(".modal-backdrop").remove();
@@ -32,7 +32,7 @@ angular.module('livewellApp')
 				}
 			
 		}
-
-		  (new PurpleRobot()).disableTrigger('dailyReview').execute();
+			var pr = new PurpleRobot();
+		  pr.disableTrigger('dailyReview').execute();
 
   });
