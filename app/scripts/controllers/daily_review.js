@@ -15,6 +15,7 @@ angular.module('livewellApp')
     console.log($scope.interventionGroups);
 
     $scope.code = parseInt($routeParams.id) || DailyReviewAlgorithm.getCode();
+    
     $scope.selectedIntervention = _.where($scope.interventionGroups, {code:$scope.code})[0];
 
     $(".modal-backdrop").remove();
@@ -32,6 +33,8 @@ angular.module('livewellApp')
 				}
 			
 		}
+
+
 			var pr = new PurpleRobot();
 		  pr.disableTrigger('dailyReview').execute();
 

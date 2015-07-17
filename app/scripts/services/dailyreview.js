@@ -17,27 +17,25 @@ angular.module('livewellApp')
 		var currentClinicalStatusCode = UserData.query('clinicalStatus').currentCode;
 		var dailyReviewResponses = Pound.find('dailyCheckIn');
 
-		recoder.execute = function(sleepRoutineRanges,dailyReviewResponses,currentClinicalStatusCode){
+		recoder.execute = function(sleepRoutineRanges,dailyReviewResponses){
 
-		 	var historySeed = {}, maxIndexDayRangeNeededForAlgorithm = 6, trimmedDailyReviewResponses = dailyReviewResponses.splice(dailyReviewResponses.length-7) || [];
+		 	var historySeed = {}, trimmedDailyReviewResponses = dailyReviewResponses.splice(dailyReviewResponses.length-7) || [];
 
 	    historySeed.wellness   							= [0,0,0,0,0,0,0]; 	// wellness balanced 7 days
 			historySeed.medications    					= [1,1,1,1,1,1,1]; 	// took all meds 7 days
 			historySeed.sleep										= [0,0,0,0,0,0,0]; 	// in baseline range 7 days
 			historySeed.routine			 						= [2,2,2,2,2,2,2]; 	// in both windows 7 days
 
-	  	for (var i = maxIndexDayRangeNeededForAlgorithm; i > -1 ; i--) { 
-
-	  		if (trimmedDailyReviewResponses.length - i >0){
-	  			debugger;
-	  		historySeed.wellness[i] 		= trimmedDailyReviewResponses[i+6].wellness;
-	  		historySeed.medications[i] 	= recoder.medications(trimmedDailyReviewResponses[i+6]);
-	  		historySeed.sleep[i] 				= recoder.sleep(trimmedDailyReviewResponses[i+6].toBed,trimmedDailyReviewResponses[i].gotUp,sleepRoutineRanges);
-	  		historySeed.routine[i] 			= recoder.routine(trimmedDailyReviewResponses[i+6].toBed,trimmedDailyReviewResponses[i+6].gotUp,sleepRoutineRanges);
-	  		}
+	  	for (var i = 0; i < 7 ; i++) { 
+	  		var responsePosition = trimmedDailyReviewResponses.length + i - 7;
+	  		if(responsePosition > -1){
+	  		historySeed.wellness[i] 		= parseInt(trimmedDailyReviewResponses[responsePosition].wellness);
+	  		historySeed.medications[i] 	= recoder.medications(trimmedDailyReviewResponses[responsePosition].medications);
+	  		historySeed.sleep[i] 				= recoder.sleep(trimmedDailyReviewResponses[responsePosition].toBed,trimmedDailyReviewResponses[responsePosition].gotUp,sleepRoutineRanges);
+	  		historySeed.routine[i] 			= recoder.routine(trimmedDailyReviewResponses[responsePosition].toBed,trimmedDailyReviewResponses[responsePosition].gotUp,sleepRoutineRanges);
+				}
 			}
 
-			debugger;
 			return historySeed
 		}
 
@@ -110,175 +108,167 @@ angular.module('livewellApp')
     	var riseTimeStart = parseInt(sleepRoutineRanges.RiseTimeStrt_MT);
     	var riseTimeStop = parseInt(sleepRoutineRanges.RiseTimeStop_MT);
 
-    	if (numGotUp < numToBed){
-    		numGotUp = numGotUp + 2400;
-    	}
     	if (bedTimeStart > bedTimeStop){
     		bedTimeStop = bedTimeStop + 2400;
     	}
+
     	if (riseTimeStart > riseTimeStop){
     		riseTimeStop = riseTimeStop + 2400;
+    	}
+
+    	if (numGotUp < riseTimeStart &&  numGotUp < riseTimeStop){
+    		numToBed = numToBed + 2400;
     	}
 
     	if(numGotUp >= riseTimeStart && numGotUp <= riseTimeStop){
     		sum++
     	}
+
+    	if (numToBed < bedTimeStart && numToBed < bedTimeStop){
+    		numToBed = numToBed + 2400;
+    	}
+
     	if(numToBed >= bedTimeStart && numToBed <= bedTimeStop){
     		sum++
     	}
-
-    	debugger;
     	return parseInt(sum)
     }
 
-		conditions[26] = function(data){
+		conditions[26] = function(data,code){
 			var boolean = false;
 			//logic
 			return boolean
 		};
-		conditions[25] = function(data){
+		conditions[25] = function(data,code){
 			var boolean = false;
 			//logic
 			return boolean
 		};
-		conditions[24] = function(data){
+		conditions[24] = function(data,code){
 			var boolean = false;
 			//logic
 			return boolean
 		};
-		conditions[23] = function(data){
+		conditions[23] = function(data,code){
 			var boolean = false;
 			//logic
 			return boolean
 		};
-		conditions[22] = function(data){
+		conditions[22] = function(data,code){
 			var boolean = false;
 			//logic
 			return boolean
 		};
-		conditions[21] = function(data){
+		conditions[21] = function(data,code){
 			var boolean = false;
 			//logic
 			return boolean
 		};
-		conditions[20] = function(data){
+		conditions[20] = function(data,code){
 			var boolean = false;
 			//logic
 			return boolean
 		};	
-		conditions[19] = function(data){
+		conditions[19] = function(data,code){
 			var boolean = false;
 			//logic
 			return boolean
 		};
-		conditions[18] = function(data){
+		conditions[18] = function(data,code){
 			var boolean = false;
 			//logic
 			return boolean
 		};
-		conditions[17] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[17] = function(data,code){
+			//mild down well
+			return data.wellness[6] == -2 && code == 1;
 		};
-		conditions[16] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[16] = function(data,code){
+			//mild up well
+			return data.wellness[6] == 2 && code == 1;
 		};
-		conditions[15] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[15] = function(data,code){
+			//balanced prodromal
+			return code == 4
 		};
-		conditions[14] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[14] = function(data,code){
+			//balanced recovering
+			return code == 3
 		};
-		conditions[13] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[13] = function(data,code){
+			//mild down prodromal
+			return data.wellness[6] == -2 && code == 2;
 		};
-		conditions[12] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[12] = function(data,code){
+			//mild up prodromal
+			return data.wellness[6] == 2 && code == 2;
 		};
-		conditions[11] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[11] = function(data,code){
+			//mild down recovering
+			return data.wellness[6] == -2 && code == 3;
 		};
-		conditions[10] = function(data){
-			var boolean = true;
-			//logic
-			return boolean
+		conditions[10] = function(data,code){
+			//mild up recovering
+			return data.wellness[6] == 2 && code == 3;
 		};
-		conditions[9] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[9] = function(data,code){
+			//moderate down
+			return data.wellness[6] == -3 && code !== 4;
 		};
-		conditions[8] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[8] = function(data,code){
+			//moderate up
+			return data.wellness[6] == 3 && code !== 4;
 		};
-		conditions[7] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[7] = function(data,code){
+			//balanced unwell
+			return code == 4;
 		};
-		conditions[6] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[6] = function(data,code){
+			//mild down unwell
+			return data.wellness[6] == -2 && code == 4;
 		};
-		conditions[5] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[5] = function(data,code){
+			//mild up unwell
+			return data.wellness[6] == 2 && code == 4;
 		};
-		conditions[4] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[4] = function(data,code){
+			//moderate down unwell
+			return data.wellness[6] == -3 && code == 4;
 		};
-		conditions[3] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[3] = function(data,code){
+			//moderate up unwell
+			return data.wellness[6] == 3 && code == 4;
 		};
-		conditions[2] = function(data){
-			var boolean = true;
-			//logic
-			return boolean
+		conditions[2] = function(data,code){
+			//logic for severe down			
+			return data.wellness[6] == -4;
 		};
-		conditions[1] = function(data){
-			var boolean = false;
-			//logic
-			return boolean
+		conditions[1] = function(data,code){
+			//logic for severe up			
+			return data.wellness[6] == 4;
 		};
 
-		conditions[0]	= null;
+// "[{"code":1,"label":"well"},{"code":2,"label":"prodromal"},{"code":3,"label":"recovering"},{"code":4,"label":"unwell"}]"
 
     contents.getCode = function(){
 
     		//look for the highest TRUE value in the condition set
+				debugger;
+    		
+    		var recodedSevenDays = recoder.execute(sleepRoutineRanges,dailyReviewResponses);
 
-    		var recodedSevenDays = recoder.execute(sleepRoutineRanges,dailyReviewResponses,currentClinicalStatusCode);
+    		console.log(recodedSevenDays);
 
-    		for(var i = conditions.length; i--; ){
+    		for(var i; i++; ){
 
-    			if (conditions[i](recodedSevenDays) == true){
+    			if (conditions[i](recodedSevenDays,currentClinicalStatusCode) == true){
     				return i
     				break;
     			}
 
     		}
 
+    		debugger;
     }
 
     return contents
