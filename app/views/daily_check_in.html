@@ -18,7 +18,8 @@
     <div class="modal-content">
 
       <div class="modal-body alert-warning">
-        <a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full">Continue to Daily Review</a><Br/>
+        <a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full" ng-show="!emergency">Continue to Daily Review</a><Br/>
+        <div class="alert alert-danger" ng-show="emergency">Please contact your doctor.</div>
         <a ng-href="#/" class="btn btn-primary btn-full" >Return Home</a>
       </div>
 

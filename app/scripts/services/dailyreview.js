@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc service
  * @name livewellApp.dailyReview
@@ -8,270 +7,393 @@
  * Service in the livewellApp.
  */
 angular.module('livewellApp')
-  .service('DailyReviewAlgorithm', function (Pound,UserData) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+    .service('DailyReviewAlgorithm', function(Pound, UserData) {
+        // AngularJS will instantiate a singleton by calling "new" on this function
+        var contents = {},
+            recoder = {},
+            history = {},
+            dailyCheckInData = {},
+            conditions = [];
+        var sleepRoutineRanges = UserData.query('sleepRoutineRanges');
+        var currentClinicalStatusCode = UserData.query('clinicalStatus').currentCode;
+        var dailyReviewResponses = Pound.find('dailyCheckIn');
+        recoder.execute = function(sleepRoutineRanges, dailyReviewResponses) {
+            var historySeed = {};
+            historySeed.wellness = [0, 0, 0, 0, 0, 0, 0]; // wellness balanced 7 days
+            historySeed.medications = [1, 1, 1, 1, 1, 1, 1]; // took all meds 7 days
+            historySeed.sleep = [0, 0, 0, 0, 0, 0, 0]; // in baseline range 7 days
+            historySeed.routine = [2, 2, 2, 2, 2, 2, 2]; // in both windows 7 days
+            for (var i = 0; i < 7; i++) {
+                var responsePosition = dailyReviewResponses.length + i - 7;
+                if (dailyReviewResponses[responsePosition] != undefined) {
+                    historySeed.wellness[i] = parseInt(dailyReviewResponses[responsePosition].wellness);
+                    historySeed.medications[i] = recoder.medications(dailyReviewResponses[responsePosition].medications);
+                    historySeed.sleep[i] = recoder.sleep(dailyReviewResponses[responsePosition].toBed, dailyReviewResponses[responsePosition].gotUp, sleepRoutineRanges);
+                    historySeed.routine[i] = recoder.routine(dailyReviewResponses[responsePosition].toBed, dailyReviewResponses[responsePosition].gotUp, sleepRoutineRanges);
+                }
+            }
+            return historySeed
+        }
 
-    var contents = {}, recoder = {}, history= {}, dailyCheckInData = {}, conditions = [];
+        recoder.medications = function(medications) {
+            switch (medications) {
+                case '0':
+                    return 0
+                    break;
+                case '1':
+                    return 0.5
+                    break;
+                case '2':
+                    return 1
+                    break;
+            }
+        }
 
-    var sleepRoutineRanges = UserData.query('sleepRoutineRanges');
-		var currentClinicalStatusCode = UserData.query('clinicalStatus').currentCode;
-		var dailyReviewResponses = Pound.find('dailyCheckIn');
+        recoder.sleep = function(toBed, gotUp, sleepRoutineRanges) {
+            var score = 0;
+            // duration = gotUp - toBed
+            // look at ranges defined in sleepRoutineRanges, which range is it in?
+            var numGotUp = parseInt(gotUp);
+            var numToBed = parseInt(toBed);
+            if (numGotUp < numToBed) {
+                numGotUp = numGotUp + 2400;
+            }
+            var duration = numGotUp - numToBed;
+            ;
+            if (duration % 100 == 70) {
+                duration = duration - 20;
+            }
+            duration = duration / 100;
+            if (duration <= sleepRoutineRanges.LessSevere) {
+                score = -1;
+            }
+            if (duration >= sleepRoutineRanges.MoreSevere) {
+                score = 1;
+            }
+            if (duration >= sleepRoutineRanges.Less && duration <= sleepRoutineRanges.More) {
+                score = 0;
+            }
+            if (duration < sleepRoutineRanges.Less && duration >= sleepRoutineRanges.LessSevere) {
+                score = -0.5;
+            }
+            if (duration > sleepRoutineRanges.More && duration <= sleepRoutineRanges.MoreSevere) {
+                score = 0.5;
+            }
+            return score
+        }
 
-		recoder.execute = function(sleepRoutineRanges,dailyReviewResponses){
-
-		 	var historySeed = {}, trimmedDailyReviewResponses = dailyReviewResponses.splice(dailyReviewResponses.length-7) || [];
-
-	    historySeed.wellness   							= [0,0,0,0,0,0,0]; 	// wellness balanced 7 days
-			historySeed.medications    					= [1,1,1,1,1,1,1]; 	// took all meds 7 days
-			historySeed.sleep										= [0,0,0,0,0,0,0]; 	// in baseline range 7 days
-			historySeed.routine			 						= [2,2,2,2,2,2,2]; 	// in both windows 7 days
-
-	  	for (var i = 0; i < 7 ; i++) { 
-	  		var responsePosition = trimmedDailyReviewResponses.length + i - 7;
-	  		if(responsePosition > -1){
-	  		historySeed.wellness[i] 		= parseInt(trimmedDailyReviewResponses[responsePosition].wellness);
-	  		historySeed.medications[i] 	= recoder.medications(trimmedDailyReviewResponses[responsePosition].medications);
-	  		historySeed.sleep[i] 				= recoder.sleep(trimmedDailyReviewResponses[responsePosition].toBed,trimmedDailyReviewResponses[responsePosition].gotUp,sleepRoutineRanges);
-	  		historySeed.routine[i] 			= recoder.routine(trimmedDailyReviewResponses[responsePosition].toBed,trimmedDailyReviewResponses[responsePosition].gotUp,sleepRoutineRanges);
-				}
-			}
-
-			return historySeed
-		}
-
-    recoder.medications = function(medications){
-    	
-    	switch (medications){
-
-    		case '0':
-    		return 0
-    		break;
-    		case '1':
-    		return 0.5
-    		break;
-    		case '2':
-    		return 1
-    		break;
-    	}
-
-
-    }
-
-   	recoder.sleep = function(gotUp, toBed, sleepRoutineRanges){
-    	var score = 0;
-
-    	// duration = gotUp - toBed
-    	// look at ranges defined in sleepRoutineRanges, which range is it in?
-
-    	var numGotUp = parseInt(gotUp);
-    	var numToBed = parseInt(toBed);
-
-    	if (numGotUp < numToBed){
-    		numGotUp = numGotUp + 2400;
-    	}
-
-    	var duration = numGotUp - numToBed;
-
-    	if (duration % 100 == 30) {
-    		duration = duration + 20;
-    	}
-
-    	duration = duration / 100;
-
-			if (duration < sleepRoutineRanges.lessSevere){
-				score = -1;
-			}
-
-			if (duration > sleepRoutineRanges.moreSevere){
-				score = 1;
-			}
-
-			if (duration < sleepRoutineRanges.less && duration >= sleepRoutineRanges.lessSevere){
-				score = -0.5;
-			}
-
-			if (duration > sleepRoutineRanges.more && duration <= sleepRoutineRanges.moreSevere){
-				score = 0.5;
-			}
-
-    	return score
-    }
-
-    recoder.routine = function(toBed, gotUp, sleepRoutineRanges){
-    	var sum = 0;
-    	var range = sleepRoutineRanges;
-    	
-    	var numGotUp = parseInt(gotUp);
-    	var numToBed = parseInt(toBed);
-    	var bedTimeStart = parseInt(sleepRoutineRanges.BedTimeStrt_MT);
-    	var bedTimeStop = parseInt(sleepRoutineRanges.BedTimeStop_MT);
-    	var riseTimeStart = parseInt(sleepRoutineRanges.RiseTimeStrt_MT);
-    	var riseTimeStop = parseInt(sleepRoutineRanges.RiseTimeStop_MT);
-
-    	if (bedTimeStart > bedTimeStop){
-    		bedTimeStop = bedTimeStop + 2400;
-    	}
-
-    	if (riseTimeStart > riseTimeStop){
-    		riseTimeStop = riseTimeStop + 2400;
-    	}
-
-    	if (numGotUp < riseTimeStart &&  numGotUp < riseTimeStop){
-    		numToBed = numToBed + 2400;
-    	}
-
-    	if(numGotUp >= riseTimeStart && numGotUp <= riseTimeStop){
-    		sum++
-    	}
-
-    	if (numToBed < bedTimeStart && numToBed < bedTimeStop){
-    		numToBed = numToBed + 2400;
-    	}
-
-    	if(numToBed >= bedTimeStart && numToBed <= bedTimeStop){
-    		sum++
-    	}
-    	return parseInt(sum)
-    }
-
-		conditions[26] = function(data,code){
-			var boolean = false;
-			//logic
-			return boolean
-		};
-		conditions[25] = function(data,code){
-			var boolean = false;
-			//logic
-			return boolean
-		};
-		conditions[24] = function(data,code){
-			var boolean = false;
-			//logic
-			return boolean
-		};
-		conditions[23] = function(data,code){
-			var boolean = false;
-			//logic
-			return boolean
-		};
-		conditions[22] = function(data,code){
-			var boolean = false;
-			//logic
-			return boolean
-		};
-		conditions[21] = function(data,code){
-			var boolean = false;
-			//logic
-			return boolean
-		};
-		conditions[20] = function(data,code){
-			var boolean = false;
-			//logic
-			return boolean
-		};	
-		conditions[19] = function(data,code){
-			var boolean = false;
-			//logic
-			return boolean
-		};
-		conditions[18] = function(data,code){
-			var boolean = false;
-			//logic
-			return boolean
-		};
-		conditions[17] = function(data,code){
-			//mild down well
-			return data.wellness[6] == -2 && code == 1;
-		};
-		conditions[16] = function(data,code){
-			//mild up well
-			return data.wellness[6] == 2 && code == 1;
-		};
-		conditions[15] = function(data,code){
-			//balanced prodromal
-			return code == 4
-		};
-		conditions[14] = function(data,code){
-			//balanced recovering
-			return code == 3
-		};
-		conditions[13] = function(data,code){
-			//mild down prodromal
-			return data.wellness[6] == -2 && code == 2;
-		};
-		conditions[12] = function(data,code){
-			//mild up prodromal
-			return data.wellness[6] == 2 && code == 2;
-		};
-		conditions[11] = function(data,code){
-			//mild down recovering
-			return data.wellness[6] == -2 && code == 3;
-		};
-		conditions[10] = function(data,code){
-			//mild up recovering
-			return data.wellness[6] == 2 && code == 3;
-		};
-		conditions[9] = function(data,code){
-			//moderate down
-			return data.wellness[6] == -3 && code !== 4;
-		};
-		conditions[8] = function(data,code){
-			//moderate up
-			return data.wellness[6] == 3 && code !== 4;
-		};
-		conditions[7] = function(data,code){
-			//balanced unwell
-			return code == 4;
-		};
-		conditions[6] = function(data,code){
-			//mild down unwell
-			return data.wellness[6] == -2 && code == 4;
-		};
-		conditions[5] = function(data,code){
-			//mild up unwell
-			return data.wellness[6] == 2 && code == 4;
-		};
-		conditions[4] = function(data,code){
-			//moderate down unwell
-			return data.wellness[6] == -3 && code == 4;
-		};
-		conditions[3] = function(data,code){
-			//moderate up unwell
-			return data.wellness[6] == 3 && code == 4;
-		};
-		conditions[2] = function(data,code){
-			//logic for severe down			
-			return data.wellness[6] == -4;
-		};
-		conditions[1] = function(data,code){
-			//logic for severe up			
-			return data.wellness[6] == 4;
-		};
-
-// "[{"code":1,"label":"well"},{"code":2,"label":"prodromal"},{"code":3,"label":"recovering"},{"code":4,"label":"unwell"}]"
-
-    contents.getCode = function(){
-
-    		//look for the highest TRUE value in the condition set
-				debugger;
-    		
-    		var recodedSevenDays = recoder.execute(sleepRoutineRanges,dailyReviewResponses);
-
-    		console.log(recodedSevenDays);
-
-    		for(var i; i++; ){
-
-    			if (conditions[i](recodedSevenDays,currentClinicalStatusCode) == true){
-    				return i
-    				break;
-    			}
-
-    		}
-
-    		debugger;
-    }
-
-    return contents
-
-
-  });
+        recoder.routine = function(toBed, gotUp, sleepRoutineRanges) {
+            var sum = 0;
+            var range = sleepRoutineRanges;
+            var numGotUp = parseInt(gotUp);
+            var numToBed = parseInt(toBed);
+            var bedTimeStart = parseInt(sleepRoutineRanges.BedTimeStrt_MT);
+            var bedTimeStop = parseInt(sleepRoutineRanges.BedTimeStop_MT);
+            var riseTimeStart = parseInt(sleepRoutineRanges.RiseTimeStrt_MT);
+            var riseTimeStop = parseInt(sleepRoutineRanges.RiseTimeStop_MT);
+            if (bedTimeStart > bedTimeStop) {
+                bedTimeStop = bedTimeStop + 2400;
+            }
+            if (riseTimeStart > riseTimeStop) {
+                riseTimeStop = riseTimeStop + 2400;
+            }
+            if (numGotUp < riseTimeStart && numGotUp < riseTimeStop) {
+                numGotUp = numGotUp + 2400;
+            }
+            if (numToBed < bedTimeStart && numToBed < bedTimeStop) {
+                numToBed = numToBed + 2400;
+            }
+            if (numGotUp >= riseTimeStart && numGotUp <= riseTimeStop) {
+                sum++
+            }
+            if (numToBed >= bedTimeStart && numToBed <= bedTimeStop) {
+                sum++
+            }
+            return parseInt(sum)
+        };
+        
+        conditions[26] = function(data, code) {
+            //well
+            return true
+        };
+        conditions[25] = function(data, code) {
+            //at risk routine
+            //Baseline ≥ 3 of last 4 days	mrd ≠ Bedtime Window and/or mrd ≠ Risetime Window,               
+            //Bedtime and Risetime Windows ≤ 5 of last 4 days
+            var sum1 = 0;
+            if (data.routine[2] == 0) {
+                sum1++
+            }
+            if (data.routine[3] == 0) {
+                sum1++
+            }
+            if (data.routine[4] == 0) {
+                sum1++
+            }
+            if (data.routine[5] == 0) {
+                sum1++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) && ((data.routine[6] > 0 && sum1 >= 3) || sum >= 5)
+        };
+        conditions[24] = function(data, code) {
+            //at risk sleep erratic
+            //mrd ≠ Baseline,  Baseline ≤ 2 of last 4 days
+            var sum1 = 0;
+            if (data.sleep[2] == 0) {
+                sum1++
+            }
+            if (data.sleep[3] == 0) {
+                sum1++
+            }
+            if (data.sleep[4] == 0) {
+                sum1++
+            }
+            if (data.sleep[5] == 0) {
+                sum1++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) && (data.sleep[6] != 0) && sum1 <= 2
+        };
+        conditions[23] = function(data, code) {
+            //at risk sleep more
+            //mrd = More or More-Severe, More or More-Severe ≥ 2 last 4 days, Less or Less-Severe  ≤ 1 last 4 days
+            var sum1 = 0;
+            if (data.sleep[2] == -1 || data.sleep[2] == -0.5) {
+                sum1++
+            }
+            if (data.sleep[3] == -1 || data.sleep[3] == -0.5) {
+                sum1++
+            }
+            if (data.sleep[4] == -1 || data.sleep[4] == -0.5) {
+                sum1++
+            }
+            if (data.sleep[5] == -1 || data.sleep[5] == -0.5) {
+                sum1++
+            }
+            var sum2 = 0;
+            if (data.sleep[2] == 1 || data.sleep[2] == 0.5) {
+                sum2++
+            }
+            if (data.sleep[3] == 1 || data.sleep[3] == 0.5) {
+                sum2++
+            }
+            if (data.sleep[4] == 1 || data.sleep[4] == 0.5) {
+                sum2++
+            }
+            if (data.sleep[5] == 1 || data.sleep[5] == 0.5) {
+                sum2++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) && (data.sleep[6] == 1 || data.sleep[6] == 0.5) && sum1 <= 1 && sum2 >= 2
+        };
+        conditions[22] = function(data, code) {
+            //at risk sleep less
+            //mrd = Less or Less-Severe, Less or Less-Severe ≥ 2 of last 4 days, More or More-Severe ≤ 1 of last 4 days
+            var sum1 = 0;
+            if (data.sleep[2] == -1 || data.sleep[2] == -0.5) {
+                sum1++
+            }
+            if (data.sleep[3] == -1 || data.sleep[3] == -0.5) {
+                sum1++
+            }
+            if (data.sleep[4] == -1 || data.sleep[4] == -0.5) {
+                sum1++
+            }
+            if (data.sleep[5] == -1 || data.sleep[5] == -0.5) {
+                sum1++
+            }
+            var sum2 = 0;
+            if (data.sleep[2] == 1 || data.sleep[2] == 0.5) {
+                sum2++
+            }
+            if (data.sleep[3] == 1 || data.sleep[3] == 0.5) {
+                sum2++
+            }
+            if (data.sleep[4] == 1 || data.sleep[4] == 0.5) {
+                sum2++
+            }
+            if (data.sleep[5] == 1 || data.sleep[5] == 0.5) {
+                sum2++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) && (data.sleep[6] == -1 || data.sleep[6] == -0.5) && sum1 >= 2 && sum2 <= 1
+        };
+        conditions[21] = function(data, code) {
+            //at risk medications
+            return code == 1 && Math.abs(data.wellness[6]) && data.medications[6] != 1
+        };
+        conditions[20] = function(data, code) {
+            //at risk sleep more severe
+            //mrd = More-Severe, More-Severe ≥ 3 of last 4 days
+            var sum = 0;
+            if (data.sleep[2] == 1) {
+                sum++
+            }
+            if (data.sleep[3] == 1) {
+                sum++
+            }
+            if (data.sleep[4] == 1) {
+                sum++
+            }
+            if (data.sleep[5] == 1) {
+                sum++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) && data.sleep[6] == 1 && sum >= 3
+        };
+        conditions[19] = function(data, code) {
+            //at risk sleep less severe
+            //mrd = Less-Severe, Less-Severe ≥ 2 of last 4 days
+            var sum = 0;
+            if (data.sleep[2] == -1) {
+                sum++
+            }
+            if (data.sleep[3] == -1) {
+                sum++
+            }
+            if (data.sleep[4] == -1) {
+                sum++
+            }
+            if (data.sleep[5] == -1) {
+                sum++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) && data.sleep[6] == -1 && sum >= 3
+        };
+        conditions[18] = function(data, code) {
+            //at risk medications severe
+            var avgOfLastFourDaysMeds = (data.medications[3] + data.medications[4] + data.medications[5] + data.medications[6]) / 4;
+            return code == 1 && Math.abs(data.wellness[6]) && data.medications[6] != 1 && avgOfLastFourDaysMeds <= 1
+        };
+        conditions[17] = function(data, code) {
+            //mild down well
+            return data.wellness[6] == -2 && code == 1;
+        };
+        conditions[16] = function(data, code) {
+            //mild up well
+            return data.wellness[6] == 2 && code == 1;
+        };
+        conditions[15] = function(data, code) {
+            //balanced prodromal
+            return code == 4
+        };
+        conditions[14] = function(data, code) {
+            //balanced recovering
+            return code == 3
+        };
+        conditions[13] = function(data, code) {
+            //mild down prodromal
+            return data.wellness[6] == -2 && code == 2;
+        };
+        conditions[12] = function(data, code) {
+            //mild up prodromal
+            return data.wellness[6] == 2 && code == 2;
+        };
+        conditions[11] = function(data, code) {
+            //mild down recovering
+            return data.wellness[6] == -2 && code == 3;
+        };
+        conditions[10] = function(data, code) {
+            //mild up recovering
+            return data.wellness[6] == 2 && code == 3;
+        };
+        conditions[9] = function(data, code) {
+            //moderate down
+            return data.wellness[6] == -3 && code !== 4;
+        };
+        conditions[8] = function(data, code) {
+            //moderate up
+            return data.wellness[6] == 3 && code !== 4;
+        };
+        conditions[7] = function(data, code) {
+            //balanced unwell
+            return code == 4;
+        };
+        conditions[6] = function(data, code) {
+            //mild down unwell
+            return data.wellness[6] == -2 && code == 4;
+        };
+        conditions[5] = function(data, code) {
+            //mild up unwell
+            return data.wellness[6] == 2 && code == 4;
+        };
+        conditions[4] = function(data, code) {
+            //moderate down unwell
+            return data.wellness[6] == -3 && code == 4;
+        };
+        conditions[3] = function(data, code) {
+            //moderate up unwell
+            return data.wellness[6] == 3 && code == 4;
+        };
+        conditions[2] = function(data, code) {
+            //logic for severe down			
+            return data.wellness[6] == -4;
+        };
+        conditions[1] = function(data, code) {
+            //logic for severe up			
+            return data.wellness[6] == 4;
+        };
+        conditions[0] = function() {
+            return false
+        }
+        // "[{"code":1,"label":"well"},{"code":2,"label":"prodromal"},{"code":3,"label":"recovering"},{"code":4,"label":"unwell"}]"
+        recoder.wellnessFormatter = function(wellnessRating) {
+            switch (wellnessRating) {
+                case -4:
+                    return 0;
+                    break;
+                case -3:
+                    return .25;
+                    break;
+                case -2:
+                    return .5;
+                    break
+                case -1:
+                    return 1;
+                    break;
+                case 0:
+                    return 1;
+                    break;
+                case 1:
+                    return 1;
+                    break;
+                case 2:
+                    return 0.5;
+                    break;
+                case 3:
+                    return 0.25;
+                    break;
+                case 4:
+                    return 0;
+                    break;
+            }
+        }
+        contents.getPercentages = function() {
+            var contents = {};
+            var recodedSevenDays = recoder.execute(sleepRoutineRanges, Pound.find('dailyCheckIn'));
+            var sleepValues = {};
+            sleepValues[-1] = 0;
+            sleepValues[-0.5] = 0.25;
+            sleepValues[0] = 1;
+            sleepValues[0.5] = 0.5;
+            sleepValues[1] = 0;
+            contents.sleep = (sleepValues[recodedSevenDays.sleep[3]] + sleepValues[recodedSevenDays.sleep[4]] + sleepValues[recodedSevenDays.sleep[5]] + sleepValues[recodedSevenDays.sleep[6]]) / 4;
+            contents.wellness = (recoder.wellnessFormatter(recodedSevenDays.wellness[3]) + recoder.wellnessFormatter(recodedSevenDays.wellness[4]) + recoder.wellnessFormatter(recodedSevenDays.wellness[5]) + recoder.wellnessFormatter(recodedSevenDays.wellness[6])) / 4;
+            contents.medications = (recodedSevenDays.medications[3] + recodedSevenDays.medications[4] + recodedSevenDays.medications[5] + recodedSevenDays.medications[6]) / 4;
+            contents.routine = (recodedSevenDays.routine[3] + recodedSevenDays.routine[4] + recodedSevenDays.routine[5] + recodedSevenDays.routine[6]) / 8;
+            return contents
+        }
+        contents.getCode = function() {
+            //look for the highest TRUE value in the condition set
+            var recodedSevenDays = recoder.execute(sleepRoutineRanges, Pound.find('dailyCheckIn'));
+            console.log(recodedSevenDays);
+            for (var i = 0; i < conditions.length; i++) {
+                var selection = conditions[i](recodedSevenDays, currentClinicalStatusCode);
+                if (selection == true) {
+                    return i
+                    break;
+                }
+            }
+        }
+        contents.code = contents.getCode();
+        contents.percentages = contents.getPercentages();
+        contents.recodedResponses = function() {
+            return recoder.execute(sleepRoutineRanges, Pound.find('dailyCheckIn'))
+        };
+        return contents
+    });

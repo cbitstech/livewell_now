@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'highcharts-ng'
+    'highcharts-ng',
+    'angularMoment'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -41,10 +42,6 @@ angular
         controller: 'CheckinsCtrl'
       })
       .when('/daily_review', {
-        templateUrl: 'views/daily_review.html',
-        controller: 'DailyReviewCtrl'
-      })
-      .when('/daily_review/:id', {
         templateUrl: 'views/daily_review.html',
         controller: 'DailyReviewCtrl'
       })

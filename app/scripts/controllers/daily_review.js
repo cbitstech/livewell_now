@@ -8,34 +8,59 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('DailyReviewCtrl', function ($scope,$routeParams,UserData,Pound,DailyReviewAlgorithm) {
+  .controller('DailyReviewCtrl', function ($scope,$routeParams,UserData,Pound,DailyReviewAlgorithm,ClinicalStatusUpdate) {
     $scope.pageTitle = "Daily Review";
 
     $scope.interventionGroups = UserData.query('dailyReview');
-    console.log($scope.interventionGroups);
 
-    $scope.code = parseInt($routeParams.id) || DailyReviewAlgorithm.getCode();
-    
-    $scope.selectedIntervention = _.where($scope.interventionGroups, {code:$scope.code})[0];
+    $scope.updatedClinicalStatus = {};
+
+    var runAlgorithm = function(){
+    	var object = {};
+    	object.code = DailyReviewAlgorithm.code;
+    	$scope.updatedClinicalStatus = ClinicalStatusUpdate.execute();
+
+    	return object
+    }
+
+    $scope.code = runAlgorithm().code;
+
+
+   
+    //TO REMOVE
+    $scope.recodedResponses = DailyReviewAlgorithm.recodedResponses();
+    $scope.dailyCheckInResponseArray = Pound.find('dailyCheckIn')
+    $scope.dailyCheckInResponses = ' |today| ' +JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-1]) +' |t-1| ' +JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-2]) + ' |t-2| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-3])+ ' |t-3| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-4]) + ' |t-4| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-5])+ ' |t-5| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-6])+ ' |t-6| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-7]);
+
+		//STOP REMOVE
+
+    $scope.percentages = DailyReviewAlgorithm.percentages;
 
     $(".modal-backdrop").remove();
 
-    Pound.add('dailyReviewStarted',{userStarted:true});
+    Pound.add('dailyReviewStarted',{userStarted:true, code:$scope.code});
+
+
+    $scope.dailyReviewCategory = _.where($scope.interventionGroups, {code:$scope.code})[0].questionSet;
 
 		$scope.interventionResponse = function(){ 
 
-			if (typeof($scope.selectedIntervention.response) == 'object'){
-
-					return $scope.selectedIntervention.response[Math.floor((Math.random() * $scope.selectedIntervention.response.length)	)]
+			if ($scope.code == 1 || $scope.code == 2 ){ 
+					return 'Please contact your care provider or hospital';
 			}
-				else{
-					return $scope.selectedIntervention.response
+			else {
+				if (_.where($scope.interventionGroups, {code:$scope.code})[0] != undefined){
+					if(typeof(_.where($scope.interventionGroups, {code:$scope.code})[0].response) == 'object'){
+							return _.where($scope.interventionGroups, {code:$scope.code})[0].response[Math.floor((Math.random() * _.where($scope.interventionGroups, {code:$scope.code})[0].response.length)	)]
+					}
+					else {
+							return _.where($scope.interventionGroups, {code:$scope.code})[0].response
+					}
 				}
-			
+			}
 		}
 
-
-			var pr = new PurpleRobot();
-		  pr.disableTrigger('dailyReview').execute();
+		var pr = new PurpleRobot();
+		pr.disableTrigger('dailyReview').execute();
 
   });

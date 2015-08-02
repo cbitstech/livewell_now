@@ -1,21 +1,3 @@
-#! /bin/bash
-
-clear
-
-echo "building distribution directory"
-grunt build --force
-
-wait
-
-echo 'Completed building distribution folder'
-echo 'Starting server'
-
-cp app/styles/bootstrap.min.css dist/styles
-cp app/images/logo.png dist/images
-
-rm -rf cordova/www
-mkdir cordova/www
-cp -r dist/* cordova/www/
 cd cordova
 cordova build android --release
 cd platforms/android/ant-build
