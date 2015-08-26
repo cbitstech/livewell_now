@@ -10,6 +10,8 @@
 angular.module('livewellApp')
   .controller('DailyReviewCtrl', function ($scope,$routeParams,UserData,Pound,DailyReviewAlgorithm,ClinicalStatusUpdate) {
     $scope.pageTitle = "Daily Review";
+    Pound.add('dailyReviewStarted',{userStarted:true, code:$scope.code});
+
 
     $scope.interventionGroups = UserData.query('dailyReview');
 
@@ -17,13 +19,13 @@ angular.module('livewellApp')
 
     var runAlgorithm = function(){
     	var object = {};
-    	object.code = function(){return DailyReviewAlgorithm.code();}
+    	object.code = DailyReviewAlgorithm.code();
     	$scope.updatedClinicalStatus = ClinicalStatusUpdate.execute();
 
     	return object
     }
 
-    $scope.code = runAlgorithm().code();
+    $scope.code = runAlgorithm().code;
 
 
    
@@ -38,7 +40,6 @@ angular.module('livewellApp')
 
     $(".modal-backdrop").remove();
 
-    Pound.add('dailyReviewStarted',{userStarted:true, code:$scope.code});
 
 
     $scope.dailyReviewCategory = _.where($scope.interventionGroups, {code:$scope.code})[0].questionSet;
