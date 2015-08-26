@@ -22,6 +22,8 @@ angular.module('livewellApp')
     //allows you to pass a question index url param into the question group directive
     $scope.questionIndex = parseInt($routeParams.questionIndex)-1 || 0;
 
+    $scope.skippable = false;
+
     //overrides questiongroup default submit action to send data to PR
     $scope.submit = function(){
 

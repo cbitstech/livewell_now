@@ -17,13 +17,13 @@ angular.module('livewellApp')
 
     var runAlgorithm = function(){
     	var object = {};
-    	object.code = DailyReviewAlgorithm.code;
+    	object.code = function(){return DailyReviewAlgorithm.code();}
     	$scope.updatedClinicalStatus = ClinicalStatusUpdate.execute();
 
     	return object
     }
 
-    $scope.code = runAlgorithm().code;
+    $scope.code = runAlgorithm().code();
 
 
    
@@ -34,7 +34,7 @@ angular.module('livewellApp')
 
 		//STOP REMOVE
 
-    $scope.percentages = DailyReviewAlgorithm.percentages;
+    $scope.percentages = DailyReviewAlgorithm.percentages();
 
     $(".modal-backdrop").remove();
 

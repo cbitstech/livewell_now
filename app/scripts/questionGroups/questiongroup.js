@@ -22,6 +22,7 @@ angular.module('livewellApp')
             scope._SURVEY_FAILURE_LABEL = scope.surveyFailureLabel || '<b>Unfortunately, this survey failed to load:</b>';
 
             scope.questionGroups = _.flatten(scope.questionGroups);
+            scope.questionAnswered = [];
 
             scope.surveyFailure = function(){
 
@@ -85,7 +86,9 @@ angular.module('livewellApp')
 
             scope.goesToIndex = "";
 
-            scope.goesTo = function(goesToId){
+            scope.goesTo = function(goesToId,index){
+
+                  scope.skipArray[index] = true;
 
                   for (var index = 0; index < scope.questionGroups.length; index++) { 
                       if (scope.questionGroups[index].questionDataLabel == goesToId){
@@ -97,7 +100,7 @@ angular.module('livewellApp')
 
             }
 
-      	scope.next = function(question){
+      	scope.next = function(question,index){
                   // console.log(question);
 
                   if (question.responses.length == 1 && question.responses[0].goesTo != "")
@@ -107,18 +110,25 @@ angular.module('livewellApp')
 
                   if (scope.goesToIndex != "")
                   {     
-                        // alert("Going to " + scope.goesToIndex);
-                        scope.currentIndex = scope.goesToIndex; 
+         
+                        scope.currentIndex = scope.goesToIndex;
 
                   }
                   else {
-                  scope.currentIndex++;
+                        debugger;
+                        if( scope.skipArray[index] == true){
+                              scope.currentIndex++;}
+                        else{
+                              alert('You must enter an answer to continue!');//modal
+                        } 
+
                   }
                   scope.goesToIndex = "";
       	};
 
       	scope.back = function(){
       		scope.currentIndex--;
+
       	};
 
 
@@ -127,6 +137,9 @@ angular.module('livewellApp')
       		console.log('OVERRIDE THIS IN YOUR CONTROLLER SCOPE: ',$('form').serializeArray());
 			$location.path('#/');      		
       	}
+
+            scope.skippable = scope.skippable || true;
+            scope.skipArray = [];
 
 
       	scope.questionViewType = function(questionType){

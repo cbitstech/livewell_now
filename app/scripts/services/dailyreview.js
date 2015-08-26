@@ -15,7 +15,7 @@ angular.module('livewellApp')
             dailyCheckInData = {},
             conditions = [];
         var sleepRoutineRanges = UserData.query('sleepRoutineRanges');
-        var currentClinicalStatusCode = UserData.query('clinicalStatus').currentCode;
+        var currentClinicalStatusCode = function(){return UserData.query('clinicalStatus').currentCode};
         var dailyReviewResponses = Pound.find('dailyCheckIn');
         recoder.execute = function(sleepRoutineRanges, dailyReviewResponses) {
             var historySeed = {};
@@ -118,30 +118,16 @@ angular.module('livewellApp')
         };
         conditions[25] = function(data, code) {
             //at risk routine
-            //Baseline ≥ 3 of last 4 days	mrd ≠ Bedtime Window and/or mrd ≠ Risetime Window,               
+            //Baseline ≥ 3 of last 4 days   mrd ≠ Bedtime Window and/or mrd ≠ Risetime Window,               
             //Bedtime and Risetime Windows ≤ 5 of last 4 days
-            var sum1 = 0;
-            if (data.routine[2] == 0) {
-                sum1++
-            }
-            if (data.routine[3] == 0) {
-                sum1++
-            }
-            if (data.routine[4] == 0) {
-                sum1++
-            }
-            if (data.routine[5] == 0) {
-                sum1++
-            }
-            return code == 1 && Math.abs(data.wellness[6]) && ((data.routine[6] > 0 && sum1 >= 3) || sum >= 5)
+            var sum1 = data.routine[3] + data.routine[4] + data.routine[5] + data.routine[6];
+
+            return code == 1 && Math.abs(data.wellness[6]) < 2 && ((data.routine[6] < 2 && sum1 <= 5))
         };
         conditions[24] = function(data, code) {
             //at risk sleep erratic
             //mrd ≠ Baseline,  Baseline ≤ 2 of last 4 days
             var sum1 = 0;
-            if (data.sleep[2] == 0) {
-                sum1++
-            }
             if (data.sleep[3] == 0) {
                 sum1++
             }
@@ -151,15 +137,15 @@ angular.module('livewellApp')
             if (data.sleep[5] == 0) {
                 sum1++
             }
-            return code == 1 && Math.abs(data.wellness[6]) && (data.sleep[6] != 0) && sum1 <= 2
+            if (data.sleep[6] == 0) {
+                sum1++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) < 2 && (data.sleep[6] != 0) && sum1 <= 2
         };
         conditions[23] = function(data, code) {
             //at risk sleep more
             //mrd = More or More-Severe, More or More-Severe ≥ 2 last 4 days, Less or Less-Severe  ≤ 1 last 4 days
             var sum1 = 0;
-            if (data.sleep[2] == -1 || data.sleep[2] == -0.5) {
-                sum1++
-            }
             if (data.sleep[3] == -1 || data.sleep[3] == -0.5) {
                 sum1++
             }
@@ -169,10 +155,10 @@ angular.module('livewellApp')
             if (data.sleep[5] == -1 || data.sleep[5] == -0.5) {
                 sum1++
             }
-            var sum2 = 0;
-            if (data.sleep[2] == 1 || data.sleep[2] == 0.5) {
-                sum2++
+            if (data.sleep[6] == -1 || data.sleep[6] == -0.5) {
+                sum1++
             }
+            var sum2 = 0;
             if (data.sleep[3] == 1 || data.sleep[3] == 0.5) {
                 sum2++
             }
@@ -182,15 +168,15 @@ angular.module('livewellApp')
             if (data.sleep[5] == 1 || data.sleep[5] == 0.5) {
                 sum2++
             }
-            return code == 1 && Math.abs(data.wellness[6]) && (data.sleep[6] == 1 || data.sleep[6] == 0.5) && sum1 <= 1 && sum2 >= 2
+            if (data.sleep[6] == 1 || data.sleep[6] == 0.5) {
+                sum2++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) < 2 && (data.sleep[6] == 1 || data.sleep[6] == 0.5) && sum1 <= 1 && sum2 >= 2
         };
         conditions[22] = function(data, code) {
             //at risk sleep less
             //mrd = Less or Less-Severe, Less or Less-Severe ≥ 2 of last 4 days, More or More-Severe ≤ 1 of last 4 days
             var sum1 = 0;
-            if (data.sleep[2] == -1 || data.sleep[2] == -0.5) {
-                sum1++
-            }
             if (data.sleep[3] == -1 || data.sleep[3] == -0.5) {
                 sum1++
             }
@@ -200,10 +186,10 @@ angular.module('livewellApp')
             if (data.sleep[5] == -1 || data.sleep[5] == -0.5) {
                 sum1++
             }
-            var sum2 = 0;
-            if (data.sleep[2] == 1 || data.sleep[2] == 0.5) {
-                sum2++
+            if (data.sleep[6] == -1 || data.sleep[6] == -0.5) {
+                sum1++
             }
+            var sum2 = 0;
             if (data.sleep[3] == 1 || data.sleep[3] == 0.5) {
                 sum2++
             }
@@ -213,19 +199,19 @@ angular.module('livewellApp')
             if (data.sleep[5] == 1 || data.sleep[5] == 0.5) {
                 sum2++
             }
-            return code == 1 && Math.abs(data.wellness[6]) && (data.sleep[6] == -1 || data.sleep[6] == -0.5) && sum1 >= 2 && sum2 <= 1
+            if (data.sleep[6] == 1 || data.sleep[6] == 0.5) {
+                sum2++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) < 2 && (data.sleep[6] == -1 || data.sleep[6] == -0.5) && sum1 >= 2 && sum2 <= 1
         };
         conditions[21] = function(data, code) {
             //at risk medications
-            return code == 1 && Math.abs(data.wellness[6]) && data.medications[6] != 1
+            return code == 1 && Math.abs(data.wellness[6]) < 2 && data.medications[6] != 1
         };
         conditions[20] = function(data, code) {
             //at risk sleep more severe
             //mrd = More-Severe, More-Severe ≥ 3 of last 4 days
             var sum = 0;
-            if (data.sleep[2] == 1) {
-                sum++
-            }
             if (data.sleep[3] == 1) {
                 sum++
             }
@@ -235,15 +221,15 @@ angular.module('livewellApp')
             if (data.sleep[5] == 1) {
                 sum++
             }
-            return code == 1 && Math.abs(data.wellness[6]) && data.sleep[6] == 1 && sum >= 3
+            if (data.sleep[6] == 1) {
+                sum++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) < 2 && data.sleep[6] == 1 && sum >= 3
         };
         conditions[19] = function(data, code) {
             //at risk sleep less severe
             //mrd = Less-Severe, Less-Severe ≥ 2 of last 4 days
             var sum = 0;
-            if (data.sleep[2] == -1) {
-                sum++
-            }
             if (data.sleep[3] == -1) {
                 sum++
             }
@@ -253,12 +239,28 @@ angular.module('livewellApp')
             if (data.sleep[5] == -1) {
                 sum++
             }
-            return code == 1 && Math.abs(data.wellness[6]) && data.sleep[6] == -1 && sum >= 3
+            if (data.sleep[6] == -1) {
+                sum++
+            }
+            return code == 1 && Math.abs(data.wellness[6]) < 2 && data.sleep[6] == -1 && sum >= 2
         };
         conditions[18] = function(data, code) {
             //at risk medications severe
-            var avgOfLastFourDaysMeds = (data.medications[3] + data.medications[4] + data.medications[5] + data.medications[6]) / 4;
-            return code == 1 && Math.abs(data.wellness[6]) && data.medications[6] != 1 && avgOfLastFourDaysMeds <= 1
+                var sum = 0;
+            if (data.medications[3] != 1) {
+                sum++
+            }
+            if (data.medications[4] != 1) {
+                sum++
+            }
+            if (data.medications[5] != 1) {
+                sum++
+            }
+            if (data.medications[6] != 1) {
+                sum++
+            }
+
+            return code == 1 && Math.abs(data.wellness[6]) < 2 && data.medications[6] != 1 && sum >= 3
         };
         conditions[17] = function(data, code) {
             //mild down well
@@ -270,7 +272,7 @@ angular.module('livewellApp')
         };
         conditions[15] = function(data, code) {
             //balanced prodromal
-            return code == 4
+            return code == 2
         };
         conditions[14] = function(data, code) {
             //balanced recovering
@@ -294,11 +296,11 @@ angular.module('livewellApp')
         };
         conditions[9] = function(data, code) {
             //moderate down
-            return data.wellness[6] == -3 && code !== 4;
+            return data.wellness[6] == -3 && code != 4;
         };
         conditions[8] = function(data, code) {
             //moderate up
-            return data.wellness[6] == 3 && code !== 4;
+            return data.wellness[6] == 3 && code != 4;
         };
         conditions[7] = function(data, code) {
             //balanced unwell
@@ -321,11 +323,11 @@ angular.module('livewellApp')
             return data.wellness[6] == 3 && code == 4;
         };
         conditions[2] = function(data, code) {
-            //logic for severe down			
+            //logic for severe down         
             return data.wellness[6] == -4;
         };
         conditions[1] = function(data, code) {
-            //logic for severe up			
+            //logic for severe up           
             return data.wellness[6] == 4;
         };
         conditions[0] = function() {
@@ -383,15 +385,15 @@ angular.module('livewellApp')
             var recodedSevenDays = recoder.execute(sleepRoutineRanges, Pound.find('dailyCheckIn'));
             console.log(recodedSevenDays);
             for (var i = 0; i < conditions.length; i++) {
-                var selection = conditions[i](recodedSevenDays, currentClinicalStatusCode);
+                var selection = conditions[i](recodedSevenDays, currentClinicalStatusCode());
                 if (selection == true) {
                     return i
                     break;
                 }
             }
         }
-        contents.code = contents.getCode();
-        contents.percentages = contents.getPercentages();
+        contents.code = function(){return contents.getCode()};
+        contents.percentages = function(){return contents.getPercentages()};
         contents.recodedResponses = function() {
             return recoder.execute(sleepRoutineRanges, Pound.find('dailyCheckIn'))
         };

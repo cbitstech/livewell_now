@@ -13,7 +13,7 @@
 	</div>
 	<div class="nav-right">
 		&nbsp;
-		<button class="btn btn-lg btn-primary" ng-click='next({{question}})' ng-hide="{{question.hideNextbutton}}" ng-if="$index != numberOfQuestions -1" ng-bind-html="label('next')"></button>
+		<button class="btn btn-lg btn-primary" ng-click='next({{question}},{{$index}})' ng-hide="{{question.hideNextbutton}}" ng-if="$index != numberOfQuestions -1" ng-bind-html="label('next')"></button>
 	<button type="submit" class="btn btn-lg btn-primary" ng-click='submit()' ng-hide="{{question.hideNextButton}}" ng-if="$index == numberOfQuestions - 1" ng-bind-html="label('submit')"></button>
 &nbsp;
 	</div>

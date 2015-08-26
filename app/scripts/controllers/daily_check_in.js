@@ -84,6 +84,9 @@
 
  	$scope.saveCheckIn = function(){
 
+ 	 var allAnswersFinished = $scope.dailyCheckIn.gotUp != '' & $scope.dailyCheckIn.toBed != '' & $scope.dailyCheckIn.medications != '' & $scope.dailyCheckIn.wellness != '';
+
+ 		if(allAnswersFinished){
  		$scope.dailyCheckIn.endTime = new Date();
  		if($scope.dailyCheckIn.wellness == 4 || $scope.dailyCheckIn.wellness == -4){
  			$scope.emergency = true;
@@ -91,6 +94,11 @@
  		Pound.add('dailyCheckIn',$scope.dailyCheckIn);
  		$scope.nextId = $routeParams.id;
  		$("#continue").modal();
+ 		}
+ 		else{
+ 			$("#warning").modal();
+ 			$scope.selectedWarningMessage = 'You must respond to all questions on this page!';
+ 		}
  	}
 
  	$scope.highlight = function(id,response){
