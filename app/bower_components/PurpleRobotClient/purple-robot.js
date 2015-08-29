@@ -933,6 +933,7 @@
 
     var timestamp = (new Date()).getTime();
     var triggerId = options.triggerId || ("TRIGGER-" + timestamp);
+    debugger;
     var triggerJson = JSON.stringify({
       type: options.type || "datetime",
       name: triggerId,

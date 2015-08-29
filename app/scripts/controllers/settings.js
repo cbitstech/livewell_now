@@ -157,33 +157,35 @@ angular.module('livewellApp')
 
         if (localStorage['checkinPrompt'] == undefined) {
             $scope.checkinPrompt = {
-                value: "13:00",
-                label: "1:00PM"
-            };
+            value: "00:00",
+            label: "12:00AM"
+        };
             $scope.reviewPrompt = {
-                value: "13:00",
-                label: "1:00PM"
-            };
+            value: "00:00",
+            label: "12:00AM"
+        };
         } else {
             $scope.checkinPrompt = JSON.parse(localStorage['checkinPrompt']);
             $scope.reviewPrompt = JSON.parse(localStorage['reviewPrompt']);
         }
 
         $scope.savePromptSchedule = function() {
-            var checkInValues = $scope.checkinPrompt.value.split(":");
-            var reviewValues = $scope.reviewPrompt.value.split(":");
+            
             if ($scope.checkinPrompt.value > $scope.reviewPrompt.value) {
                 $("form").append('<div class="alert alert-warning">Your check in prompt should be before your Daily Review.</div>')
             } else {
                 localStorage['checkinPrompt'] = JSON.stringify($scope.checkinPrompt);
                 localStorage['reviewPrompt'] = JSON.stringify($scope.reviewPrompt);
                 debugger;
-                var dailyCheckInDateTime = new Date(2015, 0, 0, parseInt(checkInValues[0]), parseInt(checkInValues[1]), 0);
-                var dailyCheckinDateTimeEnd = new Date(2015, 0, 0, parseInt(checkInValues[0]), parseInt(checkInValues[1]) + 1, 0);
-                var dailyReviewDateTime = new Date(2015, 0, 0, parseInt(reviewValues[0]), parseInt(reviewValues[1]), 0);
-                var dailyReviewDateTimeEnd = new Date(2015, 0, 0, parseInt(reviewValues[0]), parseInt(reviewValues[1]) + 1, 0);
-                var dailyReviewRenewalDateTime = new Date(2015, 0, 0, 2, 0, 0);
-                var dailyReviewRenewalDateTimeEnd = new Date(2015, 0, 0, 2, 1, 0);
+                //new Date(year, month, day, hours, minutes, seconds, milliseconds)
+                var checkInValues = $scope.checkinPrompt.value.split(":");
+                var reviewValues = $scope.reviewPrompt.value.split(":");
+                var dailyCheckInDateTime = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]) + 1, 0);
+                var dailyReviewDateTime = new Date(2015, 0, 1, parseInt(reviewValues[0]), parseInt(reviewValues[1]), 0);
+                var dailyReviewDateTimeEnd = new Date(2015, 0, 1, parseInt(reviewValues[0]), parseInt(reviewValues[1]) + 1, 0);
+                var dailyReviewRenewalDateTime = new Date(2015, 0, 1, 2, 0, 0);
+                var dailyReviewRenewalDateTimeEnd = new Date(2015, 0, 1, 2, 1, 0);
                 var pr = new PurpleRobot();
                 debugger;
                 var dailyCheckInDialog =
