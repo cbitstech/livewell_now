@@ -29,27 +29,27 @@ angular.module('livewellApp')
 
     		var _SAVE_LOCATION = 'surveys';
 
-    		var responses = $('form').serializeArray();
+    		var responses = _.flatten($scope.responseArray);
+            debugger;
 
             var sessionID = Guid.create();
 
-    		// _.each(responses, function(el){
+    		_.each(responses, function(el){
 
-    		// 	var payload = {
-    		// 		userId: UserDetails.find,
-    		// 		survey: $scope.pageTitle,
-    		// 		questionDataLabel: el.name,
-    		// 		questionValue: el.value,
-    		// 		sessionGUID: sessionID,
-    		// 		savedAt: new Date()
-    		// 	};
+    			var payload = {
+    				userId: UserDetails.find,
+    				survey: $scope.pageTitle,
+    				questionDataLabel: el.name,
+    				questionValue: el.value,
+    				sessionGUID: sessionID,
+    				savedAt: new Date()
+    			};
 
-    		// 	// (new PurpleRobot()).emitReading(_SAVE_LOCATION,payload).execute();
-    		// 	console.log(payload);
+    			// (new PurpleRobot()).emitReading(_SAVE_LOCATION,payload).execute();
+    			console.log(payload);
 
-    		// });
+    		});
 
-    		// alert('Thank you, your results have been saved');
 
             var responsePayload = {
                 sessionID   : sessionID,

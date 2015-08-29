@@ -23,6 +23,7 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
             3: 0,
             4: 0
         };
+        debugger;
         for (var i = dailyReviewResponses.length - 1; i > dailyReviewResponses.length - 8; i--) {
             var aWV = 0;
             if (dailyReviewResponses[i] != undefined) {
@@ -69,6 +70,7 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
          ];
         }
         var lWR = lastWeeklyResponses;
+        debugger;
         var phq8Sum = parseInt(lWR[0].value) + parseInt(lWR[1].value) + parseInt(lWR[2].value) + parseInt(lWR[3].value) + parseInt(lWR[4].value) + parseInt(lWR[5].value) + parseInt(lWR[6].value) + parseInt(lWR[7].value);
         var amrsSum = parseInt(lWR[8].value) + parseInt(lWR[9].value) + parseInt(lWR[10].value) + parseInt(lWR[11].value);
         //"[{"code":1,"label":"well"},{"code":2,"label":"prodromal"},{"code":3,"label":"recovering"},{"code":4,"label":"unwell"}]"

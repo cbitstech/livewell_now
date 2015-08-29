@@ -24,6 +24,8 @@ angular.module('livewellApp')
             scope.questionGroups = _.flatten(scope.questionGroups);
             scope.questionAnswered = [];
 
+            scope.responseArray = [];
+
             scope.surveyFailure = function(){
 
                   var error = {};
@@ -103,6 +105,8 @@ angular.module('livewellApp')
       	scope.next = function(question,index){
                   // console.log(question);
 
+                  scope.responseArray[scope.currentIndex] = $('form').serializeArray()[0]; 
+
                   if (question.responses.length == 1 && question.responses[0].goesTo != "")
                         {
                               scope.goesTo(question.responses[0].goesTo);
@@ -115,7 +119,7 @@ angular.module('livewellApp')
 
                   }
                   else {
-                        debugger;
+
                         if( scope.skipArray[index] == true){
                               scope.currentIndex++;}
                         else{
@@ -127,7 +131,9 @@ angular.module('livewellApp')
       	};
 
       	scope.back = function(){
+
       		scope.currentIndex--;
+
 
       	};
 
