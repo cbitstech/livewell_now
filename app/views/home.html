@@ -36,9 +36,9 @@
 
 <div class="row col-md-12 col-xs-12 col-sm-12 col-lg-12 text-center" style="position:absolute; bottom:25px;" >
 <h3>{{greeting}}</h3>
-<!--  ng-hide="weeklyCheckInCompleteThisWeek()"-->
-<a class="btn btn-full btn-primary" ng-href="#/weekly_check_in">Weekly Check In</a><!-- ng-hide="dailyCheckInCompleteToday()" -->
-<a class="btn btn-full btn-primary" ng-href="#/daily_check_in" >Daily Check In</a>
+
+<a class="btn btn-full btn-primary" ng-href="#/weekly_check_in" ng-hide="weeklyCheckInCompleteThisWeek()">Weekly Check In</a>
+<a class="btn btn-full btn-primary" ng-href="#/daily_check_in" ng-hide="dailyCheckInCompleteToday()">Daily Check In</a>
 <a class="btn btn-full btn-primary" ng-href="#/daily_review" ng-show="(!dailyReviewCompleteToday() && dailyCheckInCompleteToday())  && !lastDailyCheckInWasEmergency()">Daily Review</a>
 <a class="btn btn-full btn-info" ng-href="#/daily_review" ng-show="dailyCheckInCompleteToday() && weeklyCheckInCompleteThisWeek() && dailyReviewCompleteToday() && !lastDailyCheckInWasEmergency()">Daily Review</a>
 <a class="btn btn-full btn-info" ng-href="#/main">Main Menu</a>

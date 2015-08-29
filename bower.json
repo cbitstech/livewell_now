@@ -13,6 +13,7 @@
     "angular-touch": "1.2.16",
     "angular-route": "1.2.16",
     "angular-moment":"~0.10.0",
+    "angular-bindonce":"~0.3.3",
     "lodash":"~2.4.1",
     "highcharts-ng":"0.0.8",
     "highcharts":"~4.1.0",
