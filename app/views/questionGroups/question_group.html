@@ -1,5 +1,5 @@
 <form>
-	<div bindonce ng-repeat="question in questionGroups track by question.id" class="question-group" data-idx="{{$index}}" ng-show='showQuestion({{$index}})' >
+	<div ng-repeat="question in ::questionGroups" class="question-group" data-idx="{{$index}}" ng-show='showQuestion({{$index}})' >
 	<label> 
 	  <div ng-switch on="questionViewType(question.type)">
         <div ng-switch-when="multiple">
