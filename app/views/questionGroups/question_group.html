@@ -1,5 +1,5 @@
 <form>
-	<div ng-repeat="question in ::questionGroups" class="question-group" data-idx="{{$index}}" ng-show='showQuestion({{$index}})' >
+	<div ng-repeat="question in ::questionGroups" class="question-group" data-idx="{{$index}}" ng-if='showQuestion($index)' >
 	<label> 
 	  <div ng-switch on="questionViewType(question.type)">
         <div ng-switch-when="multiple">
@@ -12,6 +12,7 @@
         	<div ng-include="'views/questionGroups/html.html'"></div>
         </div>
     </div>
+    </label>
     <div ng-show="question.responses.length == 0 && pageTitle == 'Daily Review'">
     <a ng-href="#/wellness/resources" class="btn btn-info btn-full">Resources</a><br/>
     <a ng-href="#/wellness/risk" class="btn btn-info btn-full">Reduce Risks</a><br/>
