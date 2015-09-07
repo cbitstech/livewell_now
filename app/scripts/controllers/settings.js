@@ -182,8 +182,6 @@ angular.module('livewellApp')
                 var reviewValues = $scope.reviewPrompt.value.split(":");
                 var dailyCheckInDateTime = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]), 0);
                 var dailyCheckinDateTimeEnd = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]) + 1, 0);
-                var dailyReviewDateTime = new Date(2015, 0, 1, parseInt(reviewValues[0]), parseInt(reviewValues[1]), 0);
-                var dailyReviewDateTimeEnd = new Date(2015, 0, 1, parseInt(reviewValues[0]), parseInt(reviewValues[1]) + 1, 0);
                 var dailyReviewRenewalDateTime = new Date(2015, 0, 1, 2, 0, 0);
                 var dailyReviewRenewalDateTimeEnd = new Date(2015, 0, 1, 2, 1, 0);
                 var pr = new PurpleRobot();
@@ -199,17 +197,7 @@ angular.module('livewellApp')
                         tag: "checkIn",
                         priority: 3
                     });
-                var dailyReviewDialog =
-                    pr.showNativeDialog({
-                        title: "LiveWell",
-                        message: "Time to do your daily review!",
-                        buttonLabelA: "OK",
-                        scriptA: pr.launchApplication('edu.northwestern.cbits.livewell'),
-                        buttonLabelB: "",
-                        scriptB: pr.launchApplication('edu.northwestern.cbits.livewell'),
-                        tag: "dailyReview",
-                        priority: 3
-                    });
+                
                 var dailyReviewRenew =
                     pr.enableTrigger('dailyReview');
                 (new PurpleRobot()).updateTrigger({

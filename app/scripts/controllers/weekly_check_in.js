@@ -30,7 +30,6 @@ angular.module('livewellApp')
     		var _SAVE_LOCATION = 'surveys';
 
     		var responses = _.flatten($scope.responseArray);
-            debugger;
 
             var sessionID = Guid.create();
 
