@@ -8,7 +8,7 @@
  * Controller of the livewellApp
  */
  angular.module('livewellApp')
- .controller('DailyCheckInCtrl', function ($scope, $location, $routeParams, Pound) {
+ .controller('DailyCheckInCtrl', function ($scope, $location, $routeParams, Pound, Guid) {
  	$scope.pageTitle = 'Daily Check In';
 
  	$scope.dailyCheckIn = {
@@ -93,6 +93,14 @@
  		}
  		Pound.add('dailyCheckIn',$scope.dailyCheckIn);
  		$scope.nextId = $routeParams.id;
+ 	
+ 	  var sessionID = Guid.create();
+
+		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'toBed',questionValue:$scope.dailyCheckIn.toBed}).execute();
+		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'gotUp', questionValue:$scope.dailyCheckIn.gotUp}).execute();
+		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'wellness',questionValue:$scope.dailyCheckIn.wellness}).execute();
+		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'medications',questionValue:$scope.dailyCheckIn.medications}).execute();
+
  		$("#continue").modal();
  		}
  		else{

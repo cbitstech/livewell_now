@@ -27,11 +27,15 @@ angular.module('livewellApp')
     //overrides questiongroup default submit action to send data to PR
     $scope.submit = function(){
 
-    		var _SAVE_LOCATION = 'surveys';
+    		var _SAVE_LOCATION = 'livewell_survey_data';
+
+            $scope.responseArray[$scope.currentIndex] = $('form').serializeArray()[0]; 
 
     		var responses = _.flatten($scope.responseArray);
 
             var sessionID = Guid.create();
+
+
 
     		_.each(responses, function(el){
 
@@ -44,7 +48,7 @@ angular.module('livewellApp')
     				savedAt: new Date()
     			};
 
-    			// (new PurpleRobot()).emitReading(_SAVE_LOCATION,payload).execute();
+    			(new PurpleRobot()).emitReading(_SAVE_LOCATION,payload).execute();
     			console.log(payload);
 
     		});
@@ -57,8 +61,6 @@ angular.module('livewellApp')
 
 
             Pound.add('weeklyCheckIn',responsePayload);
-
-
 
     		$location.path("/ews");
 

@@ -18,7 +18,7 @@
     
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   </head>
-  <body ng-app="livewellApp">
+  <body ng-app="livewellApp"><!-- ng-app="livewellApp" -->
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -57,6 +57,7 @@
     <script src="bower_components/PurpleRobotClient/purple-robot.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
@@ -112,6 +113,19 @@
         <script src="scripts/controllers/setup.js"></script>
         <script src="scripts/controllers/usereditor.js"></script>
         <script src="scripts/services/clinicalstatusupdate.js"></script>
+
         <!-- endbuild -->
+        <script src="cordova.js"></script>
+        <script src="cordova_plugins.js"></script>
+
+        <script>
+        document.addEventListener("deviceready", function() {
+
+            document.addEventListener("resume", function() {
+                window.location.href = "index.html";
+            }, false);
+
+        });
+        </script>
 </body>
 </html>

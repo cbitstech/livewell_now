@@ -15,6 +15,8 @@ angular.module('livewellApp')
     $scope.questionGroups = Questions.query($routeParams.code);
 
     $scope.hideProgressBar = true;
-    console.log($scope.questionGroups);
+
+	  var pr = new PurpleRobot();
+		pr.disableTrigger('dailyCheckIn1').disableTrigger('dailyCheckIn2').disableTrigger('dailyCheckIn3').disableTrigger('dailyCheckIn4').disableTrigger('dailyCheckIn5').disableTrigger('dailyCheckIn6').execute();
 
   });

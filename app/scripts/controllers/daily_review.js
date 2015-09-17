@@ -41,7 +41,6 @@ angular.module('livewellApp')
     $(".modal-backdrop").remove();
 
 
-
     $scope.dailyReviewCategory = _.where($scope.interventionGroups, {code:$scope.code})[0].questionSet;
 
 		$scope.interventionResponse = function(){ 
@@ -61,7 +60,5 @@ angular.module('livewellApp')
 			}
 		}
 
-		var pr = new PurpleRobot();
-		pr.disableTrigger('dailyReview').execute();
 
   });

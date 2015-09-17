@@ -12,7 +12,7 @@
 
  	var SERVER_LOCATION = 'https://livewell2.firebaseio.com/';
  	var APP_COLLECTIONS_ROUTE = 'appcollections';
- 	var USER_ID = 'test';
+ 	var USER_ID = $scope.userID;
   var ROUTE_SUFFIX = '.json';
 
   $scope.error = '';
@@ -20,9 +20,17 @@
   $scope.errorClass = '';
 
  	var downloadContent = function(app_collections){
+
+ 		if($scope.userID != undefined){localStorage['userID'] = $scope.userID; } 
+
  		_.each(app_collections,function(el){
- 			$http.get(SERVER_LOCATION + el.route + ROUTE_SUFFIX + "?userId=" + USER_ID)
+ 			$http.get(SERVER_LOCATION + "users/" + localStorage['userID'] + "/" + el.route + ROUTE_SUFFIX )
  			.success(function(response) {
+
+				if(el.route == 'team' && response == null){
+					alert('THE USER HAS NOT BEEN CONFIGURED!');
+				}
+
  				if (response.length != undefined){
  				localStorage[el.route] = JSON.stringify(_.compact(response));
  				}

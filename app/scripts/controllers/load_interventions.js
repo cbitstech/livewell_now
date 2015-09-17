@@ -13,7 +13,9 @@ angular.module('livewellApp')
     $scope.pageTitle = 'Topics';
 
     $scope.hierarchy = UserData.query('interventionLabels');
-    $scope.interventionGroups = UserData.query('dailyReview');
+    $scope.interventionGroups = UserData.query('dailyReview')
+
+    debugger;
 
     $scope.goToIntervention = function(code){
 

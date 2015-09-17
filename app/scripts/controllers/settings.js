@@ -160,60 +160,95 @@ angular.module('livewellApp')
             value: "00:00",
             label: "12:00AM"
         };
-            $scope.reviewPrompt = {
-            value: "00:00",
-            label: "12:00AM"
-        };
+      
         } else {
             $scope.checkinPrompt = JSON.parse(localStorage['checkinPrompt']);
-            $scope.reviewPrompt = JSON.parse(localStorage['reviewPrompt']);
         }
 
         $scope.savePromptSchedule = function() {
             
-            if ($scope.checkinPrompt.value > $scope.reviewPrompt.value) {
-                $("form").append('<div class="alert alert-warning">Your check in prompt should be before your Daily Review.</div>')
-            } else {
                 localStorage['checkinPrompt'] = JSON.stringify($scope.checkinPrompt);
-                localStorage['reviewPrompt'] = JSON.stringify($scope.reviewPrompt);
-                debugger;
                 //new Date(year, month, day, hours, minutes, seconds, milliseconds)
                 var checkInValues = $scope.checkinPrompt.value.split(":");
-                var reviewValues = $scope.reviewPrompt.value.split(":");
-                var dailyCheckInDateTime = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]), 0);
-                var dailyCheckinDateTimeEnd = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime1 = new Date(2015, 0, 1, parseInt(checkInValues[0])-1, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd1 = new Date(2015, 0, 1, parseInt(checkInValues[0])-1, parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime2 = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd2 = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime3 = new Date(2015, 0, 1, parseInt(checkInValues[0])+1, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd3 = new Date(2015, 0, 1, parseInt(checkInValues[0])+1, parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime4 = new Date(2015, 0, 1, parseInt(checkInValues[0])+2, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd4 = new Date(2015, 0, 1, parseInt(checkInValues[0])+2, parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime5 = new Date(2015, 0, 1, parseInt(checkInValues[0])+3, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd5 = new Date(2015, 0, 1, parseInt(checkInValues[0])+3, parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime6 = new Date(2015, 0, 1, parseInt(checkInValues[0])+4, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd6 = new Date(2015, 0, 1, parseInt(checkInValues[0])+4, parseInt(checkInValues[1]) + 1, 0);              
                 var dailyReviewRenewalDateTime = new Date(2015, 0, 1, 2, 0, 0);
                 var dailyReviewRenewalDateTimeEnd = new Date(2015, 0, 1, 2, 1, 0);
                 var pr = new PurpleRobot();
-                debugger;
+                
                 var dailyCheckInDialog =
                     pr.showNativeDialog({
                         title: "LiveWell",
-                        message: "Time to check in with LiveWell!",
-                        buttonLabelA: "OK",
+                        message: "Can you complete your LiveWell activities now?",
+                        buttonLabelA: "YES",
                         scriptA: pr.launchApplication('edu.northwestern.cbits.livewell'),
-                        buttonLabelB: "",
-                        scriptB: pr.launchApplication('edu.northwestern.cbits.livewell'),
+                        buttonLabelB: "NO",
+                        scriptB: pr.doNothing(),
                         tag: "checkIn",
                         priority: 3
                     });
                 
                 var dailyReviewRenew =
-                    pr.enableTrigger('dailyReview');
+                    pr.enableTrigger('dailyCheckIn1').enableTrigger('dailyCheckIn2').enableTrigger('dailyCheckIn3').enableTrigger('dailyCheckIn4');
+
                 (new PurpleRobot()).updateTrigger({
-                    triggerId: 'dailyCheckIn',
+                    triggerId: 'dailyCheckIn1',
                     random: false,
                     script: dailyCheckInDialog,
-                    startAt: dailyCheckInDateTime,
-                    endAt: dailyCheckinDateTimeEnd
+                    startAt: dailyCheckInDateTime1,
+                    endAt: dailyCheckinDateTimeEnd1
                 }).execute();
+
                 (new PurpleRobot()).updateTrigger({
-                    triggerId: 'dailyReview',
+                    triggerId: 'dailyCheckIn2',
                     random: false,
-                    script: dailyReviewDialog,
-                    startAt: dailyReviewDateTime,
-                    endAt: dailyReviewDateTimeEnd
+                    script: dailyCheckInDialog,
+                    startAt: dailyCheckInDateTime2,
+                    endAt: dailyCheckinDateTimeEnd2
                 }).execute();
+
+                (new PurpleRobot()).updateTrigger({
+                    triggerId: 'dailyCheckIn3',
+                    random: false,
+                    script: dailyCheckInDialog,
+                    startAt: dailyCheckInDateTime3,
+                    endAt: dailyCheckinDateTimeEnd3
+                }).execute();
+
+                (new PurpleRobot()).updateTrigger({
+                    triggerId: 'dailyCheckIn4',
+                    random: false,
+                    script: dailyCheckInDialog,
+                    startAt: dailyCheckInDateTime4,
+                    endAt: dailyCheckinDateTimeEnd4
+                }).execute();
+             
+                (new PurpleRobot()).updateTrigger({
+                    triggerId: 'dailyCheckIn5',
+                    random: false,
+                    script: dailyCheckInDialog,
+                    startAt: dailyCheckInDateTime5,
+                    endAt: dailyCheckinDateTimeEnd5
+                }).execute();
+
+                (new PurpleRobot()).updateTrigger({
+                    triggerId: 'dailyCheckIn6',
+                    random: false,
+                    script: dailyCheckInDialog,
+                    startAt: dailyCheckInDateTime6,
+                    endAt: dailyCheckinDateTimeEnd6
+                }).execute();
+
                 (new PurpleRobot()).updateTrigger({
                     triggerId: 'dailyReviewReset',
                     random: false,
@@ -221,7 +256,8 @@ angular.module('livewellApp')
                     startAt: dailyReviewRenewalDateTime,
                     endAt: dailyReviewRenewalDateTimeEnd
                 }).execute();
+
                 $("form").append('<div class="alert alert-success">Your prompt times have been updated.</div>');
-            }
+            
         };
     });

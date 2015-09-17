@@ -141,6 +141,33 @@ angular.module('livewellApp')
       	//is overridden by scope.complete function if different action is desired at the end of survey
       	scope.submit = scope.submit || function(){
       		console.log('OVERRIDE THIS IN YOUR CONTROLLER SCOPE: ',$('form').serializeArray());
+
+            var _SAVE_LOCATION = 'livewell_survey_data';
+
+            $scope.responseArray[$scope.currentIndex] = $('form').serializeArray()[0]; 
+
+            var responses = _.flatten($scope.responseArray);
+
+            var sessionID = Guid.create();
+
+            _.each(responses, function(el){
+
+                  var payload = {
+                        userId: UserDetails.find,
+                        survey: 'survey',
+                        questionDataLabel: el.name,
+                        questionValue: el.value,
+                        sessionGUID: sessionID,
+                        savedAt: new Date()
+                  };
+
+                  (new PurpleRobot()).emitReading(_SAVE_LOCATION,payload).execute();
+                  console.log(payload);
+
+            });
+
+
+
 			$location.path('#/');      		
       	}
 
