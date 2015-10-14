@@ -1,85 +1,24 @@
 <div ng-include="'views/partials/navbar.html'"></div>
 
-<div class="alert alert-warning">
-Complete your daily check in at least three times to see your feedback charts!
+<!--<div class="alert alert-warning">-->
+<!--Complete your daily check in at least three times to see your feedback charts!-->
+<!--</div>-->
+<h4>Wellness</h4>
+<highchart id="chart1" config="config" style="width:100%; height:150px;" ></highchart>
+
+<div ng-show="dailyCheckInResponseArray.length > 7">
+    <h4>Sleep</h4>
+    <table class="table rounded-cells">
+            <tr><td ng-repeat="day in recodedResponses.sleep track by $index" class="{{sleep.class(day)}}" data-toggle="tooltip" data-placement="top" title="{{sleep.title(day)}}" tooltip="{{sleep.tooltip(day)}}" tooltip-placement="top"></td></tr>
+    </table>
+
+    <h4>Medication</h4>
+    <table class="table rounded-cells">
+        <tr><td ng-repeat="day in recodedResponses.medications track by $index" class="{{medication.class(day)}}" data-toggle="tooltip" data-placement="top" title="{{medication.title(day)}}" tooltip="{{medication.tooltip(day)}}" tooltip-placement="top"></td></tr>
+    </table>
+
+    <h4>Routine</h4>
+    <table class="table rounded-cells">
+        <tr><td ng-repeat="day in recodedResponses.routine track by $index" class="{{routine.class(day)}}" data-toggle="tooltip" data-placement="top" title="{{routine.title(day)}}" tooltip="{{routine.tooltip(day)}}" tooltip-placement="top"></td></tr>
+    </table>
 </div>
-
-<!--<highchart id="chart1" config="config" style="width:100%; height:150px;" ></highchart>
-
-<h4>Sleep</h4>
-<table class="table rounded-cells">
-        <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>
-</table>
-
-<h4>Medication</h4>
-<table class="table rounded-cells">
-      <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>
-</table>
-
-<h4>Routine</h4>
-<table class="table rounded-cells">
-      <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>   <td class=""  class="a" data-toggle="tooltip" data-placement="top"
-        title="No Data"
-        tooltip="No Data"
-        tooltip-placement="top"></td>
-</table>-->
