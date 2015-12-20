@@ -10,8 +10,8 @@ Build and Install Process
 -------------------------
 1. Install Node.JS from http://nodejs.org/download/
 2. Clone the repo
-3. Run `npm install -g bower grunt-cli yo generator-angular`
-4. Run `grunt serve` to serve or `grunt build` to make a distributable version
+3. Run `npm install bower grunt-cli yo generator-angular`
+4. Run `. build_local.bash` to serve or `. build_dist.bash` to make a distributable version
 
 Need help or having issues? Take a look at:
 -------------------------------------------
