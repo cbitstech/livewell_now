@@ -228,7 +228,7 @@ angular.module('livewellApp')
             var dailyReviewIsTrueWhen = code == 1 && Math.abs(data.wellness[6]) < 2 && data.sleep[6] == 1 && sum >= 3;
 
             if (dailyReviewIsTrueWhen){
-                if (sum == 3){alert('Call your psychiatrist about sleeping too much');}
+                if (sum == 3){alert('Call your psychiatrist about sleeping too much. test');}
                 if (sum == 4){alert('Call your psychiatrist about sleeping too much *');}
             }
 
