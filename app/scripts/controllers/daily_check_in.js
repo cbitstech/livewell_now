@@ -8,7 +8,7 @@
  * Controller of the livewellApp
  */
  angular.module('livewellApp')
- .controller('DailyCheckInCtrl', function ($scope, $location, $routeParams, Pound, Guid) {
+ .controller('DailyCheckInCtrl', function ($scope, $location, $routeParams, $filter, Pound, Guid, UserData) {
  	$scope.pageTitle = 'Daily Check In';
 
  	$scope.dailyCheckIn = {
@@ -20,6 +20,8 @@
  	};
 
  	$scope.emergency = false;
+
+ 	// $scope.doctorPhone = $filter('filter')(UserData.query('team'),{role:'Psychiatrist'});
 
  	$scope.responses = [
  	{order:1,response:'-4', label:'-4',tailoredMessage:'some message',warningMessage:'You rated yourself as being in a crisis with a -4, if this is correct, close and press continue.'},
@@ -33,7 +35,8 @@
  	{order:9,response:'4', label:'+4',tailoredMessage:'some message',warningMessage:'You rated yourself as being in a crisis with a +4, if this is correct, close and press continue.'}
  	];
 
- 	$scope.times = [ 	{value:"0000", label:"12:00AM"},
+ 	$scope.times = [ 	
+ 	{value:"0000", label:"12:00AM"},
 	{value:"0030", label:"12:30AM"},
 	{value:"0100", label:"1:00AM"},
 	{value:"0130", label:"1:30AM"},
@@ -116,6 +119,17 @@
  		$scope.dailyCheckIn.wellness = response;
 
  	}
+
+ 	$scope.notifyCareGroup = function(){
+
+ 		//notify Coach "role = Coach"
+		//"LiveWell Subject {{Patient ID}}" Has Issued a Crisis Daily Check In
+
+ 		//notify Psychiatrist "role = Psychiatrist"
+		//"LiveWell Subject {{Patient ID}}" Has Issued a Crisis Daily Check In
+
+ 	}
+
 
  	$scope.warning = function(warningMessage){
 

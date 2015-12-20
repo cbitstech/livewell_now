@@ -19,7 +19,7 @@
 
       <div class="modal-body alert-warning">
         <a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full" ng-show="!emergency">Continue to Daily Review</a><Br/>
-        <div class="alert alert-danger" ng-show="emergency">Please contact your doctor.</div>
+        <div class="alert alert-danger" ng-show="emergency">Please contact your doctor {{doctorName}} at <a ng-click="notifyCareGroup()" href="phone:{{doctorPhone}}" class="btn btn-full btn-primary">{{doctorPhone}}</a></div>
         <a ng-href="#/" class="btn btn-primary btn-full" >Return Home</a>
       </div>
 

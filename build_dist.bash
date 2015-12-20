@@ -3,7 +3,7 @@
 clear
 
 echo "building distribution directory"
-grunt build --force
+./node_modules/grunt-cli/bin/grunt build --force
 
 wait
 

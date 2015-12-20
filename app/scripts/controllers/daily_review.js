@@ -17,6 +17,10 @@ angular.module('livewellApp')
 
     $scope.updatedClinicalStatus = {};
 
+    $scope.notifyCareTeam = function(){
+        
+    }
+
     var runAlgorithm = function(){
     	var object = {};
     	object.code = DailyReviewAlgorithm.code();
@@ -35,7 +39,7 @@ angular.module('livewellApp')
 		$scope.dailyCheckInResponseArray = Pound.find('dailyCheckIn')
     $scope.dailyCheckInResponses = ' |today| ' +JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-1]) +' |t-1| ' +JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-2]) + ' |t-2| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-3])+ ' |t-3| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-4]) + ' |t-4| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-5])+ ' |t-5| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-6])+ ' |t-6| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-7]);
 
-		//STOP REMOVE
+	//STOP REMOVE
 
     $scope.percentages = DailyReviewAlgorithm.percentages();
 
