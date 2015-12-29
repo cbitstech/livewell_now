@@ -8,7 +8,9 @@ Build and Install Process
 3. Run `npm install`
 4. Run `npm install grunt-cli yo angular-generator`
 5. Run `bower install`
-6. Run `. build_local.bash` to serve or `. build_dist.bash` to make a distributable version
+6. Run `. build_local.bash` to serve locally
+7. Run `. build_dist.bash` to make a distributable version, zip the "dist" folder and update to the build.phonegap.com site previously configured
+
 
 To seed the application:
 ------------------------
