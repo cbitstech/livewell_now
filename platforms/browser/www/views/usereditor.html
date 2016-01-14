@@ -1,0 +1,160 @@
+<h2>User Editor</h2>
+<div class="row">
+<div class="col-md-3">
+<label> Select a user:
+<select name="" class="form-control wide">
+	<option ng-repeat='user in users'>{{user}}</option>
+</select>
+</label>
+<br/>
+<input ng-model="userCreate" type="text">
+<button class="btn btn-primary" ng-click='users.push(userCreate)'>Add a user</button>
+
+<h4>Content Editor</h4>
+<h5>User Settings</h4>
+<button class="btn btn-info btn-full" ng-click="type='routine'">Sleep Routine Ranges</button><br/>
+<button class="btn btn-info btn-full" ng-click="type='routine2'">Sleep Duration Ranges</button><br/>
+<button class="btn btn-info btn-full" ng-click="type='status'">Clinical Status <label class="label-success label">Well</label></button><br/>
+<h5>Wellness Plan</h5>	
+<button class="btn btn-info btn-full" ng-click="type='plan'">Plan</button><br/>
+<button class="btn btn-info btn-full" ng-click="type='anchors'">Anchors</button><br/>
+<button class="btn btn-info btn-full" ng-click="type='risk'">Reduce Risk</button><br/>
+<button class="btn btn-info btn-full" ng-click="type='medication'">Medication</button><br/>
+<button class="btn btn-info btn-full" ng-click="type='team'">Team</button><br/>
+<button class="btn btn-info btn-full" ng-click="type='schedule'">Schedule</button><br/>
+
+<h5>Weekly Check In &gt; Early Warning Signs</h5>
+<button class="btn btn-info btn-full" ng-click="type='mania'">Mania</button><br/>
+<button class="btn btn-info btn-full" ng-click="type='depression'">Depression</button><br/>
+
+</div>
+<div class="col-md-9">
+<!-- <button class="btn btn-warning">Add an anchor</button><br/><br/>
+<input type="text" class="form-control" placeholder="Enter a value">
+<input type="text" class="form-control" placeholder="Enter a label">
+<button class="btn-primary btn">Save</button>
+ -->
+<div ng-show="type == 'status'">
+	<h2>Clinical Status</h2>
+<select class="form-control" name="clinical">
+	<option>Well</option>
+	<option>Prodromal</option>
+	<option>Recovering</option>
+	<option>Unwell</option>
+</select>
+</div>
+
+<div ng-show="type =='routine'">
+<h2>Routine</h2>
+<label>Sleep time start <input type="text" name="sleep_time_start" class="form-control"></label><br/>
+<label>Sleep time end <input type="text" name="sleep_time_start" class="form-control"></label><br/>
+<label>Wake time start <input type="text" name="sleep_time_start" class="form-control"></label><br/>
+<label>Wake time end <input type="text" name="sleep_time_start" class="form-control"></label><br/>
+</div>
+
+<div ng-show="type =='routine2'">
+<h2>Routine</h2>
+<label>Less <input type="text" name="sleep_time_start" class="form-control"></label><br/>
+<label>Less Severe <input type="text" name="sleep_time_start" class="form-control"></label><br/>
+<label>More <input type="text" name="sleep_time_start" class="form-control"></label><br/>
+<label>More Severe <input type="text" name="sleep_time_start" class="form-control"></label><br/>
+</div>
+
+<div ng-show="type =='plan'">
+<h2>Plan</h2>
+<label>+4</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>+3</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>+2</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>+1</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>0</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-1</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-2</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-3</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-4</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/></div>
+<div ng-show="type =='anchors'">
+<h2>Anchors</h2>
+<label>+4</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>+3</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>+2</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>+1</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>0</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-1</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-2</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-3</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-4</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+</div>
+<div ng-show="type =='risk'">
+<h2>Reduce Risk</h2>
+<label>+4</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>+3</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>+2</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>+1</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>0</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-1</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-2</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-3</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/>
+<label>-4</label> <textarea name="text" class="form-control" style="width:100% important!" rows="4"></textarea><br/></div>
+<div ng-show="type =='medication'">
+<h2>Medications</h2>
+<label>Medication 1 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="dose"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"> </label><br/>
+<label>Medication 2 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="dose"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"> </label</label><br/>
+<label>Medication 3 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="dose"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"> </label</label><br/>
+<label>Medication 4 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="dose"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"> </label</label><br/>
+<label>Medication 5 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="dose"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"> </label</label><br/>
+<label>Medication 6 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="dose"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"> </label</label><br/>
+<label>Medication 7 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="dose"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"> </label</label><br/>
+<label>Medication 8 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="dose"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"> </label</label><br/>
+</div>
+
+<div ng-show="type =='team'">
+<h2>Team</h2>
+<label>Member 1 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="relationship"> <input type="text" name="sleep_time_start" class="form-control" placeholder="phone number"> </label><br/>
+<label>Member 2 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="relationship"> <input type="text" name="sleep_time_start" class="form-control" placeholder="phone number"> </label><br/>
+<label>Member 3 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="relationship"> <input type="text" name="sleep_time_start" class="form-control" placeholder="phone number"> </label><br/>
+</div>
+
+<div ng-show="type =='schedule'">
+<h2>Schedule</h2>
+<i>Please add phone appointments with the participant here!</i><br/><br/>
+<label>Event 1 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"></label><br/>
+<label>Event 2 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"></label><br/>
+<label>Event 3 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"></label><br/>
+<label>Event 4 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"></label><br/>
+<label>Event 5 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"></label><br/>
+<label>Event 6 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"></label><br/>
+<label>Event 7 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"></label><br/>
+<label>Event 8 <input type="text" name="sleep_time_start" class="form-control" placeholder="name"> <input type="text" name="sleep_time_start" class="form-control" placeholder="when"></label><br/>
+</div>
+
+<div ng-show="type =='depression'">
+<h2>EWS: Depression</h2>
+<label>Item #1<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #2<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #3<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #4<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #5<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #6<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #7<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #8<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #9<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #10<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+</div>
+
+<div ng-show="type =='mania'">
+<h2>EWS: Mania</h2>
+<label>Item #1<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #2<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #3<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #4<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #5<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #6<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #7<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #8<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #9<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+<label>Item #10<input type="text" name="sleep_time_start" class="form-control" placeholder="name"></label><br/>
+</div>
+
+
+</div>
+<div class="col-md-3"></div>
+</div>
