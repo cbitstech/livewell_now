@@ -224,7 +224,22 @@ angular.module('livewellApp')
             if (data.sleep[6] == 1) {
                 sum++
             }
-            return code == 1 && Math.abs(data.wellness[6]) < 2 && data.sleep[6] == 1 && sum >= 3
+
+            var dailyReviewIsTrueWhen = code == 1 && Math.abs(data.wellness[6]) < 2 && data.sleep[6] == 1 && sum >= 3;
+
+            if (dailyReviewIsTrueWhen){
+                if (sum == 3){
+
+                    Pound.add('clinical_reachout',{call:'coach', message:'Call your psychiatrist about sleeping too much', code:20});        
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', code:20}).execute();
+                }
+                if (sum == 4){
+                    Pound.add('clinical_reachout',{call:'coach', message:'Call your psychiatrist about sleeping too much', email:'psychiatrist', code:20});        
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', email:'psychiatrist', code:20}).execute();
+                }
+            }
+
+            return dailyReviewIsTrueWhen
         };
         conditions[19] = function(data, code) {
             //at risk sleep less severe
@@ -242,11 +257,26 @@ angular.module('livewellApp')
             if (data.sleep[6] == -1) {
                 sum++
             }
-            return code == 1 && Math.abs(data.wellness[6]) < 2 && data.sleep[6] == -1 && sum >= 2
+
+            var dailyReviewIsTrueWhen = code == 1 && Math.abs(data.wellness[6]) < 2 && data.sleep[6] == -1 && sum >= 2;
+
+            if (dailyReviewIsTrueWhen){
+                if (sum == 2){
+
+                    Pound.add('clinical_reachout',{call:'coach', message:'Call your psychiatrist about sleeping too little', code:19});        
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', code:19}).execute();
+                }
+                if (sum == 3){
+                    Pound.add('clinical_reachout',{call:'coach', message:'Call your psychiatrist about sleeping too little', email:'psychiatrist', code:19});        
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', email:'psychiatrist', code:19}).execute();
+                }
+            }
+
+            return dailyReviewIsTrueWhen
         };
         conditions[18] = function(data, code) {
             //at risk medications severe
-                var sum = 0;
+            var sum = 0;
             if (data.medications[3] != 1) {
                 sum++
             }
@@ -260,15 +290,84 @@ angular.module('livewellApp')
                 sum++
             }
 
-            return code == 1 && Math.abs(data.wellness[6]) < 2 && data.medications[6] != 1 && sum >= 3
+            var dailyReviewIsTrueWhen = code == 1 && Math.abs(data.wellness[6]) < 2 && data.medications[6] != 1 && sum >= 3;
+
+            if (dailyReviewIsTrueWhen){
+                if (sum == 3){                    
+                    Pound.add('clinical_reachout',{call:'psychiatrist', message:'Call your psychiatrist about taking your medications', code:18});
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'psychiatrist', code:18}).execute();
+                }
+                if (sum == 4){                    
+                    Pound.add('clinical_reachout',{message:'Call your psychiatrist about taking your medications', call:'psychiatrist', email:'coach', code:18});        
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', email:'psychiatrist', code:18}).execute();
+                }
+            }
+            return dailyReviewIsTrueWhen
         };
         conditions[17] = function(data, code) {
             //mild down well
-            return data.wellness[6] == -2 && code == 1;
+            var dailyReviewIsTrueWhen = data.wellness[6] == -2 && code == 1;
+
+            if (dailyReviewIsTrueWhen){
+                var sum = 0;
+                if (Math.abs(data.wellness[3]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[4]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[5]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[6]) > 1) {
+                    sum++
+                }
+
+                if (sum == 3){                    
+                    Pound.add('clinical_reachout',{call:'psychiatrist', message:'Call your psychiatrist about worsening symptoms', code:17}); 
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', code:17}).execute();
+                }
+                if (sum == 4){                    
+                    Pound.add('clinical_reachout',{call:'coach', message:'Call your psychiatrist about worsening symptoms', email:'psychiatrist',code:17}); 
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', email:'psychiatrist', code:17}).execute();
+                }
+            }
+
+
+
+            return dailyReviewIsTrueWhen;
         };
         conditions[16] = function(data, code) {
             //mild up well
-            return data.wellness[6] == 2 && code == 1;
+            var dailyReviewIsTrueWhen = data.wellness[6] == 2 && code == 1;
+
+            if (dailyReviewIsTrueWhen){
+                var sum = 0;
+                if (Math.abs(data.wellness[3]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[4]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[5]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[6]) > 1) {
+                    sum++
+                }
+
+                if (sum == 2){                    
+                    Pound.add('clinical_reachout',{call:'psychiatrist', message:'Call your psychiatrist about worsening symptoms', code:16}); 
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', code:16}).execute();
+                }
+                if (sum >= 3){                    
+                    Pound.add('clinical_reachout',{call:'psychiatrist', message:'Call your psychiatrist about worsening symptoms', email:'psychiatrist',code:16}); 
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', email:'psychiatrist', code:16}).execute();
+                }
+
+            }
+
+            return dailyReviewIsTrueWhen
         };
         conditions[15] = function(data, code) {
             //balanced prodromal
@@ -296,11 +395,66 @@ angular.module('livewellApp')
         };
         conditions[9] = function(data, code) {
             //moderate down
-            return data.wellness[6] == -3 && code != 4;
+            var dailyReviewIsTrueWhen = data.wellness[6] == -3 && code != 4;
+
+            if (dailyReviewIsTrueWhen && code == 1){
+                var sum = 0;
+                if (Math.abs(data.wellness[3]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[4]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[5]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[6]) > 1) {
+                    sum++
+                }
+
+                if (sum == 3){
+                    Pound.add('clinical_reachout',{call:'psychiatrist', message:'Call your psychiatrist about worsening symptoms', code:9}); 
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', code:9}).execute();
+                }
+                if (sum == 4){
+                    Pound.add('clinical_reachout',{call:'psychiatrist', message:'Call your psychiatrist about worsening symptoms', email:'psychiatrist',code:9}); 
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', email:'psychiatrist', code:9}).execute();
+                }
+            }
+
+            return dailyReviewIsTrueWhen
         };
         conditions[8] = function(data, code) {
             //moderate up
-            return data.wellness[6] == 3 && code != 4;
+            var dailyReviewIsTrueWhen = data.wellness[6] == 3 && code != 4;
+
+            if (dailyReviewIsTrueWhen && code == 1){
+                var sum = 0;
+                if (Math.abs(data.wellness[3]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[4]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[5]) > 1) {
+                    sum++
+                }
+                if (Math.abs(data.wellness[6]) > 1) {
+                    sum++
+                }
+
+                if (sum == 2){
+                    Pound.add('clinical_reachout',{call:'psychiatrist', message:'Call your psychiatrist about worsening symptoms', code:8}); 
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', code:8}).execute();
+                }
+                if (sum >= 3){                    
+                    Pound.add('clinical_reachout',{call:'psychiatrist', message:'Call your psychiatrist about worsening symptoms', email:'psychiatrist',code:8}); 
+                    (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', email:'psychiatrist', code:8}).execute();
+                }
+
+            }
+
+            return dailyReviewIsTrueWhen
         };
         conditions[7] = function(data, code) {
             //balanced unwell
@@ -328,7 +482,7 @@ angular.module('livewellApp')
         };
         conditions[1] = function(data, code) {
             //logic for severe up           
-            return data.wellness[6] == 4;
+            return data.wellness[6] == 4;  
         };
         conditions[0] = function() {
             return false

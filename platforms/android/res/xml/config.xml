@@ -1,23 +1,28 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="edu.northwestern.cbits.sis" version="0.4.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="edu.northwestern.cbits.livewell" version="3.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
-    <name>SiS</name>
-    <description>
-        An application to aid in the cessation of smoking cigarettes.
-    </description>
-    <author email="eric.schlange@northwestern.edu" href="http://www.cbits.northwestern.edu">
-        Eric Schlange
-    </author>
-    <content src="index.html" />
-    <access origin="" />
-    <icon src="res/icon.png" />
-    <feature name="Device">
-        <param name="android-package" value="org.apache.cordova.device.Device" />
-    </feature>
     <feature name="LocalNotification">
         <param name="android-package" value="de.appplant.cordova.plugin.localnotification.LocalNotification" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
     </feature>
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
     </feature>
+    <name>LiveWell</name>
+    <description>
+        An application for bipolar disorder
+    </description>
+    <author email="e-goulding@northwestern.edu" href="http://www.cbits.northwestern.edu">
+        Evan Goulding
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="phone:*" />
+    <icon src="icon.png" />
 </widget>

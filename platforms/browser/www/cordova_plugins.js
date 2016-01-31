@@ -44,6 +44,7 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "cordova-plugin-whitelist": "1.2.2-dev",
     "org.apache.cordova.network-information": "0.2.15",
     "de.appplant.cordova.plugin.local-notification": "0.8.1",
     "org.apache.cordova.device": "0.3.0"
