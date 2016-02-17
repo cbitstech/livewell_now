@@ -48,10 +48,13 @@ angular.module('livewellApp')
     if (latestWarning != undefined){
         if (latestWarning.shownToUser == undefined){
             $scope.warningMessage = Pound.find('clinical_reachout')[Pound.find('clinical_reachout').length-1].message
-            $scope.phoneNumber = _.where(JSON.parse(localStorage.team),{role:'Psychiatrist'})[0].phone;
-            $scope.coachNumber = _.where(JSON.parse(localStorage.team),{role:'Coach'})[0].phone;
+            $scope.psychiatristEmail = _.where(JSON.parse(localStorage.team),{role:'Psychiatrist'})[0].email;
 
-            (new PurpleRobot()).emitReading('livewell_email',{email:$scope.coachNumber + ',' + $scope.phoneNumber, message: $scope.warningMessage}).execute();
+            if (_.where(JSON.parse(localStorage.team),{role:'Coach'})[0] != undefined){
+            $scope.coachEmail = _.where(JSON.parse(localStorage.team),{role:'Coach'})[0].email;
+            } else{ $scope.coachEmail = ''}
+
+            (new PurpleRobot()).emitReading('livewell_email',{psychiatristEmail:$scope.psychiatristEmail, coachEmail: $scope.coachEmail, message: $scope.warningMessage}).execute();
 
             latestWarning.shownToUser = true;
             Pound.update('clinical_reachout',latestWarning);

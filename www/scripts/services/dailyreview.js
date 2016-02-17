@@ -32,6 +32,7 @@ angular.module('livewellApp')
                     historySeed.routine[i] = recoder.routine(dailyReviewResponses[responsePosition].toBed, dailyReviewResponses[responsePosition].gotUp, sleepRoutineRanges);
                 }
             }
+            localStorage['recodedResponses'] = JSON.stringify(historySeed);
             return historySeed
         }
 

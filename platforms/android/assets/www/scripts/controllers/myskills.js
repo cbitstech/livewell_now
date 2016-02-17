@@ -16,7 +16,11 @@ angular.module('livewellApp')
 
     $scope.lessons = JSON.parse(localStorage['lessons']);
 
-		$scope.mySkills = _.uniq(JSON.parse(localStorage['mySkills']));
+		if (JSON.parse(localStorage['mySkills'] != undefined)){
+			$scope.mySkills = _.uniq(JSON.parse(localStorage['mySkills']));
+		} else {
+			$scope.mySkills = [];
+		}
 
  		$scope.skill = function(id){
  			return $filter('filter')($scope.lessons,{id:id},true)

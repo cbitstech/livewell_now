@@ -14,12 +14,10 @@
     </div>
     </label>
     <div ng-show="question.responses.length == 0 && pageTitle == 'Daily Review'">
-    <a ng-href="#/wellness/resources" class="btn btn-info btn-full">Resources</a><br/>
-    <a ng-href="#/wellness/risk" class="btn btn-info btn-full">Reduce Risks</a><br/>
-    <a ng-href="#/wellness/awareness" class="btn btn-info btn-full">Awareness &amp; Action</a><br/><br/>
-    <a ng-href="#/charts" class="btn btn-info btn-full">My Charts</a><br/><br/>
-  
-
+    <a ng-href="#/wellness/resources" class="btn btn-info btn-full">Wellness Plan</a><br/>
+    <a ng-href="#/skills" class="btn btn-info btn-full">Skills</a><br/>
+    <a ng-href="#/foundations" class="btn btn-info btn-full">Foundations</a><br/><br/>
+    <a ng-href="#/load_interventions" class="btn btn-info btn-full">Review Something Else</a>
     </div>    
 
     <div ng-hide="question.responses.length == 0 && pageTitle == 'Daily Review'">

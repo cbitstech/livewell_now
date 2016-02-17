@@ -53,14 +53,29 @@ angular.module('livewellApp')
 
     		});
 
-
             var responsePayload = {
                 sessionID   : sessionID,
                 responses   : responses
             };
 
-
             Pound.add('weeklyCheckIn',responsePayload);
+
+            var lWR = responses;
+            var phq8Sum = parseInt(lWR[0].value) + parseInt(lWR[1].value) + parseInt(lWR[2].value) + parseInt(lWR[3].value) + parseInt(lWR[4].value) + parseInt(lWR[5].value) + parseInt(lWR[6].value) + parseInt(lWR[7].value);
+            var amrsSum = parseInt(lWR[8].value) + parseInt(lWR[9].value) + parseInt(lWR[10].value) + parseInt(lWR[11].value) + parseInt(lWR[12].value);
+
+            if (amrsSum >= 10){
+            (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', message:'Altman Mania Rating Scale >= 10'}).execute();
+            }
+            if (amrsSum >= 16){
+            (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'psychiatrist',  message:'Altman Mania Rating Scale >= 16'}).execute();
+            }
+            if (phq8Sum >= 15){
+            (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'coach', message:'PHQ8 >= 15'}).execute();
+            }
+            if (phq8Sum >= 20){
+            (new PurpleRobot()).emitReading('livewell_clinicalreachout',{call:'psychiatrist', message:'PHQ8 >= 20'}).execute();
+            }
 
     		$location.path("/ews");
 

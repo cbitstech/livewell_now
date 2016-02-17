@@ -6,6 +6,7 @@
 
       <div class="modal-body alert-danger">
        {{selectedWarningMessage}}<br/><br/>
+
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
 
@@ -19,7 +20,12 @@
 
       <div class="modal-body alert-warning">
         <a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full" ng-show="!emergency">Continue to Daily Review</a><Br/>
-        <div class="alert alert-danger" ng-show="emergency">Please contact your doctor.</div>
+        <div class="alert alert-danger" ng-show="emergency">
+        Looks like you are in a crisis we recommend that you call your psychiatrist, call 9-1-1, or go to the nearest emergency room.<br/><br/>
+        <a ng-show="warningPhoneNumber != null" class="btn btn-primary" href="tel:{{warningPhoneNumber}}">Call Your Psychiatrist Now</a>
+
+        </div>
+   
         <a ng-href="#/" class="btn btn-primary btn-full" >Return Home</a>
       </div>
 
@@ -53,7 +59,7 @@
 
     <h4>Wellness</h4>
     <div class="btn-group btn-group-justified" data-toggle="buttons">
-        <label ng-click="highlight('#button{{response.order}}','{{response.response}}');warning('{{response.warningMessage}}')" id="button{{response.order}}" class="btn bgcolor{{response.order}} btn-group-radio" ng-repeat="response in responses">{{response.label}}
+        <label ng-click="highlight('#button{{response.order}}','{{response.response}}');warning({{response}})" id="button{{response.order}}" class="btn bgcolor{{response.order}} btn-group-radio" ng-repeat="response in responses">{{response.label}}
 
     </div>
 

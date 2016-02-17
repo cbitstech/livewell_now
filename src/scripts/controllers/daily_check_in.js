@@ -21,16 +21,30 @@
 
  	$scope.emergency = false;
 
+ 	$scope.warningPhoneNumber = null;
+
+ 	if (_.where(JSON.parse(localStorage.team),{role:'Psychiatrist'})[0] != undefined) {
+    	$scope.phoneNumber = _.where(JSON.parse(localStorage.team),{role:'Psychiatrist'})[0].phone;
+ 	} else { 
+ 		$scope.phoneNumber = '312-503-1886';
+ 	}
+
+ 	if (_.where(JSON.parse(localStorage.team),{role:'Coach'})[0] != undefined){
+    	$scope.coachNumber = _.where(JSON.parse(localStorage.team),{role:'Coach'})[0].phone;
+ 	} else {
+ 		$scope.coachNumber = '312-503-1886';
+ 	}
+
  	$scope.responses = [
- 	{order:1,response:'-4', label:'-4',tailoredMessage:'some message',warningMessage:'You rated yourself as being in a crisis with a -4, if this is correct, close and press continue.'},
- 	{order:2,response:'-3', label:'-3',tailoredMessage:'some message'},
- 	{order:3,response:'-2', label:'-2',tailoredMessage:'some message'},
- 	{order:4,response:'-1', label:'-1',tailoredMessage:'some message'},
- 	{order:5,response:'0', label:'0',tailoredMessage:'some message'},
- 	{order:6,response:'1', label:'+1',tailoredMessage:'some message'},
- 	{order:7,response:'2', label:'+2',tailoredMessage:'some message'},
- 	{order:8,response:'3', label:'+3',tailoredMessage:'some message'},
- 	{order:9,response:'4', label:'+4',tailoredMessage:'some message',warningMessage:'You rated yourself as being in a crisis with a +4, if this is correct, close and press continue.'}
+ 	{order:1,callCoach:true, response:'-4', label:'-4',tailoredMessage:'some message',warningMessage:'You rated yourself as being in a crisis with a -4, if this is correct, close and press submit.'},
+ 	{order:2,callCoach:false, response:'-3', label:'-3',tailoredMessage:'some message'},
+ 	{order:3,callCoach:false, response:'-2', label:'-2',tailoredMessage:'some message'},
+ 	{order:4,callCoach:false, response:'-1', label:'-1',tailoredMessage:'some message'},
+ 	{order:5,callCoach:false, response:'0', label:'0',tailoredMessage:'some message'},
+ 	{order:6,callCoach:false, response:'1', label:'+1',tailoredMessage:'some message'},
+ 	{order:7,callCoach:false, response:'2', label:'+2',tailoredMessage:'some message'},
+ 	{order:8,callCoach:false, response:'3', label:'+3',tailoredMessage:'some message'},
+ 	{order:9,callCoach:true, response:'4', label:'+4',tailoredMessage:'some message',warningMessage:'You rated yourself as being in a crisis with a +4, if this is correct, close and press submit.'}
  	];
 
  	$scope.times = [ 	{value:"0000", label:"12:00AM"},
@@ -91,6 +105,7 @@
  		if($scope.dailyCheckIn.wellness == 4 || $scope.dailyCheckIn.wellness == -4){
  			$scope.emergency = true;
  		}
+
  		Pound.add('dailyCheckIn',$scope.dailyCheckIn);
  		$scope.nextId = $routeParams.id;
  	
@@ -117,11 +132,16 @@
 
  	}
 
- 	$scope.warning = function(warningMessage){
+ 	$scope.warning = function(response){
 
- 		if (warningMessage.length > 0){
+ 		if (response.warningMessage.length > 0){
+ 			$scope.selectedWarningMessage = response.warningMessage;
+ 			if (response.callCoach == true){
+ 				$scope.warningPhoneNumber = $scope.phoneNumber;
+ 			} else {
+ 				$scope.warningPhoneNumber = null;
+ 			}
  			$("#warning").modal();
- 			$scope.selectedWarningMessage = warningMessage;
  		}
 
 

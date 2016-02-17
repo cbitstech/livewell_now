@@ -170,20 +170,20 @@ angular.module('livewellApp')
                 localStorage['checkinPrompt'] = JSON.stringify($scope.checkinPrompt);
                 //new Date(year, month, day, hours, minutes, seconds, milliseconds)
                 var checkInValues = $scope.checkinPrompt.value.split(":");
-                var dailyCheckInDateTime1 = new Date(2015, 0, 1, parseInt(checkInValues[0])-1, parseInt(checkInValues[1]), 0);
-                var dailyCheckinDateTimeEnd1 = new Date(2015, 0, 1, parseInt(checkInValues[0])-1, parseInt(checkInValues[1]) + 1, 0);
-                var dailyCheckInDateTime2 = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]), 0);
-                var dailyCheckinDateTimeEnd2 = new Date(2015, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]) + 1, 0);
-                var dailyCheckInDateTime3 = new Date(2015, 0, 1, parseInt(checkInValues[0])+1, parseInt(checkInValues[1]), 0);
-                var dailyCheckinDateTimeEnd3 = new Date(2015, 0, 1, parseInt(checkInValues[0])+1, parseInt(checkInValues[1]) + 1, 0);
-                var dailyCheckInDateTime4 = new Date(2015, 0, 1, parseInt(checkInValues[0])+2, parseInt(checkInValues[1]), 0);
-                var dailyCheckinDateTimeEnd4 = new Date(2015, 0, 1, parseInt(checkInValues[0])+2, parseInt(checkInValues[1]) + 1, 0);
-                var dailyCheckInDateTime5 = new Date(2015, 0, 1, parseInt(checkInValues[0])+3, parseInt(checkInValues[1]), 0);
-                var dailyCheckinDateTimeEnd5 = new Date(2015, 0, 1, parseInt(checkInValues[0])+3, parseInt(checkInValues[1]) + 1, 0);
-                var dailyCheckInDateTime6 = new Date(2015, 0, 1, parseInt(checkInValues[0])+4, parseInt(checkInValues[1]), 0);
-                var dailyCheckinDateTimeEnd6 = new Date(2015, 0, 1, parseInt(checkInValues[0])+4, parseInt(checkInValues[1]) + 1, 0);              
-                var dailyReviewRenewalDateTime = new Date(2015, 0, 1, 2, 0, 0);
-                var dailyReviewRenewalDateTimeEnd = new Date(2015, 0, 1, 2, 1, 0);
+                var dailyCheckInDateTime1 = new Date(2016, 0, 1, parseInt(checkInValues[0])-1, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd1 = new Date(2016, 0, 1, parseInt(checkInValues[0])-1, parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime2 = new Date(2016, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd2 = new Date(2016, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime3 = new Date(2016, 0, 1, parseInt(checkInValues[0])+1, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd3 = new Date(2016, 0, 1, parseInt(checkInValues[0])+1, parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime4 = new Date(2016, 0, 1, parseInt(checkInValues[0])+2, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd4 = new Date(2016, 0, 1, parseInt(checkInValues[0])+2, parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime5 = new Date(2016, 0, 1, parseInt(checkInValues[0])+3, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd5 = new Date(2016, 0, 1, parseInt(checkInValues[0])+3, parseInt(checkInValues[1]) + 1, 0);
+                var dailyCheckInDateTime6 = new Date(2016, 0, 1, parseInt(checkInValues[0])+4, parseInt(checkInValues[1]), 0);
+                var dailyCheckinDateTimeEnd6 = new Date(2016, 0, 1, parseInt(checkInValues[0])+4, parseInt(checkInValues[1]) + 1, 0);              
+                var dailyReviewRenewalDateTime = new Date(2016, 0, 1, 2, 0, 0);
+                var dailyReviewRenewalDateTimeEnd = new Date(2016, 0, 1, 2, 1, 0);
                 var pr = new PurpleRobot();
                 
                 var dailyCheckInDialog =

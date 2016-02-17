@@ -1,3 +1,4 @@
+
 'use strict';
 
 /**
@@ -8,16 +9,100 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('ChartsCtrl', function ($scope) {
+  .controller('ChartsCtrl', function ($scope,Pound) {
 
         $scope.pageTitle = 'My Charts';
 
 
         $('td').tooltip();
 
+        $scope.dailyCheckInResponseArray = Pound.find('dailyCheckIn');
+        debugger;
+        $scope.recodedResponses = JSON.parse(localStorage['recodedResponses']);
+
+        $scope.graph = []
+        if ($scope.dailyCheckInResponseArray.length > 7){
+            $scope.graph[6] = $scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-1];
+            $scope.graph[5] = $scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-2];
+            $scope.graph[4] = $scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-3];
+            $scope.graph[3] = $scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-4];
+            $scope.graph[2] = $scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-5];
+            $scope.graph[1] = $scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-6];
+            $scope.graph[0] = $scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length-7];
+        }
+        else{
+            $scope.graph = $scope.dailyCheckInResponseArray;
+        }
 
 
-   Highcharts.theme =  {colors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+        $scope.wellness = [];
+        $scope.dates = [];
+
+        for (var i = 0; i < $scope.graph.length; i++) {
+            $scope.wellness.push(parseInt($scope.dailyCheckInResponseArray[i].wellness));
+            var datepush = $scope.dailyCheckInResponseArray[i].created_at.split('T')[0].split('-');
+            $scope.dates.push(datepush[1] + '-' + datepush[2]);
+        }
+
+        $scope.routine = {
+            class: function(value){
+              debugger;
+                var returnvalue = null;
+                switch(value) {
+                    case 0:
+                        returnvalue ='a';
+                        break;
+                    case 1:
+                        returnvalue = 'b';
+                        break;
+                    case 2:
+                        returnvalue = 'c';
+                        break;
+                }
+                return returnvalue
+            }
+        };
+
+        $scope.medication = {
+            class: function(value){
+                var returnvalue = null;
+                switch(value) {
+                    case 0:
+                        returnvalue ='a';
+                        break;
+                    case 0.5:
+                        returnvalue = 'b';
+                        break;
+                    case 1:
+                        returnvalue = 'c';
+                        break;
+                }
+                return returnvalue
+            }
+        };
+
+        $scope.sleep = {
+            class: function(value){
+                var returnvalue = null;
+                switch(value) {
+                    case (value < 0):
+                        returnvalue ='a';
+                        break;
+                    case (value == 0):
+                        returnvalue = 'b';
+                        break;
+                    case (value > 0):
+                        returnvalue = 'c';
+                        break;
+                }
+                return returnvalue
+            }
+        };
+
+
+
+
+        Highcharts.theme =  {colors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
       "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
    chart: {
       backgroundColor: 'transparent',
@@ -46,7 +131,7 @@ angular.module('livewellApp')
             color: '#E0E0E3'
          }
       },
-      lineColor: '#707073',
+      lineColor: '#FFFFFF',
       minorGridLineColor: '#505053',
       tickColor: '#707073',
       title: {
@@ -85,7 +170,7 @@ angular.module('livewellApp')
             color: '#B0B0B3'
          },
          marker: {
-            lineColor: '#333'
+            lineColor: 'white'
          }
       },
       boxplot: {
@@ -182,7 +267,7 @@ angular.module('livewellApp')
       maskFill: 'rgba(255,255,255,0.1)',
       series: {
          color: '#7798BF',
-         lineColor: '#A6C7ED'
+         lineColor: 'white'
       },
       xAxis: {
          gridLineColor: '#505053'
@@ -222,7 +307,7 @@ Highcharts.setOptions(Highcharts.theme);
             x: -20
         },
         xAxis: {
-            categories: ['5/16','5/17','5/18','5/19','5/20','5/21','5/22',]
+            categories:  $scope.dates
         },
         yAxis: {
             title: {
@@ -251,6 +336,6 @@ Highcharts.setOptions(Highcharts.theme);
         series: [{
              showInLegend: false,
             name: 'Wellness',
-            data: [0,0,0,0,0,0,0]
+            data: $scope.wellness
         }]};
   });
