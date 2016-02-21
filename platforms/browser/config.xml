@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="edu.northwestern.cbits.livewell" version="3.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="Device">
+        <param name="browser-package" value="Device" />
+    </feature>
     <name>LiveWell</name>
     <description>
         An application for bipolar disorder
@@ -17,7 +20,4 @@
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
-    <feature name="Device">
-        <param name="browser-package" value="Device" />
-    </feature>
 </widget>
