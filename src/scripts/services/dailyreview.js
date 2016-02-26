@@ -28,7 +28,7 @@ angular.module('livewellApp')
                 if (dailyReviewResponses[responsePosition] != undefined) {
                     historySeed.wellness[i] = parseInt(dailyReviewResponses[responsePosition].wellness);
                     historySeed.medications[i] = recoder.medications(dailyReviewResponses[responsePosition].medications);
-                    historySeed.sleep[i] = recoder.sleep(dailyReviewResponses[responsePosition].toBed, dailyReviewResponses[responsePosition].gotUp, sleepRoutineRanges);
+                    historySeed.sleep[i] = recoder.sleep(dailyReviewResponses[responsePosition].sleepDuration,sleepRoutineRanges);
                     historySeed.routine[i] = recoder.routine(dailyReviewResponses[responsePosition].toBed, dailyReviewResponses[responsePosition].gotUp, sleepRoutineRanges);
                 }
             }
@@ -50,21 +50,13 @@ angular.module('livewellApp')
             }
         }
 
-        recoder.sleep = function(toBed, gotUp, sleepRoutineRanges) {
+        recoder.sleep = function(sleepDuration, sleepRoutineRanges) {
             var score = 0;
             // duration = gotUp - toBed
             // look at ranges defined in sleepRoutineRanges, which range is it in?
-            var numGotUp = parseInt(gotUp);
-            var numToBed = parseInt(toBed);
-            if (numGotUp < numToBed) {
-                numGotUp = numGotUp + 2400;
-            }
-            var duration = numGotUp - numToBed;
-            ;
-            if (duration % 100 == 70) {
-                duration = duration - 20;
-            }
-            duration = duration / 100;
+
+            var duration = parseInt(sleepDuration);
+
             if (duration <= sleepRoutineRanges.LessSevere) {
                 score = -1;
             }

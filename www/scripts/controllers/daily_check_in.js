@@ -98,7 +98,11 @@
 
  	$scope.saveCheckIn = function(){
 
- 	 var allAnswersFinished = $scope.dailyCheckIn.gotUp != '' & $scope.dailyCheckIn.toBed != '' & $scope.dailyCheckIn.medications != '' & $scope.dailyCheckIn.wellness != '';
+ 	 var allAnswersFinished = $scope.dailyCheckIn.gotUp != '' 
+ 	 	& $scope.dailyCheckIn.toBed != '' 
+ 	 	& $scope.dailyCheckIn.medications != '' 
+ 	 	& $scope.dailyCheckIn.wellness != ''
+ 	 	& $scope.dailyCheckIn.sleepDuration != '';
 
  		if(allAnswersFinished){
  		$scope.dailyCheckIn.endTime = new Date();
@@ -134,6 +138,7 @@
 		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'gotUp', questionValue:$scope.dailyCheckIn.gotUp}).execute();
 		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'wellness',questionValue:$scope.dailyCheckIn.wellness}).execute();
 		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'medications',questionValue:$scope.dailyCheckIn.medications}).execute();
+		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'sleepDuration',questionValue:$scope.dailyCheckIn.sleepDuration}).execute();
 
  		$("#continue").modal();
  		}

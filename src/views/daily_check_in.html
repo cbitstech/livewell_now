@@ -47,6 +47,11 @@
 </div>
 
 <br/><br/>
+        <h4>Hours Slept</h4>
+        <input ng-model="dailyCheckIn.sleepDuration" name="sleepDuration" type="number" min="0" max="36">
+        </select>
+
+        <h3>Routine</h3>
         <h4>Went To Bed</h4>
         <select ng-model="dailyCheckIn.toBed" name="toBed">
             <option ng-repeat="time in times" value="{{time.value}}" style="color:black !important;">{{time.label}}</option> 
@@ -54,12 +59,10 @@
 
         <h4>Got Up</h4>
         <select ng-model="dailyCheckIn.gotUp"name="gotUp">
-                    <option ng-repeat="time in times" value="{{time.value}}"  style="color:black !important;">{{time.label}}</option> 
+            <option ng-repeat="time in times" value="{{time.value}}"  style="color:black !important;">{{time.label}}</option> 
         </select>
 
-        <h4>How many hours did you sleep?</h4>
-        <input ng-model="dailyCheckIn.sleepDuration" name="sleepDuration" type="number" min="0" max="36">
-        </select>
+
 
     <h4>Wellness</h4>
     <div class="btn-group btn-group-justified" data-toggle="buttons">
