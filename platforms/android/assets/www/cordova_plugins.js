@@ -31,7 +31,6 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-crosswalk-webview": "1.5.0",
     "cordova-plugin-whitelist": "1.2.2-dev",
     "org.apache.cordova.device": "0.3.0",
     "org.apache.cordova.network-information": "0.2.15"

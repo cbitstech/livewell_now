@@ -104,6 +104,25 @@
  		$scope.dailyCheckIn.endTime = new Date();
  		if($scope.dailyCheckIn.wellness == 4 || $scope.dailyCheckIn.wellness == -4){
  			$scope.emergency = true;
+ 			$scope.psychiatristEmail = _.where(JSON.parse(localStorage.team), {
+                    role: 'Psychiatrist'
+                })[0].email;
+
+            if (_.where(JSON.parse(localStorage.team), {
+                    role: 'Coach'
+                })[0] != undefined) {
+                $scope.coachEmail = _.where(JSON.parse(localStorage.team), {
+                    role: 'Coach'
+                })[0].email;
+            } else {
+                $scope.coachEmail = ''
+            }
+
+            (new PurpleRobot()).emitReading('livewell_email', {
+                psychiatristEmail: $scope.psychiatristEmail,
+                coachEmail: $scope.coachEmail,
+                message: 'User answered with a ' + $scope.dailyCheckIn.wellness + ' on the daily check in'
+            }).execute();
  		}
 
  		Pound.add('dailyCheckIn',$scope.dailyCheckIn);

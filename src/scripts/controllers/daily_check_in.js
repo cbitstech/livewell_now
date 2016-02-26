@@ -98,12 +98,35 @@
 
  	$scope.saveCheckIn = function(){
 
- 	 var allAnswersFinished = $scope.dailyCheckIn.gotUp != '' & $scope.dailyCheckIn.toBed != '' & $scope.dailyCheckIn.medications != '' & $scope.dailyCheckIn.wellness != '';
+ 	 var allAnswersFinished = $scope.dailyCheckIn.gotUp != '' 
+ 	 	& $scope.dailyCheckIn.toBed != '' 
+ 	 	& $scope.dailyCheckIn.medications != '' 
+ 	 	& $scope.dailyCheckIn.wellness != ''
+ 	 	& $scope.dailyCheckIn.sleepDuration != '';
 
  		if(allAnswersFinished){
  		$scope.dailyCheckIn.endTime = new Date();
  		if($scope.dailyCheckIn.wellness == 4 || $scope.dailyCheckIn.wellness == -4){
  			$scope.emergency = true;
+ 			$scope.psychiatristEmail = _.where(JSON.parse(localStorage.team), {
+                    role: 'Psychiatrist'
+                })[0].email;
+
+            if (_.where(JSON.parse(localStorage.team), {
+                    role: 'Coach'
+                })[0] != undefined) {
+                $scope.coachEmail = _.where(JSON.parse(localStorage.team), {
+                    role: 'Coach'
+                })[0].email;
+            } else {
+                $scope.coachEmail = ''
+            }
+
+            (new PurpleRobot()).emitReading('livewell_email', {
+                psychiatristEmail: $scope.psychiatristEmail,
+                coachEmail: $scope.coachEmail,
+                message: 'User answered with a ' + $scope.dailyCheckIn.wellness + ' on the daily check in'
+            }).execute();
  		}
 
  		Pound.add('dailyCheckIn',$scope.dailyCheckIn);
@@ -115,6 +138,7 @@
 		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'gotUp', questionValue:$scope.dailyCheckIn.gotUp}).execute();
 		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'wellness',questionValue:$scope.dailyCheckIn.wellness}).execute();
 		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'medications',questionValue:$scope.dailyCheckIn.medications}).execute();
+		(new PurpleRobot()).emitReading('livewell_survey_data',{survey:'daily',sessionGUID: sessionID,startTime:$scope.dailyCheckIn.startTime,questionDataLabel:'sleepDuration',questionValue:$scope.dailyCheckIn.sleepDuration}).execute();
 
  		$("#continue").modal();
  		}

@@ -16,7 +16,6 @@ angular.module('livewellApp')
         $('td').tooltip();
 
         $scope.dailyCheckInResponseArray = Pound.find('dailyCheckIn');
-        debugger;
         $scope.recodedResponses = JSON.parse(localStorage['recodedResponses']);
 
         $scope.graph = []
@@ -44,17 +43,16 @@ angular.module('livewellApp')
 
         $scope.routine = {
             class: function(value) {
-                debugger;
                 var returnvalue = null;
                 switch (value) {
                     case 0:
-                        returnvalue = 'a';
+                        returnvalue = 'c';
                         break;
                     case 1:
                         returnvalue = 'b';
                         break;
                     case 2:
-                        returnvalue = 'c';
+                        returnvalue = 'a';
                         break;
                 }
                 return returnvalue
@@ -66,13 +64,13 @@ angular.module('livewellApp')
                 var returnvalue = null;
                 switch (value) {
                     case 0:
-                        returnvalue = 'a';
+                        returnvalue = 'c';
                         break;
                     case 0.5:
                         returnvalue = 'b';
                         break;
                     case 1:
-                        returnvalue = 'c';
+                        returnvalue = 'a';
                         break;
                 }
                 return returnvalue
@@ -82,16 +80,14 @@ angular.module('livewellApp')
         $scope.sleep = {
             class: function(value) {
                 var returnvalue = null;
-                switch (value) {
-                    case (value < 0):
-                        returnvalue = 'a';
-                        break;
-                    case (value == 0):
-                        returnvalue = 'b';
-                        break;
-                    case (value > 0):
+                if (value < 0){
                         returnvalue = 'c';
-                        break;
+                }
+                if (value == 0){
+                        returnvalue = 'a';
+                }
+                if (value > 0){
+                        returnvalue = 'b';
                 }
                 return returnvalue
             }
@@ -101,6 +97,9 @@ angular.module('livewellApp')
 
 
         Highcharts.theme = {
+            exporting: {
+                 enabled: false 
+            },
             chart: {
                 backgroundColor: 'transparent',
                 style: {
@@ -329,9 +328,6 @@ angular.module('livewellApp')
                 verticalAlign: 'middle',
                 borderWidth: 0,
                 enabled: false
-            },
-            exporting: {
-                 enabled: false 
             },
             series: [{
                 showInLegend: false,

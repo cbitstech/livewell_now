@@ -199,7 +199,7 @@ angular.module('livewellApp')
                     });
                 
                 var dailyReviewRenew =
-                    pr.enableTrigger('dailyCheckIn1').enableTrigger('dailyCheckIn2').enableTrigger('dailyCheckIn3').enableTrigger('dailyCheckIn4');
+                    pr.enableTrigger('dailyCheckIn1').enableTrigger('dailyCheckIn2').enableTrigger('dailyCheckIn3').enableTrigger('dailyCheckIn4').enableTrigger('dailyCheckIn5').enableTrigger('dailyCheckIn6');
 
                 (new PurpleRobot()).updateTrigger({
                     triggerId: 'dailyCheckIn1',
