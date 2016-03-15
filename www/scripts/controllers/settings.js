@@ -186,17 +186,16 @@ angular.module('livewellApp')
                 var dailyReviewRenewalDateTimeEnd = new Date(2016, 0, 1, 2, 1, 0);
                 var pr = new PurpleRobot();
                 
+
+
                 var dailyCheckInDialog =
-                    pr.showNativeDialog({
-                        title: "LiveWell",
-                        message: "Can you complete your LiveWell activities now?",
-                        buttonLabelA: "YES",
-                        scriptA: pr.launchApplication('edu.northwestern.cbits.livewell'),
-                        buttonLabelB: "NO",
-                        scriptB: pr.doNothing(),
-                        tag: "checkIn",
-                        priority: 3
-                    });
+                    pr.showScriptNotification({
+                            title: "LiveWell",
+                            message: "Can you complete your LiveWell activities now?",
+                            isPersistent: true,
+                            isSticky: false,
+                            script: pr.launchApplication('edu.northwestern.cbits.livewell')
+                          });
                 
                 var dailyReviewRenew =
                     pr.enableTrigger('dailyCheckIn1').enableTrigger('dailyCheckIn2').enableTrigger('dailyCheckIn3').enableTrigger('dailyCheckIn4').enableTrigger('dailyCheckIn5').enableTrigger('dailyCheckIn6');

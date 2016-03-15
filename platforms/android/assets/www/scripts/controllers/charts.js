@@ -81,13 +81,13 @@ angular.module('livewellApp')
             class: function(value) {
                 var returnvalue = null;
                 if (value < 0){
-                        returnvalue = 'c';
-                }
-                if (value == 0){
                         returnvalue = 'a';
                 }
-                if (value > 0){
+                if (value == 0){
                         returnvalue = 'b';
+                }
+                if (value > 0){
+                        returnvalue = 'c';
                 }
                 return returnvalue
             }
@@ -138,6 +138,8 @@ angular.module('livewellApp')
                 }
             },
             yAxis: {
+                max:3,
+                min:-3,
                 gridLineColor: '#707073',
                 labels: {
                     style: {

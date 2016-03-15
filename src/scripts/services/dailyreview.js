@@ -520,11 +520,11 @@ angular.module('livewellApp')
             sleepValues[-0.5] = 0.25;
             sleepValues[0] = 1;
             sleepValues[0.5] = 0.5;
-            sleepValues[1] = 0;
-            contents.sleep = (sleepValues[recodedSevenDays.sleep[3]] + sleepValues[recodedSevenDays.sleep[4]] + sleepValues[recodedSevenDays.sleep[5]] + sleepValues[recodedSevenDays.sleep[6]]) / 4;
-            contents.wellness = (recoder.wellnessFormatter(recodedSevenDays.wellness[3]) + recoder.wellnessFormatter(recodedSevenDays.wellness[4]) + recoder.wellnessFormatter(recodedSevenDays.wellness[5]) + recoder.wellnessFormatter(recodedSevenDays.wellness[6])) / 4;
-            contents.medications = (recodedSevenDays.medications[3] + recodedSevenDays.medications[4] + recodedSevenDays.medications[5] + recodedSevenDays.medications[6]) / 4;
-            contents.routine = (recodedSevenDays.routine[3] + recodedSevenDays.routine[4] + recodedSevenDays.routine[5] + recodedSevenDays.routine[6]) / 8;
+            sleepValues[1] = 0.25;
+            contents.sleep = (sleepValues[recodedSevenDays.sleep[0]] + sleepValues[recodedSevenDays.sleep[1]] + sleepValues[recodedSevenDays.sleep[2]] + sleepValues[recodedSevenDays.sleep[3]] + sleepValues[recodedSevenDays.sleep[4]] + sleepValues[recodedSevenDays.sleep[5]] + sleepValues[recodedSevenDays.sleep[6]]) / 7;
+            contents.wellness = (recoder.wellnessFormatter(recodedSevenDays.wellness[0]) + recoder.wellnessFormatter(recodedSevenDays.wellness[1]) + recoder.wellnessFormatter(recodedSevenDays.wellness[2]) + recoder.wellnessFormatter(recodedSevenDays.wellness[3]) + recoder.wellnessFormatter(recodedSevenDays.wellness[4]) + recoder.wellnessFormatter(recodedSevenDays.wellness[5]) + recoder.wellnessFormatter(recodedSevenDays.wellness[6])) / 7;
+            contents.medications = (recodedSevenDays.medications[0] + recodedSevenDays.medications[1] + recodedSevenDays.medications[2] + recodedSevenDays.medications[3] + recodedSevenDays.medications[4] + recodedSevenDays.medications[5] + recodedSevenDays.medications[6]) / 7;
+            contents.routine = (recodedSevenDays.routine[0] + recodedSevenDays.routine[1] + recodedSevenDays.routine[2] + recodedSevenDays.routine[3] + recodedSevenDays.routine[4] + recodedSevenDays.routine[5] + recodedSevenDays.routine[6]) / 14;
             return contents
         }
         contents.getCode = function() {

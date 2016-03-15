@@ -46,13 +46,13 @@ angular.module('livewellApp')
                 var returnvalue = null;
                 switch (value) {
                     case 0:
-                        returnvalue = 'c';
+                        returnvalue = ['c','missed two'];  
                         break;
                     case 1:
-                        returnvalue = 'b';
+                        returnvalue = ['b','missed one'];
                         break;
                     case 2:
-                        returnvalue = 'a';
+                        returnvalue = ['a','in range']; 
                         break;
                 }
                 return returnvalue
@@ -64,13 +64,13 @@ angular.module('livewellApp')
                 var returnvalue = null;
                 switch (value) {
                     case 0:
-                        returnvalue = 'c';
+                        returnvalue = ['c','took none'];
                         break;
                     case 0.5:
-                        returnvalue = 'b';
+                        returnvalue = ['b','took some']; 
                         break;
                     case 1:
-                        returnvalue = 'a';
+                        returnvalue = ['a','took all'];
                         break;
                 }
                 return returnvalue
@@ -80,15 +80,25 @@ angular.module('livewellApp')
         $scope.sleep = {
             class: function(value) {
                 var returnvalue = null;
-                if (value < 0){
-                        returnvalue = 'c';
+
+                switch (value) {
+                    case -1:
+                        returnvalue = ['c','too little'];
+                        break;
+                    case -0.5:
+                        returnvalue = ['b','too little'];
+                        break;
+                    case 0:
+                        returnvalue = ['a','in range']; 
+                        break;
+                    case .5:
+                        returnvalue = ['b','too much']; 
+                        break;
+                    case 1:
+                        returnvalue = ['c','too much']; 
+                        break;
                 }
-                if (value == 0){
-                        returnvalue = 'a';
-                }
-                if (value > 0){
-                        returnvalue = 'b';
-                }
+              
                 return returnvalue
             }
         };
@@ -138,6 +148,75 @@ angular.module('livewellApp')
                 }
             },
             yAxis: {
+
+                 plotBands: [
+                    { // Light air
+                        from: -3.5,
+                        to: -2.5,
+                        color: '',
+                        label: {
+                            text: '-3',
+                            style: {
+                                color: '#606060'
+                            }
+                            }
+                    }},{ // Light air
+                        from: -2.5,
+                        to: -1.5,
+                        color: '',
+                        label: {
+                            text: '-2',
+                            style: {
+                                color: '#606060'
+                            }
+                            }
+                    }},{ // Light air
+                        from: -1.5,
+                        to: -.5,
+                        color: '',
+                        label: {
+                            text: '-1',
+                            style: {
+                                color: '#606060'
+                            }
+                            }
+                    },{ // Light air
+                        from: -.5,
+                        to: .5,
+                        color: '',
+                        label: {
+                            text: '0',
+                            style: {
+                                color: '#606060'
+                    }}},{ // Light air
+                        from: .5,
+                        to: 1.5,
+                        color: '',
+                        label: {
+                            text: '+1',
+                            style: {
+                                color: '#606060'
+                    }}},{ // Light air
+                        from: 1.5,
+                        to: 2.5,
+                        color: '',
+                        label: {
+                            text: '+2',
+                            style: {
+                                color: '#606060'
+                    }}},{ // Light air
+                        from: 2.5,
+                        to: 3.5,
+                        color: '',
+                        label: {
+                            text: '+3',
+                            style: {
+                                color: '#606060'
+                    }}} 
+
+                ],
+                max:3,
+                min:-3,
                 gridLineColor: '#707073',
                 labels: {
                     style: {

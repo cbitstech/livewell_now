@@ -14,9 +14,8 @@ angular.module('livewellApp')
 
     $scope.mainLinks = [
     {name:"Foundations", href:"foundations"},
-    {name:"Skills", href:"skills"},
+    {name:"Toolbox", href:"skills"},
     {name:"Wellness Plan", href:"wellness/resources"},
-    {name:"Instructions", href:"instructions"}
     ];
 
     // $scope.showLogin = function(){
