@@ -520,7 +520,7 @@ angular.module('livewellApp')
             sleepValues[-0.5] = 0.25;
             sleepValues[0] = 1;
             sleepValues[0.5] = 0.5;
-            sleepValues[1] = 0;
+            sleepValues[1] = 0.25;
             contents.sleep = (sleepValues[recodedSevenDays.sleep[0]] + sleepValues[recodedSevenDays.sleep[1]] + sleepValues[recodedSevenDays.sleep[2]] + sleepValues[recodedSevenDays.sleep[3]] + sleepValues[recodedSevenDays.sleep[4]] + sleepValues[recodedSevenDays.sleep[5]] + sleepValues[recodedSevenDays.sleep[6]]) / 7;
             contents.wellness = (recoder.wellnessFormatter(recodedSevenDays.wellness[0]) + recoder.wellnessFormatter(recodedSevenDays.wellness[1]) + recoder.wellnessFormatter(recodedSevenDays.wellness[2]) + recoder.wellnessFormatter(recodedSevenDays.wellness[3]) + recoder.wellnessFormatter(recodedSevenDays.wellness[4]) + recoder.wellnessFormatter(recodedSevenDays.wellness[5]) + recoder.wellnessFormatter(recodedSevenDays.wellness[6])) / 7;
             contents.medications = (recodedSevenDays.medications[0] + recodedSevenDays.medications[1] + recodedSevenDays.medications[2] + recodedSevenDays.medications[3] + recodedSevenDays.medications[4] + recodedSevenDays.medications[5] + recodedSevenDays.medications[6]) / 7;

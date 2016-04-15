@@ -190,12 +190,12 @@ angular.module('livewellApp')
 
                 var dailyCheckInDialog =
                     pr.showScriptNotification({
-                        title: "LiveWell",
-                        message: "Can you complete your LiveWell activities now?",
-                        isPersistent: true,
-                        isSticky: false,
-                        script: pr.launchApplication('edu.northwestern.cbits.livewell')
-                      });
+                            title: "LiveWell",
+                            message: "Can you complete your LiveWell activities now?",
+                            isPersistent: true,
+                            isSticky: false,
+                            script: pr.launchApplication('edu.northwestern.cbits.livewell')
+                          });
                 
                 var dailyReviewRenew =
                     pr.enableTrigger('dailyCheckIn1').enableTrigger('dailyCheckIn2').enableTrigger('dailyCheckIn3').enableTrigger('dailyCheckIn4').enableTrigger('dailyCheckIn5').enableTrigger('dailyCheckIn6');

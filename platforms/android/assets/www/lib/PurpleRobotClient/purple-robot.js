@@ -933,15 +933,47 @@
 
     var timestamp = (new Date()).getTime();
     var triggerId = options.triggerId || ("TRIGGER-" + timestamp);
-    debugger;
+
+    function formatDate (date){
+      function formatYear(date){
+        return date.getFullYear();
+      }
+
+      function formatMonth(date){
+        return ("0" + parseInt(1+date.getMonth())).slice(-2);
+      }
+
+      function formatDays(date){
+        return ("0" + parseInt(date.getDate())).slice(-2);
+      }
+
+      function formatHours(date){
+        return ("0" + date.getHours()).slice(-2);
+      }
+
+      function formatMinutes(date){
+        return ("0" + date.getMinutes()).slice(-2);
+      }
+
+      function formatSeconds  (date){
+        return ("0" + date.getSeconds()).slice(-2);
+      }
+
+      return formatYear(date) + formatMonth(date) + formatDays(date) + "T" +
+             formatHours(date) + formatMinutes(date) + formatSeconds(date);
+    
+    }
+
     var triggerJson = JSON.stringify({
       type: options.type || "datetime",
       name: triggerId,
       identifier: triggerId,
       action: options.script.toString(),
-      datetime_start: options.startAt,
-      datetime_end: options.endAt,
-      datetime_repeat: options.repeatRule || "FREQ=DAILY;INTERVAL=1"
+      datetime_start: formatDate(options.startAt),
+      datetime_end: formatDate(options.endAt),
+      datetime_repeat: options.repeatRule || "FREQ=DAILY;INTERVAL=1",
+      datetime_random: (options.random === true) || false,
+      fire_on_boot: true && (options.fire_on_boot !== false)
     });
 
     return this._push("updateTrigger", q(triggerId) + ", " + triggerJson);

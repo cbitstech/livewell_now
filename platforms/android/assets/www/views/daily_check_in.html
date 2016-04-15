@@ -1,70 +1,90 @@
 <div ng-include="'views/partials/navbar.html'"></div>
 
 <div id="warning" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-      <div class="modal-body alert-danger">
-       {{selectedWarningMessage}}<br/><br/>
+            <div class="modal-body alert-danger">
+                {{selectedWarningMessage}}
+                <br/>
+                <br/>
 
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<div id="continue" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-body alert-warning">
-        <a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full" ng-show="!emergency">Continue to Daily Review</a><Br/>
-        <div class="alert alert-danger" ng-show="emergency">
-        Looks like you are in a crisis we recommend that you call your psychiatrist, call 9-1-1, or go to the nearest emergency room.<br/><br/>
-        <a ng-show="warningPhoneNumber != null" class="btn btn-primary" href="tel:{{warningPhoneNumber}}">Call Your Psychiatrist Now</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
 
         </div>
-   
-        <a ng-href="#/" class="btn btn-primary btn-full" >Return Home</a>
-      </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<div id="continue" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body alert-warning">
+                
+                <Br/>
+                <div class="alert alert-danger" ng-show="emergency">
+                    Looks like you are in a crisis we recommend that you call your psychiatrist, call 9-1-1, or go to the nearest emergency room.
+                    <br/>
+                    
+                    <a ng-show="warningPhoneNumber != null" class="btn btn-primary" href="tel:{{warningPhoneNumber}}">Call Your Psychiatrist Now</a>
+
+                </div>
+                <a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full" >Continue to Daily Review</a>
+                                    <br/>
+                <a ng-href="#/" class="btn btn-primary btn-full">Return Home</a>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 
 <form ng-submit="saveCheckIn()" class="center-form">
-    <h4>Medications</h4>
+    <h4>MEDICATIONS</h4>
 
-<div class="row-fluid">
-    <label class="btn btn-success col-sm-4 col-md-4 col-xs-4">
-        <input type="radio" ng-model="dailyCheckIn.medications" value="2"> All</label>
-    <label class="btn btn-warning col-sm-4 col-md-4 col-xs-4">
-        <input type="radio" ng-model="dailyCheckIn.medications" value="1"> Some</label>
-    <label class="btn btn-danger col-sm-4 col-md-4 col-xs-4">
-        <input type="radio" ng-model="dailyCheckIn.medications" value="0"> None</label>
-</div>
+    <div class="row-fluid">
+        <label class="btn btn-success col-sm-4 col-md-4 col-xs-4">
+            <input type="radio" ng-model="dailyCheckIn.medications" value="2"> All</label>
+        <label class="btn btn-warning col-sm-4 col-md-4 col-xs-4">
+            <input type="radio" ng-model="dailyCheckIn.medications" value="1"> Some</label>
+        <label class="btn btn-danger col-sm-4 col-md-4 col-xs-4">
+            <input type="radio" ng-model="dailyCheckIn.medications" value="0"> None</label>
+    </div>
 
-<br/><br/>
-        <h4>Hours Slept</h4>
-        <input ng-model="dailyCheckIn.sleepDuration" name="sleepDuration" type="number" min="0" max="36" step="0.5">
-        </select>
-
-        <h4>Routine</h4>
-        <h4>Went To Bed</h4>
-        <select ng-model="dailyCheckIn.toBed" name="toBed">
-            <option ng-repeat="time in times" value="{{time.value}}" style="color:black !important;">{{time.label}}</option> 
-        </select>
-
-        <h4>Got Up</h4>
-        <select ng-model="dailyCheckIn.gotUp"name="gotUp">
-            <option ng-repeat="time in times" value="{{time.value}}"  style="color:black !important;">{{time.label}}</option> 
-        </select>
+    <br/>
+    <br/>
+    <h4>SLEEP</h4>
+    <select ng-model="dailyCheckIn.sleepDuration" name="sleepDuration" >
+        <option ng-repeat="hour in hours" value="{{hour.value}}" style="color:black !important;">{{hour.label}}</option>
+    </select>
 
 
+    <h4>ROUTINE</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Went To Bed</h5>
+            <select ng-model="dailyCheckIn.toBed" name="toBed">
+                <option ng-repeat="time in times" value="{{time.value}}" style="color:black !important;">{{time.label}}</option>
+            </select>
+        </div>
+        <div class="col-sm-6">
+            <h5>Got Up</h5>
+            <select ng-model="dailyCheckIn.gotUp" name="gotUp">
+                <option ng-repeat="time in times" value="{{time.value}}" style="color:black !important;">{{time.label}}</option>
+            </select>
+        </div>
+    </div>
 
-    <h4>Wellness</h4>
+
+
+    <h4>WELLNESS</h4>
     <div class="btn-group btn-group-justified" data-toggle="buttons">
         <label ng-click="highlight('#button{{response.order}}','{{response.response}}');warning({{response}})" id="button{{response.order}}" class="btn bgcolor{{response.order}} btn-group-radio" ng-repeat="response in responses">{{response.label}}
 
@@ -73,4 +93,3 @@
     <br/>
     <button type="submit" class="btn btn-primary btn-full">Submit</button>
 </form>
-

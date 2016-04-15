@@ -8,13 +8,41 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-    .controller('DailyReviewCtrl', function($scope, $routeParams, UserData, Pound, DailyReviewAlgorithm, ClinicalStatusUpdate, Guid) {
+    .controller('DailyReviewCtrl', function($scope, $routeParams, $timeout, UserData, Pound, DailyReviewAlgorithm, ClinicalStatusUpdate, Guid) {
         $scope.pageTitle = "Daily Review";
         
         Pound.add('dailyReviewStarted', {
             userStarted: true,
             code: $scope.code
         });
+
+        $timeout(function(){$('.add-tooltip').tooltip()});
+
+        $scope.routineData = UserData.query('sleepRoutineRanges');
+
+        $scope.cleanTime = function(militaryTime){
+
+            var time = militaryTime.toString();
+            var cleanTime = '';
+           
+            if (time[0] == '0' && time[1] == '0'){
+                cleanTime = '12:' + time[2] + time[3];
+            } else if( time[0] == '0'){
+                cleanTime =  time[1] + ":" + time[2] + time[3];
+            } else if (parseInt(time[0] + time[1]) > 12 ){
+                cleanTime = (parseInt(time[0] + time[1]) - 12) + ":" + time[2] + time[3];
+            } else {
+                cleanTime = time[0] + time[1] + ":" + time[2] + time[3];
+            }
+
+            if (parseInt(militaryTime) > 1200){
+                return cleanTime + ' PM'
+            }
+            else {
+                return cleanTime + ' AM'
+            }
+
+        }
 
         $scope.interventionGroups = UserData.query('dailyReview');
 
@@ -61,6 +89,10 @@ angular.module('livewellApp')
                 $scope.psychiatristEmail = _.where(JSON.parse(localStorage.team), {
                     role: 'Psychiatrist'
                 })[0].email;
+
+                $scope.phoneNumber = _.where(JSON.parse(localStorage.team), {
+                    role: 'Psychiatrist'
+                })[0].phone;
 
                 if (_.where(JSON.parse(localStorage.team), {
                         role: 'Coach'
