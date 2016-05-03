@@ -166,10 +166,19 @@ angular.module('livewellApp')
         }
 
         $scope.savePromptSchedule = function() {
+
+
+
+
+                (new PurpleRobot()).emitReading('livewell_prompt_registration', {
+                    startTime:  $scope.checkinPrompt.value,
+                    registrationId: localStorage.registrationId
+                }).execute();
             
+
+                var checkInValues = $scope.checkinPrompt.value.split(":");
                 localStorage['checkinPrompt'] = JSON.stringify($scope.checkinPrompt);
                 //new Date(year, month, day, hours, minutes, seconds, milliseconds)
-                var checkInValues = $scope.checkinPrompt.value.split(":");
                 var dailyCheckInDateTime1 = new Date(2016, 0, 1, parseInt(checkInValues[0])-1, parseInt(checkInValues[1]), 0);
                 var dailyCheckinDateTimeEnd1 = new Date(2016, 0, 1, parseInt(checkInValues[0])-1, parseInt(checkInValues[1]) + 1, 0);
                 var dailyCheckInDateTime2 = new Date(2016, 0, 1, parseInt(checkInValues[0]), parseInt(checkInValues[1]), 0);

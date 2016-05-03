@@ -24,16 +24,17 @@
         <div class="modal-content">
 
             <div class="modal-body alert-warning">
-                <a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full" ng-show="!emergency">Continue to Daily Review</a>
+                
                 <Br/>
                 <div class="alert alert-danger" ng-show="emergency">
                     Looks like you are in a crisis we recommend that you call your psychiatrist, call 9-1-1, or go to the nearest emergency room.
                     <br/>
-                    <br/>
+                    
                     <a ng-show="warningPhoneNumber != null" class="btn btn-primary" href="tel:{{warningPhoneNumber}}">Call Your Psychiatrist Now</a>
 
                 </div>
-
+                <a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full" >Continue to Daily Review</a>
+                                    <br/>
                 <a ng-href="#/" class="btn btn-primary btn-full">Return Home</a>
             </div>
 
@@ -65,16 +66,16 @@
     </select>
 
 
-    <h3>ROUTINE</h3>
+    <h4>ROUTINE</h4>
     <div class="row">
-        <div class="col-md-6">
-            <h4>WENT TO BED</h4>
+        <div class="col-sm-6">
+            <h5>Went To Bed</h5>
             <select ng-model="dailyCheckIn.toBed" name="toBed">
                 <option ng-repeat="time in times" value="{{time.value}}" style="color:black !important;">{{time.label}}</option>
             </select>
         </div>
-        <div class="col-md-6">
-            <h4>GOT UP</h4>
+        <div class="col-sm-6">
+            <h5>Got Up</h5>
             <select ng-model="dailyCheckIn.gotUp" name="gotUp">
                 <option ng-repeat="time in times" value="{{time.value}}" style="color:black !important;">{{time.label}}</option>
             </select>
