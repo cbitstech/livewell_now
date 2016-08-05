@@ -12,7 +12,7 @@ angular.module('livewellApp')
     $scope.pageTitle = "Toolbox";
 
         $scope.mainLinks = [
-           {id:'fundamentals',name:"Building Skills"},
+           {id:'fundamentals',name:"Making Changes"},
            {id:'awareness',name:"Self-Assessment"},
            {id:'lifestyle',name:"Lifestyle"},
            {id:'coping',name:"Coping"},

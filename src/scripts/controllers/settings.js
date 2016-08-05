@@ -197,73 +197,73 @@ angular.module('livewellApp')
                 
 
 
-                var dailyCheckInDialog =
-                    pr.showScriptNotification({
-                            title: "LiveWell",
-                            message: "Can you complete your LiveWell activities now?",
-                            isPersistent: true,
-                            isSticky: false,
-                            script: pr.launchApplication('edu.northwestern.cbits.livewell')
-                          });
+                // var dailyCheckInDialog =
+                //     pr.showScriptNotification({
+                //             title: "LiveWell",
+                //             message: "Can you complete your LiveWell activities now?",
+                //             isPersistent: true,
+                //             isSticky: false,
+                //             script: pr.launchApplication('edu.northwestern.cbits.livewell')
+                //           });
                 
-                var dailyReviewRenew =
-                    pr.enableTrigger('dailyCheckIn1').enableTrigger('dailyCheckIn2').enableTrigger('dailyCheckIn3').enableTrigger('dailyCheckIn4').enableTrigger('dailyCheckIn5').enableTrigger('dailyCheckIn6');
+                // var dailyReviewRenew =
+                //     pr.enableTrigger('dailyCheckIn1').enableTrigger('dailyCheckIn2').enableTrigger('dailyCheckIn3').enableTrigger('dailyCheckIn4').enableTrigger('dailyCheckIn5').enableTrigger('dailyCheckIn6');
 
-                (new PurpleRobot()).updateTrigger({
-                    triggerId: 'dailyCheckIn1',
-                    random: false,
-                    script: dailyCheckInDialog,
-                    startAt: dailyCheckInDateTime1,
-                    endAt: dailyCheckinDateTimeEnd1
-                }).execute();
+                // (new PurpleRobot()).updateTrigger({
+                //     triggerId: 'dailyCheckIn1',
+                //     random: false,
+                //     script: dailyCheckInDialog,
+                //     startAt: dailyCheckInDateTime1,
+                //     endAt: dailyCheckinDateTimeEnd1
+                // }).execute();
 
-                (new PurpleRobot()).updateTrigger({
-                    triggerId: 'dailyCheckIn2',
-                    random: false,
-                    script: dailyCheckInDialog,
-                    startAt: dailyCheckInDateTime2,
-                    endAt: dailyCheckinDateTimeEnd2
-                }).execute();
+                // (new PurpleRobot()).updateTrigger({
+                //     triggerId: 'dailyCheckIn2',
+                //     random: false,
+                //     script: dailyCheckInDialog,
+                //     startAt: dailyCheckInDateTime2,
+                //     endAt: dailyCheckinDateTimeEnd2
+                // }).execute();
 
-                (new PurpleRobot()).updateTrigger({
-                    triggerId: 'dailyCheckIn3',
-                    random: false,
-                    script: dailyCheckInDialog,
-                    startAt: dailyCheckInDateTime3,
-                    endAt: dailyCheckinDateTimeEnd3
-                }).execute();
+                // (new PurpleRobot()).updateTrigger({
+                //     triggerId: 'dailyCheckIn3',
+                //     random: false,
+                //     script: dailyCheckInDialog,
+                //     startAt: dailyCheckInDateTime3,
+                //     endAt: dailyCheckinDateTimeEnd3
+                // }).execute();
 
-                (new PurpleRobot()).updateTrigger({
-                    triggerId: 'dailyCheckIn4',
-                    random: false,
-                    script: dailyCheckInDialog,
-                    startAt: dailyCheckInDateTime4,
-                    endAt: dailyCheckinDateTimeEnd4
-                }).execute();
+                // (new PurpleRobot()).updateTrigger({
+                //     triggerId: 'dailyCheckIn4',
+                //     random: false,
+                //     script: dailyCheckInDialog,
+                //     startAt: dailyCheckInDateTime4,
+                //     endAt: dailyCheckinDateTimeEnd4
+                // }).execute();
              
-                (new PurpleRobot()).updateTrigger({
-                    triggerId: 'dailyCheckIn5',
-                    random: false,
-                    script: dailyCheckInDialog,
-                    startAt: dailyCheckInDateTime5,
-                    endAt: dailyCheckinDateTimeEnd5
-                }).execute();
+                // (new PurpleRobot()).updateTrigger({
+                //     triggerId: 'dailyCheckIn5',
+                //     random: false,
+                //     script: dailyCheckInDialog,
+                //     startAt: dailyCheckInDateTime5,
+                //     endAt: dailyCheckinDateTimeEnd5
+                // }).execute();
 
-                (new PurpleRobot()).updateTrigger({
-                    triggerId: 'dailyCheckIn6',
-                    random: false,
-                    script: dailyCheckInDialog,
-                    startAt: dailyCheckInDateTime6,
-                    endAt: dailyCheckinDateTimeEnd6
-                }).execute();
+                // (new PurpleRobot()).updateTrigger({
+                //     triggerId: 'dailyCheckIn6',
+                //     random: false,
+                //     script: dailyCheckInDialog,
+                //     startAt: dailyCheckInDateTime6,
+                //     endAt: dailyCheckinDateTimeEnd6
+                // }).execute();
 
-                (new PurpleRobot()).updateTrigger({
-                    triggerId: 'dailyReviewReset',
-                    random: false,
-                    script: dailyReviewRenew,
-                    startAt: dailyReviewRenewalDateTime,
-                    endAt: dailyReviewRenewalDateTimeEnd
-                }).execute();
+                // (new PurpleRobot()).updateTrigger({
+                //     triggerId: 'dailyReviewReset',
+                //     random: false,
+                //     script: dailyReviewRenew,
+                //     startAt: dailyReviewRenewalDateTime,
+                //     endAt: dailyReviewRenewalDateTimeEnd
+                // }).execute();
 
                 $("form").append('<div class="alert alert-success">Your prompt times have been updated.</div>');
             

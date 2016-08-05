@@ -15,6 +15,10 @@
                         {
                             "xml": "<feature name=\"PushNotification\"><param name=\"android-package\" value=\"com.adobe.phonegap.push.PushPlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -99,6 +103,9 @@
         "phonegap-plugin-push": {
             "SENDER_ID": "334078391843",
             "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
         }
     },
     "dependent_plugins": {},
@@ -114,10 +121,18 @@
             "clobbers": [
                 "PushNotification"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-device/www/device.js",
+            "id": "cordova-plugin-device.device",
+            "clobbers": [
+                "device"
+            ]
         }
     ],
     "plugin_metadata": {
         "cordova-plugin-whitelist": "1.2.2-dev",
-        "phonegap-plugin-push": "1.6.2"
+        "phonegap-plugin-push": "1.6.2",
+        "cordova-plugin-device": "1.1.2"
     }
 }

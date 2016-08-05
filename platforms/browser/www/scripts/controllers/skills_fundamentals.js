@@ -10,11 +10,13 @@
 angular.module('livewellApp')
   .controller('SkillsFundamentalsCtrl', function ($scope) {
 
-  	$scope.pageTitle = "Building Skills";
+  	$scope.pageTitle = "Making Changes";
 
     $scope.mainLinks = [
-    {name:"Prepare", id:537, post:'skills_fundamentals'},
-		{name:"Plan", id:538, post:'skills_fundamentals'},
-		{name:"Perform",id:539,post:'skills_fundamentals'}
-		];
+		{name:"Get Prepared", id:190, post:'skills_fundamentals'},
+		{name:"Set Goal", id:193, post:'skills_fundamentals'},
+		{name:"Develop Plan",id:191,post:'skills_fundamentals'},
+		{name:"Monitor Behavior", id:192, post:'skills_fundamentals'},
+		{name:"Evaluate Performance",id:195,post:'skills_fundamentals'}
+	];
   });

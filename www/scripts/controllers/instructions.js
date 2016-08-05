@@ -13,8 +13,8 @@
 
     $scope.mainLinks = [
            {id:198,name:"Introduction", post:"instructions"},
-            {id:199,name:"Schedule", post:"instructions"},
             {id:201,name:"Settings", post:"instructions"},
+            {id:199,name:"Toolbox", post:"instructions"},
             {id:202,name:"Coach", post:"instructions"},
             {id:203,name:"Psychiatrist", post:"instructions"},
             {id:204,name:"Foundations", post:"instructions"},

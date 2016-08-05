@@ -20,6 +20,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
         }
     },
     "dependent_plugins": {}

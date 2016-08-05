@@ -17,6 +17,7 @@ angular.module('livewellApp')
 
         $scope.dailyCheckInResponseArray = Pound.find('dailyCheckIn');
         $scope.recodedResponses = JSON.parse(localStorage['recodedResponses']);
+        $scope.timezoneoffset = new Date().getTimezoneOffset() / 60;
 
         $scope.graph = []
         if ($scope.dailyCheckInResponseArray.length > 7) {
@@ -31,15 +32,18 @@ angular.module('livewellApp')
             $scope.graph = $scope.dailyCheckInResponseArray;
         }
 
+        console.log($scope.graph);
 
         $scope.wellness = [];
         $scope.dates = [];
 
         for (var i = 0; i < $scope.graph.length; i++) {
-            $scope.wellness.push(parseInt($scope.dailyCheckInResponseArray[i].wellness));
-            var datepush = $scope.dailyCheckInResponseArray[i].created_at.split('T')[0].split('-');
-            $scope.dates.push(datepush[1] + '-' + datepush[2]);
+            debugger;
+            $scope.wellness.push(parseInt($scope.graph[i].wellness));
+            $scope.dates.push(moment($scope.graph[i].created_at).format('MM-DD'));
         }
+
+
 
         $scope.routine = {
             class: function(value) {
