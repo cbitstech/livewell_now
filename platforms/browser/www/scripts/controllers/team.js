@@ -12,4 +12,5 @@ angular.module('livewellApp')
     $scope.pageTitle = "My Team";
 
     $scope.team = UserData.query('team');
+    $scope.secureTeam = UserData.query('secureContent').team;
  });

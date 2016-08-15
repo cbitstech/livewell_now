@@ -13,10 +13,10 @@ angular.module('livewellApp')
   	$scope.pageTitle = "Making Changes";
 
     $scope.mainLinks = [
-    {name:"Get Prepared", id:190, post:'skills_fundamentals'},
+		{name:"Get Prepared", id:190, post:'skills_fundamentals'},
 		{name:"Set Goal", id:193, post:'skills_fundamentals'},
 		{name:"Develop Plan",id:191,post:'skills_fundamentals'},
-	{name:"Monitor Behavior", id:192, post:'skills_fundamentals'},
+		{name:"Monitor Behavior", id:192, post:'skills_fundamentals'},
 		{name:"Evaluate Performance",id:195,post:'skills_fundamentals'}
-		];
+	];
   });

@@ -11,6 +11,7 @@
  .controller('FetchContentCtrl', function ($scope,$http) {
 
  	var SERVER_LOCATION = 'https://livewell2.firebaseio.com/';
+ 	var SECURE_CONTENT = 'https://mohrlab.northwestern.edu/livewell-dash/content/'; 
  	var APP_COLLECTIONS_ROUTE = 'appcollections';
  	var USER_ID = $scope.userID;
   var ROUTE_SUFFIX = '.json';
@@ -44,8 +45,20 @@
  		})
  	}
 
+ 	$scope.fetchSecureContent = function(){
+
+ 		 	$http.get(SECURE_CONTENT +'?user='+ localStorage['userID'] +'&token=' + localStorage['registrationid'])
+ 			.success(function(content) {
+ 				localStorage['secureContent'] = JSON.stringify(content);
+ 			}).error(function(err) {
+ 				$scope.error = 'No internet connection!';
+ 				$scope.errorColor = 'red';
+ 			});
+ 	}
+
  	$scope.fetchContent = function(){
  			$scope.errorColor = 'green';
+ 			$scope.fetchSecureContent();
  			$http.get(SERVER_LOCATION + APP_COLLECTIONS_ROUTE + ROUTE_SUFFIX)
  			.success(function(app_collections) {
  				downloadContent(_.compact(app_collections));

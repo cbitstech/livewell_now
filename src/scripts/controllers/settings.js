@@ -168,8 +168,6 @@ angular.module('livewellApp')
         $scope.savePromptSchedule = function() {
 
 
-
-
                 (new PurpleRobot()).emitReading('livewell_prompt_registration', {
                     startTime:  $scope.checkinPrompt.value,
                     registrationId: localStorage.registrationId

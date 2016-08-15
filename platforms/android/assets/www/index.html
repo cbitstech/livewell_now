@@ -116,6 +116,10 @@
                 window.location.href = "index.html";
             }, false);
 
+            document.addEventListener("click", function(ev){
+                var clickTrackPayload = {objectClicked: ev.srcElement.outerHTML, targetPage:ev.currentTarget.URL};
+                (new PurpleRobot()).emitReading('livewell_event_tracking', clickTrackPayload).execute();
+            });
 
             var push = PushNotification.init({ "android": {"senderID": "334078391843"}} );
 
