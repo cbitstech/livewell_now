@@ -1,0 +1,18 @@
+<div ng-include="'views/partials/navbar.html'"></div>
+
+<h4>Check all warning signs of mania you experienced in the past week. If none, then
+check none:</h4>
+<form>
+<div ng-controller="EwsCtrl" class="row-group">
+<br/>
+	<div  ng-repeat="element in ews" >
+	<label for="{{element.value}}" class="btn btn-info wide" style="text-align:left; margin-bottom:10px;">
+		<input name="ews" value="{{element.value}}" type="checkbox" id="{{element.value}}">
+		<span ng-bind-html="element.value"></span>
+	</label>
+	</div>
+
+</div>
+<br/>
+<a ng-click='onClick()' class="wide btn-lg btn btn-primary">Next</a>
+</form>

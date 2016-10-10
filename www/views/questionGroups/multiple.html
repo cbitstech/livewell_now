@@ -1,0 +1,10 @@
+<div ng-include="'views/questionGroups/title.html'"></div>
+
+<div ng-hide="question.responses.length == 1">
+<div class="response-group">
+	<label ng-repeat="response in question.responses | orderBy : 'order' " class="btn btn-info wide btn-sm response-label" style="font-size:.8em;">
+		<input type="{{question.type}}" name="{{question.questionDataLabel}}" id="q{{question.questionDataLabel}}{{response.value}}" value="{{response.value}}" ng-click="goesTo('{{response.goesTo}}',{{$parent.$index}});" data-goto="{{response.goesTo}}"> 
+		{{response.label}} 
+	</label>
+</div>
+</div>

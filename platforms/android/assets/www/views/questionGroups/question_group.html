@@ -1,0 +1,35 @@
+<form>
+	<div ng-repeat="question in questionGroups" class="question-group" data-idx="{{$index}}" ng-if='showQuestion($index)' >
+	<label> 
+	  <div ng-switch on="questionViewType(question.type)">
+        <div ng-switch-when="multiple">
+        		<div ng-include="'views/questionGroups/multiple.html'"></div>
+        </div>
+        <div ng-switch-when="single">
+        		<div ng-include="'views/questionGroups/single.html'"></div>
+        </div>
+        <div ng-switch-default>
+        	<div ng-include="'views/questionGroups/html.html'"></div>
+        </div>
+    </div>
+    </label>
+    <div ng-show="question.responses.length == 0 && pageTitle == 'Daily Review'">
+    <a ng-href="#/wellness/resources" class="btn btn-info btn-full">Wellness Plan</a><br/>
+    <a ng-href="#/skills" class="btn btn-info btn-full">Toolbox</a><br/>
+    <a ng-href="#/foundations" class="btn btn-info btn-full">Foundations</a><br/><br/>
+    <a ng-href="#/load_interventions" class="btn btn-info btn-full">Review Something Else</a>
+    </div>    
+
+    <div ng-hide="question.responses.length == 0 && pageTitle == 'Daily Review'">
+
+	  <div ng-include="'views/questionGroups/nav.html'"></div>
+    </div>
+    </div>
+</form>
+<div ng-show="surveyFailure().error" >
+    <div class="alert alert-danger">
+    <span ng-bind-html="_SURVEY_FAILURE_LABEL"></span><br/>
+    <span ng-bind-html="surveyFailure().message"></span>
+    </div>
+</div>
+

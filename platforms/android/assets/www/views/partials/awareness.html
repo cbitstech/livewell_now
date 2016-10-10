@@ -1,0 +1,26 @@
+
+<div ng-controller="AwarenessCtrl">
+
+
+	<button ng-click="loadPlan()" class="btn btn-info col-md-4 col-sm-4 col-xs-4 awareness-btn" id="load-plan">Plan</button>
+	<button ng-click="loadAnchors()" class="btn btn-info col-md-4 col-sm-4 col-xs-4 awareness-btn" id="load-anchors">Anchors</button>
+	<button class="btn-info btn col-md-4 col-sm-4 col-xs-4 awareness-btn" ng-click="loadAction()" id="load-action">Definition</button>
+
+<div ng-show="showAction">
+	<table class="col-md-12 col-sm-12 table" >
+		<tr ng-repeat="element in awareness | orderBy: 'order':true"><th class="col-md-1 col-xs-1 col-sm-1 bgcolor{{element.order}}">{{element.value}}</th><th class="col-xs-2 col-md-2 col-sm-2 bgcolor{{element.order}}">{{element.name}}</th><td class="col-xs-9 col-md-9 col-sm-9" ng-bind-html="element.response"></td></tr>
+	</table>
+</div>
+
+<div ng-show="showAnchors">
+	<table class="col-md-12 col-sm-12 table">
+		<tr ng-repeat="element in intervention_anchors | orderBy:'order':true"><th class="col-md-1 col-xs-1 col-sm-1 bgcolor{{element.order}}">{{element.value}}</th><th class="col-xs-2 col-md-2 col-sm-2 bgcolor{{element.order}}">{{element.name}}</th><td class="col-xs-9 col-md-9 col-sm-9" ng-bind-html="element.response"></td></tr>
+	</table>
+</div>
+
+<div ng-show="showPlan">
+	<table class="col-md-12 col-sm-12 table">
+		<tr ng-repeat="element in plan | orderBy:'order':true"><th class="col-md-1 col-xs-1 col-sm-1 bgcolor{{element.order}}">{{element.value}}</th><th class="col-xs-2 col-md-2 col-sm-2 bgcolor{{element.order}}">{{element.name}}</th><td class="col-xs-9 col-md-9 col-sm-9" ng-bind-html="element.response"></td></tr>
+	</table>
+</div>
+</div>

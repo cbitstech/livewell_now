@@ -1,0 +1,15 @@
+<h2>Daily Review Tester</h2>
+
+<table class="table table-striped">
+	<tr><th>ID</th><th>Wellness</th><th>Meds</th><th>Got Up</th><th>Went To Bed</th><th>Time</th></tr>
+	<tr ng-repeat="item in collection">
+		<td>{{$index}}</td>
+		<td>{{item.wellness}}</td>
+		<td>{{item.medications}}</td>
+		<td>{{item.gotUp}}</td>
+		<td>{{item.toBed}}</td>
+		<td>{{item.timestamp}}</td>
+	</tr>
+</table>
+
+<h1>Intervention: {{proposedIntervention}}</h1>
