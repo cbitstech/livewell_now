@@ -45,3 +45,5 @@ bower_components/
 cordova/
 dist/
 node_modules/
+
+platforms/

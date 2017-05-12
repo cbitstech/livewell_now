@@ -7,26 +7,26 @@
  * # UserData
  * Service in the livewellApp.
  */
-angular.module('livewellApp')
-  .service('UserData', function UserData() {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-	
-  var content = {};
+angular.module('livewellApp').service('UserData', function UserData() {
+	// AngularJS will instantiate a singleton by calling "new" on this function
 
-  content.query = function(collectionKey){
+	var content = {};
 
-  console.log(collectionKey);
-  if (localStorage[collectionKey] != undefined){
-  content.items = JSON.parse(localStorage[collectionKey]); 
+	content.query = function(collectionKey){
+		console.log(collectionKey);
+		
+		if (localStorage[collectionKey] != undefined){
+			content.items = JSON.parse(localStorage[collectionKey]); 
+		}
+		else{
+			content.items = [];
+		}
+		
+		console.log(content.items);
+		
+		return content.items
 	}
-	else{
-		content.items = [];
-	}
-  console.log(content.items);
- 	return content.items
 
-	}
+	return content
 
-  return content
-
-  });
+});

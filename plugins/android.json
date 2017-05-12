@@ -10,11 +10,14 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
         },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
+        },
         "phonegap-plugin-push": {
             "SENDER_ID": "334078391843",
             "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
         },
-        "cordova-plugin-device": {
+        "cordova-plugin-app-version": {
             "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
         }
     },

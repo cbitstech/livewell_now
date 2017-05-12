@@ -1,144 +1,144 @@
 <!doctype html>
 <html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-<!--     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *">
- -->
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://fonts.googleapis.com/ 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+		<title></title>
+		<!--     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *"> -->
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css" />
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<link rel="stylesheet" href="styles/main.css">
+		<link rel="stylesheet" href="styles/bootstrap.min.css">
 
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	</head>
+	<body ng-app="livewellApp">
+		<!--[if lt IE 7]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
 
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-  </head>
-  <body ng-app="livewellApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+		<!-- Add your site or application content here -->
+		<div class="container">
+			<div ng-view></div>
+		</div>
 
-    <!-- Add your site or application content here -->
-    <div class="container">
-    <div ng-view></div>
-    </div>
+		<!--[if lt IE 9]>
+		<script src="lib/es5-shim/es5-shim.js"></script>
+		<script src="lib/json3/lib/json3.min.js"></script>
+		<![endif]-->
 
-    <!--[if lt IE 9]>
-    <script src="lib/es5-shim/es5-shim.js"></script>
-    <script src="lib/json3/lib/json3.min.js"></script>
-    <![endif]-->
+		<script src="vendor/jquery/jquery-2.2.4.min.js"></script>
+		<script src="lib/angular/angular.js"></script>
+		<script src="lib/json3/lib/json3.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="lib/angular-resource/angular-resource.js"></script>
+		<script src="lib/angular-cookies/angular-cookies.js"></script>
+		<script src="lib/angular-sanitize/angular-sanitize.js"></script>
+		<script src="lib/angular-animate/angular-animate.js"></script>
+		<script src="lib/angular-touch/angular-touch.js"></script>
+		<script src="lib/angular-route/angular-route.js"></script>
+		<script src="lib/moment/moment.js"></script>
+		<script src="lib/angular-moment/angular-moment.js"></script>
+		<script src="vendor/lodash/lodash.compat.js"></script>
+		<script src="lib/highcharts-ng/highcharts-ng.js"></script>
+		<script src="lib/highcharts/highcharts.js"></script>
+		<script src="lib/highcharts/highcharts-more.js"></script>
+		<script src="lib/highcharts/modules/exporting.js"></script>
+		<script src="lib/PurpleRobotClient/purple-robot.js"></script>
 
-    <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/json3/lib/json3.js"></script>
-    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="lib/angular-resource/angular-resource.js"></script>
-    <script src="lib/angular-cookies/angular-cookies.js"></script>
-    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
-    <script src="lib/angular-animate/angular-animate.js"></script>
-    <script src="lib/angular-touch/angular-touch.js"></script>
-    <script src="lib/angular-route/angular-route.js"></script>
-    <script src="lib/moment/moment.js"></script>
-    <script src="lib/angular-moment/angular-moment.js"></script>
-    <script src="lib/lodash/dist/lodash.compat.js"></script>
-    <script src="lib/highcharts-ng/highcharts-ng.js"></script>
-    <script src="lib/highcharts/highcharts.js"></script>
-    <script src="lib/highcharts/highcharts-more.js"></script>
-    <script src="lib/highcharts/modules/exporting.js"></script>
-    <script src="lib/PurpleRobotClient/purple-robot.js"></script>
+		<script src="scripts/app.js"></script>
+		<script src="scripts/controllers/main.js"></script>
+		<script src="scripts/controllers/about.js"></script>
+		<script src="scripts/controllers/foundations.js"></script>
+		<script src="scripts/controllers/checkins.js"></script>
+		<script src="scripts/controllers/daily_review.js"></script>
+		<script src="scripts/controllers/wellness.js"></script>
+		<script src="scripts/controllers/instructions.js"></script>
+		<script src="scripts/controllers/daily_review_summary.js"></script>
+		<script src="scripts/controllers/daily_review_conclusion.js"></script>
+		<script src="scripts/controllers/medications.js"></script>
+		<script src="scripts/controllers/skills.js"></script>
+		<script src="scripts/controllers/team.js"></script>
+		<script src="scripts/controllers/intervention.js"></script>
+		<script src="scripts/controllers/exit.js"></script>
+		<script src="scripts/controllers/charts.js"></script>
+		<script src="scripts/controllers/resources.js"></script>
+		<script src="scripts/controllers/risks.js"></script>
+		<script src="scripts/controllers/awareness.js"></script>
+		<script src="scripts/controllers/weekly_check_in.js"></script>
+		<script src="scripts/controllers/daily_check_in.js"></script>
+		<script src="scripts/controllers/ews.js"></script>
+		<script src="scripts/controllers/ews2.js"></script>
+		<script src="scripts/services/static_content.js"></script>
+		<script src="scripts/controllers/fetch_content.js"></script>
+		<script src="scripts/services/user_data.js"></script>
+		<script src="scripts/services/questions.js"></script>
+		<script src="scripts/questionGroups/questiongroup.js"></script>
+		<script src="scripts/controllers/settings.js"></script>
+		<script src="scripts/services/guid.js"></script>
+		<script src="scripts/controllers/login.js"></script>
+		<script src="scripts/services/pound.js"></script>
+		<script src="scripts/services/user_details.js"></script>
+		<script src="scripts/controllers/localstoragebackuprestore.js"></script>
+		<script src="scripts/controllers/cms.js"></script>
+		<script src="scripts/controllers/admin.js"></script>
+		<script src="scripts/controllers/lesson_player.js"></script>
+		<script src="scripts/controllers/load_interventions.js"></script>
+		<script src="scripts/controllers/skills_fundamentals.js"></script>
+		<script src="scripts/controllers/skills_awareness.js"></script>
+		<script src="scripts/controllers/skills_lifestyle.js"></script>
+		<script src="scripts/controllers/skills_coping.js"></script>
+		<script src="scripts/controllers/skills_team.js"></script>
+		<script src="scripts/controllers/schedule.js"></script>
+		<script src="scripts/controllers/summary_player.js"></script>
+		<script src="scripts/controllers/myskills.js"></script>
+		<script src="scripts/controllers/dailyreviewtester.js"></script>
+		<script src="scripts/controllers/personalsnapshot.js"></script>
+		<script src="scripts/services/dailyreview.js"></script>
+		<script src="scripts/controllers/home.js"></script>
+		<script src="scripts/controllers/setup.js"></script>
+		<script src="scripts/controllers/usereditor.js"></script>
+		<script src="scripts/services/clinicalstatusupdate.js"></script>
+		<script src="cordova.js"></script>
+		<script src="cordova_plugins.js"></script>
 
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/foundations.js"></script>
-        <script src="scripts/controllers/checkins.js"></script>
-        <script src="scripts/controllers/daily_review.js"></script>
-        <script src="scripts/controllers/wellness.js"></script>
-        <script src="scripts/controllers/instructions.js"></script>
-        <script src="scripts/controllers/daily_review_summary.js"></script>
-        <script src="scripts/controllers/daily_review_conclusion.js"></script>
-        <script src="scripts/controllers/medications.js"></script>
-        <script src="scripts/controllers/skills.js"></script>
-        <script src="scripts/controllers/team.js"></script>
-        <script src="scripts/controllers/intervention.js"></script>
-        <script src="scripts/controllers/exit.js"></script>
-        <script src="scripts/controllers/charts.js"></script>
-        <script src="scripts/controllers/resources.js"></script>
-        <script src="scripts/controllers/risks.js"></script>
-        <script src="scripts/controllers/awareness.js"></script>
-        <script src="scripts/controllers/weekly_check_in.js"></script>
-        <script src="scripts/controllers/daily_check_in.js"></script>
-        <script src="scripts/controllers/ews.js"></script>
-        <script src="scripts/controllers/ews2.js"></script>
-        <script src="scripts/services/static_content.js"></script>
-        <script src="scripts/controllers/fetch_content.js"></script>
-        <script src="scripts/services/user_data.js"></script>
-        <script src="scripts/services/questions.js"></script>
-        <script src="scripts/questionGroups/questiongroup.js"></script>
-        <script src="scripts/controllers/settings.js"></script>
-        <script src="scripts/services/guid.js"></script>
-        <script src="scripts/controllers/login.js"></script>
-        <script src="scripts/services/pound.js"></script>
-        <script src="scripts/services/user_details.js"></script>
-        <script src="scripts/controllers/localstoragebackuprestore.js"></script>
-        <script src="scripts/controllers/cms.js"></script>
-        <script src="scripts/controllers/admin.js"></script>
-        <script src="scripts/controllers/lesson_player.js"></script>
-        <script src="scripts/controllers/load_interventions.js"></script>
-        <script src="scripts/controllers/skills_fundamentals.js"></script>
-        <script src="scripts/controllers/skills_awareness.js"></script>
-        <script src="scripts/controllers/skills_lifestyle.js"></script>
-        <script src="scripts/controllers/skills_coping.js"></script>
-        <script src="scripts/controllers/skills_team.js"></script>
-        <script src="scripts/controllers/schedule.js"></script>
-        <script src="scripts/controllers/summary_player.js"></script>
-        <script src="scripts/controllers/myskills.js"></script>
-        <script src="scripts/controllers/dailyreviewtester.js"></script>
-        <script src="scripts/controllers/personalsnapshot.js"></script>
-        <script src="scripts/services/dailyreview.js"></script>
-        <script src="scripts/controllers/home.js"></script>
-        <script src="scripts/controllers/setup.js"></script>
-        <script src="scripts/controllers/usereditor.js"></script>
-        <script src="scripts/services/clinicalstatusupdate.js"></script>
-        <script src="cordova.js"></script>
-        <script src="cordova_plugins.js"></script>
+		<script>
+		document.addEventListener("deviceready", function() {
+			document.addEventListener("resume", function() {
+				window.location.href = "index.html";
+			}, false);
 
-        <script>
-        document.addEventListener("deviceready", function() {
+			document.addEventListener("click", function(ev){
+				var clickTrackPayload = {objectClicked: ev.srcElement.outerHTML, targetPage:ev.currentTarget.URL};
+				(new PurpleRobot()).emitReading('livewell_event_tracking', clickTrackPayload).execute();
+			});
 
-            document.addEventListener("resume", function() {
-                window.location.href = "index.html";
-            }, false);
+			var push = PushNotification.init({ 
+				"android":  {
+					"senderID": "334078391843",
+					"icon": "note"
+				}
+			});
 
-            document.addEventListener("click", function(ev){
-                var clickTrackPayload = {objectClicked: ev.srcElement.outerHTML, targetPage:ev.currentTarget.URL};
-                (new PurpleRobot()).emitReading('livewell_event_tracking', clickTrackPayload).execute();
-            });
+			console.log(push);
 
-            var push = PushNotification.init({ "android": {"senderID": "334078391843"}} );
+			push.on('registration', function(data) {
+				console.log("registration", data);
+				localStorage['registrationId'] = data.registrationId;
+			});
 
-            console.log(push);
+			push.on('notification', function(data) {
+				console.log("notification", data);
+			});
 
-            push.on('registration', function(data) {
-                console.log("registration", data);
-                localStorage['registrationId'] = data.registrationId;
-            });
-
-            push.on('notification', function(data) {
-                console.log("notification", data);
-            });
-
-            push.on('error', function(e) {
-                console.log("error", e);
-            });
-
-        });
-        </script>
-</body>
+			push.on('error', function(e) {
+				console.log("error", e);
+			});
+		});
+		</script>
+		</body>
 </html>
