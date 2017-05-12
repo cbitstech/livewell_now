@@ -166,8 +166,6 @@ angular.module('livewellApp')
         }
 
         $scope.savePromptSchedule = function() {
-
-
                 (new PurpleRobot()).emitReading('livewell_prompt_registration', {
                     startTime:  $scope.checkinPrompt.value,
                     registrationId: localStorage.registrationId
@@ -192,8 +190,6 @@ angular.module('livewellApp')
                 var dailyReviewRenewalDateTime = new Date(2016, 0, 1, 2, 0, 0);
                 var dailyReviewRenewalDateTimeEnd = new Date(2016, 0, 1, 2, 1, 0);
                 var pr = new PurpleRobot();
-                
-
 
                 // var dailyCheckInDialog =
                 //     pr.showScriptNotification({

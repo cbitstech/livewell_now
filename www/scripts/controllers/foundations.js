@@ -21,6 +21,6 @@ angular.module('livewellApp')
 		{name:"Team", id:187, post:'foundations', type:'lesson_player'},
 		{name:"Awareness", id:188, post:'foundations', type:'lesson_player'},
 		{name:"Action", id:189, post:'foundations', type:'lesson_player'},
-		{name:"Conclusion", id:250, post:'foundations', type:'lesson_player'}]
+		{name:"Wrapping Up", id:378, post:'foundations', type:'lesson_player'}]
 
   });

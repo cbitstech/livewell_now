@@ -4,24 +4,20 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"browser-package\" value=\"Device\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
-            }
-        }
+        "files": {}
     },
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
         },
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "85075801930",
+            "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
+        },
+        "cordova-plugin-app-version": {
             "PACKAGE_NAME": "edu.northwestern.cbits.livewell"
         }
     },

@@ -8,34 +8,37 @@
  * Controller of the livewellApp
  */
 angular.module('livewellApp')
-  .controller('Ews2Ctrl', function ($scope,$location,UserData,UserDetails,Guid) {
+    .controller('Ews2Ctrl', function ($scope,$location,UserData,UserDetails,Guid) {
+        $scope.pageTitle = "Weekly Check In";
+        $scope.ews2 = UserData.query('ews2');
 
-  	$scope.pageTitle = "Weekly Check In";
+        $scope.onClick=function(){
+            var responses = $('form').serializeArray();
 
-    $scope.ews2 = UserData.query('ews2');
+            console.log('EWS RESPONSE LENGTH: ' + responses.length);
 
-		$scope.onClick=function(){
-						
-	
-            var el = JSON.stringify($('form').serializeArray()) || {name:'ews', value:null}; ; 
-            var sessionID = Guid.create();
+            if (responses.length > 0) {
+                var el = JSON.stringify(responses || {name:'ews', value:null}); 
+                var sessionID = Guid.create();
 
-            var payload = {
-                  userId: UserDetails.find,
-                  survey: 'ews2',
-                  questionDataLabel: 'ews2',
-                  questionValue: el,
-                  sessionGUID: sessionID,
-                  savedAt: new Date()
-            };
+				var clinicalStatus = JSON.parse(localStorage['clinicalStatus']);
 
-            (new PurpleRobot()).emitReading('livewell_survey_data',payload).execute();
-            console.log(payload);
+                var payload = {
+                    userId: UserDetails.find,
+                    survey: 'ews2',
+                    questionDataLabel: 'ews2',
+                    questionValue: el,
+                    sessionGUID: sessionID,
+                    savedAt: new Date(),
+					clinicalStatus: clinicalStatus 
+                };
 
-						$location.path('/');      		
+                (new PurpleRobot()).emitReading('livewell_survey_data',payload).execute();
+                console.log(JSON.stringify(payload));
 
-		}
-
-
-
-  });
+                $location.path('/');            
+            } else {
+                alert('Please choose at least one answer to continue. Select "None" if no other answer applies.');
+            }
+        }
+});

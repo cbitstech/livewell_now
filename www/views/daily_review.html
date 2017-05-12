@@ -1,101 +1,98 @@
 <div id="warning" class="modal fade" ng-show="showWarning">
-   <div class="modal-dialog">
-      <div class="modal-body alert-danger">
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-         <h4 class="modal-title">Ask for help</h4>
-         {{warningMessage}}<br/><br/>
-         <a href="tel:{{phoneNumber}}" class="btn btn-primary">Call Now</a>
-      </div>
-   </div>
-   <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
+	<div class="modal-dialog">
+		<div class="modal-body alert-danger">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Ask for help</h4>
+			{{warningMessage}}<br/><br/>
+			<a href="tel:{{phoneNumber}}" class="btn btn-primary">Call Now</a>
+		</div>
+	<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
 <div ng-include="'views/partials/navbar.html'"></div>
 <br/>
-<div class="row-group" ng-show='code != 1 && code != 2'>
-   <div class="row">
-      <div class="col-md-3 col-xs-3"></div>
-      <div class="col-md-6 col-xs-6" style="text-align:center;">
-            Last seven days<br/><br/>
-      </div>
-      <div class="col-md-3 col-xs-3"></div>
-   </div>
-   <div class="row">
-      <div class="col-md-3 col-xs-3">Medication</div>
-      <div class="col-md-6 col-xs-6">
-            <div class="add-tooltip progress" data-toggle="tooltip" title="% medications taken (All)">
 
-               <div class="progress-bar progress-bar-{{selectedIntervention.medicationsClass}}" role="progressbar" aria-valuenow="{{percentages.medications * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentages.medications * 100}}%;">
-               </div>
-            </div>
-      </div>
-      <div class="col-md-3 col-xs-3">{{percentages.medications * 100 | number: 0}}%</div>
-   </div>
-   <div class="row">
-      <div class="col-md-3 col-xs-3">Sleep</div>
-      <div class="col-md-6 col-xs-6">
-        
-            <div class="add-tooltip progress" data-toggle="tooltip" title="% within sleep range ({{routineData.Less}}-{{routineData.More}} hrs)">
-               <div class="progress-bar progress-bar-{{selectedIntervention.sleepClass}}" role="progressbar" aria-valuenow="{{percentages.sleep * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentages.sleep * 100}}%;">
-               </div>
-            </div>
-      </div>
-      <div class="col-md-3 col-xs-3">{{percentages.sleep * 100 | number: 0}}%</div>
-   </div>
-   <div class="row">
-      <div class="col-md-3 col-xs-3">Routine</div>
-      <div class="col-md-6 col-xs-6">
-            <div class="add-tooltip progress" data-toggle="tooltip" title="% within routine windows (bedtime {{cleanTime(routineData.BedTimeStrt_MT)}} - {{cleanTime(routineData.BedTimeStop_MT)}}, risetime = {{cleanTime(routineData.RiseTimeStrt_MT)}} - {{cleanTime(routineData.RiseTimeStop_MT)}})">
-               <div class="progress-bar progress-bar-{{selectedIntervention.routineClass}}" role="progressbar" aria-valuenow="{{percentages.routine * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentages.routine * 100}}%;">
-               </div>
-            </div>
-      </div>
-      <div class="col-md-3 col-xs-3">{{percentages.routine * 100 | number: 0}}%</div>
-   </div>
-   <div class="row">
-      <div class="col-md-3 col-xs-3">Wellness</div>
-      <div class="col-md-6 col-xs-6">
-            <div class="add-tooltip progress" data-toggle="tooltip" title="% well (-1 to 1)">
-               <div class="progress-bar progress-bar-{{selectedIntervention.wellnessClass}}" role="progressbar" aria-valuenow="{{percentages.wellness * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentages.wellness * 100}}%;">
-               </div>
-            </div>
-      </div>
-      <div class="col-md-3 col-xs-3">{{percentages.wellness * 100 | number: 0}}%</div>
-   </div>
+<div class="row-group" ng-show='code != 1 && code != 2'>
+	<div class="row">
+		<div class="col-md-3 col-xs-3"></div>
+		<div class="col-md-6 col-xs-6" style="text-align:center;">
+			Last seven days<br/><br/>
+		</div>
+		<div class="col-md-3 col-xs-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 col-xs-3">Medication</div>
+		<div class="col-md-6 col-xs-6">
+			<div class="add-tooltip progress" data-toggle="tooltip" title="% medications taken (All)">
+				<div class="progress-bar progress-bar-{{selectedIntervention.medicationsClass}}" role="progressbar" aria-valuenow="{{percentages.medications * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentages.medications * 100}}%;"></div>
+			</div>
+		</div>
+		<div class="col-md-3 col-xs-3">{{percentages.medications * 100 | number: 0}}%</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 col-xs-3">Sleep</div>
+		<div class="col-md-6 col-xs-6">
+			<div class="add-tooltip progress" data-toggle="tooltip" title="% within sleep range ({{routineData.Less}}-{{routineData.More}} hrs)">
+				<div class="progress-bar progress-bar-{{selectedIntervention.sleepClass}}" role="progressbar" aria-valuenow="{{percentages.sleep * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentages.sleep * 100}}%;"></div>
+			</div>
+		</div>
+		<div class="col-md-3 col-xs-3">{{percentages.sleep * 100 | number: 0}}%</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 col-xs-3">Routine</div>
+		<div class="col-md-6 col-xs-6">
+			<div class="add-tooltip progress" data-toggle="tooltip" title="% within routine windows (bedtime {{cleanTime(routineData.BedTimeStrt_MT)}} - {{cleanTime(routineData.BedTimeStop_MT)}}, risetime = {{cleanTime(routineData.RiseTimeStrt_MT)}} - {{cleanTime(routineData.RiseTimeStop_MT)}})">
+				<div class="progress-bar progress-bar-{{selectedIntervention.routineClass}}" role="progressbar" aria-valuenow="{{percentages.routine * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentages.routine * 100}}%;"></div>
+			</div>
+		</div>
+		<div class="col-md-3 col-xs-3">{{percentages.routine * 100 | number: 0}}%</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 col-xs-3">Wellness</div>
+		<div class="col-md-6 col-xs-6">
+			<div class="add-tooltip progress" data-toggle="tooltip" title="% well (-1 to 1)">
+				<div class="progress-bar progress-bar-{{selectedIntervention.wellnessClass}}" role="progressbar" aria-valuenow="{{percentages.wellness * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentages.wellness * 100}}%;"></div>
+			</div>
+		</div>
+		<div class="col-md-3 col-xs-3">{{percentages.wellness * 100 | number: 0}}%</div>
+	</div>
 </div>
+
 <div class="row-group" style="margin-top:2em;">
-   <div class="row">
-      <div class="col-md-12" style="margin-bottom:1em;" ng-bind-html="interventionResponse()"></div>
-   </div>
+	<div class="row">
+		<div class="col-md-12" style="margin-bottom:1em;" ng-bind-html="interventionResponse()"></div>
+	</div>
 </div>
 <div class="row-group" style="margin-top:1em;">
-   <div class="row">
-      <div class="col-md-12 col-xs-12">
-         <a ng-href="#/intervention/{{dailyReviewCategory}}" class="btn btn-primary btn-full">Continue</a>
-      </div>
-
-      <!-- 	<div class="col-md-5 col-xs-5">
-         <a ng-href="#/exit" class="btn btn-default wide">Exit</a>
-         </div> -->
-   </div>
+	<div class="row">
+		<div class="col-md-12 col-xs-12">
+			<a ng-href="#/intervention/{{dailyReviewCategory}}" class="btn btn-primary btn-full">Continue</a>
+		</div>
+		<!-- 	
+			<div class="col-md-5 col-xs-5">
+				<a ng-href="#/exit" class="btn btn-default wide">Exit</a>
+			</div> 
+		-->
+	</div>
 </div>
 <!-- <a ng-href="#/daily_check_in" class="btn btn-primary btn-full">Daily Check In</a>
-   -->
+-->
 <!-- <h2>{{code}} {{dailyReviewCategory}}</h2>
-   <h3>Daily Check Ins (last 7)</h3>
-   <div class="well">{{dailyCheckInResponses}}</div>
-   
-   <h3>Recoded Responses</h3>
-   <div class="well">{{recodedResponses}}</div>
-   
-   <h3>Status Update Logic</h3>
-   
-   <div class="well">
-   	Previous Status: {{updatedClinicalStatus.oldStatus}}<br/>
-   	New Status: {{updatedClinicalStatus.newStatus}}<br/>
-   	Last AMRS Score: {{updatedClinicalStatus.amrsSum}}<br/>
-   	Last PHQ Score: {{updatedClinicalStatus.phq8Sum}}<br/><br/>
-   	Wellness Rating Counts:in last 7 days: <br/>{{updatedClinicalStatus.intensityCount}}
-   
-   	<Br/></div> -->
+<h3>Daily Check Ins (last 7)</h3>
+<div class="well">{{dailyCheckInResponses}}</div>
+
+<h3>Recoded Responses</h3>
+<div class="well">{{recodedResponses}}</div>
+
+<h3>Status Update Logic</h3>
+
+<div class="well">
+Previous Status: {{updatedClinicalStatus.oldStatus}}<br/>
+New Status: {{updatedClinicalStatus.newStatus}}<br/>
+Last AMRS Score: {{updatedClinicalStatus.amrsSum}}<br/>
+Last PHQ Score: {{updatedClinicalStatus.phq8Sum}}<br/><br/>
+Wellness Rating Counts:in last 7 days: <br/>{{updatedClinicalStatus.intensityCount}}
+
+<Br/></div> -->

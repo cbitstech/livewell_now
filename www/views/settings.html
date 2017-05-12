@@ -1,24 +1,28 @@
 <div ng-include="'views/partials/navbar.html'"></div>
-
-
 <div class="col-xs-12 col-sm-12 col-md-12">
+    <form ng-submit="savePromptSchedule()">
+        <h4>Set Your Daily Notification Time</h4>
 
-<form ng-submit="savePromptSchedule()">
-
-<h4>Set Your Daily Notification Time</h4>
-
-<select id="checkinPrompt" name="checkinPrompt" ng-model="checkinPrompt" ng-options="time.label for time in times track by time.value" style="color:black !important;">
-</select>
-<br/><Br/>
-<button type="submit" class="btn btn-primary">Save</button>
-<br/><br/>
-<p>This time will determine when you will first be prompted to complete your daily activities.</p>
-<p><b>Daily activities</b> are all white buttons on the home screen of the device.</p>
-<p>You will be prompted every 1 hour to complete your activities after this time!</p>
-
-
-<br/><br/>
-
-</form>
-
+        <select id="checkinPrompt" name="checkinPrompt" ng-model="checkinPrompt" ng-options="time.label for time in times track by time.value" style="color:black !important;"></select>
+        <br/><br/>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <br/><br/>
+        <p>This time will determine when you will first be prompted to complete your daily activities.</p>
+        <p><b>Daily activities</b> are all white buttons on the home screen of the device.</p>
+        <p>You will be prompted every 2 hours to complete your activities after this time!</p>
+        <br/><br/>
+        <br/><br/>
+        <div id="version" style="align: right;"></div>
+    </form>
+    <script>
+        cordova.getAppVersion.getVersionNumber(function (version) {
+			var clinicalStatus = JSON.parse(localStorage['clinicalStatus']);
+			
+			if (clinicalStatus['version'] == undefined) {
+				clinicalStatus['version'] = '?';
+			}
+			
+            $('div#version').text("v." + version + ' (' + clinicalStatus['currentCode'] + '.' + clinicalStatus['version'] + ')');
+        });
+    </script>
 </div>

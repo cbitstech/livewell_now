@@ -1,20 +1,20 @@
 <div class="question-nav" style="margin-bottom:5px;">
-{{hideBackButton}}
-{{hideNextButton}}
+	{{hideBackButton}}
+	{{hideNextButton}}
 	<div class="nav-left">&nbsp;
 		<button class="btn btn-lg btn-info" ng-click='back()' ng-hide="{{question.hideBackButton}}" ng-if="$index != 0" ng-bind-html="label('back')"></button>
 		&nbsp;
 	</div>
 	<div class="nav-center">
-  &nbsp;
-  <span class="question-group-progress" ng-hide="hideProgressBar">
-  	&nbsp;{{$index+1}} / {{numberOfQuestions}}&nbsp;
-  </span>
+		&nbsp;
+		<span class="question-group-progress" ng-hide="hideProgressBar">
+			&nbsp;{{$index+1}} / {{numberOfQuestions}}&nbsp;
+		</span>
 	</div>
 	<div class="nav-right">
 		&nbsp;
 		<button class="btn btn-lg btn-primary" ng-click='next({{question}},{{$index}})' ng-hide="{{question.hideNextbutton}}" ng-if="$index != numberOfQuestions -1" ng-bind-html="label('next')"></button>
-	<button type="submit" class="btn btn-lg btn-primary" ng-click='submit()' ng-hide="{{question.hideNextButton}}" ng-if="$index == numberOfQuestions - 1" ng-bind-html="label('submit')"></button>
-&nbsp;
+		<button type="submit" class="btn btn-lg btn-primary" ng-click='submit()' ng-hide="{{question.hideNextButton}}" ng-if="$index == numberOfQuestions - 1" ng-bind-html="label('submit')"></button>
+		&nbsp;
 	</div>
 </div>
