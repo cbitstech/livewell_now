@@ -78,6 +78,8 @@ angular.module('livewellApp').controller('FetchContentCtrl', function ($scope,$h
 
                             if (oldVersion == undefined || newVersion > oldVersion) {
                                 localStorage[el.route] = JSON.stringify(newStatus);
+                                
+                                // TODO
                             }
                         }
                     }

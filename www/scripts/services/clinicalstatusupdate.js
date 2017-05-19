@@ -9,10 +9,12 @@
 angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, UserData) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var contents = {};
+
+    var currentClinicalStatusCode = function() {
+        return UserData.query('clinicalStatus').currentCode
+    };
+    
     contents.execute = function() {
-        var currentClinicalStatusCode = function() {
-            return UserData.query('clinicalStatus').currentCode
-        };
         
         //"[{"code":1,"label":"well"},{"code":2,"label":"prodromal"},{"code":3,"label":"recovering"},{"code":4,"label":"unwell"}]"
         var dailyReviewResponses = Pound.find('dailyCheckIn');
@@ -157,5 +159,60 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
         return returnStatus
     }
     
+    contents.noExecute = function() {
+        var returnStatus = {};
+
+        var dailyReviewResponses = Pound.find('dailyCheckIn');
+
+        var intensityCount = {
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0
+        };
+
+        for (var i = dailyReviewResponses.length - 1; i > dailyReviewResponses.length - 8; i--) {
+            var aWV = 0;
+            
+            if (dailyReviewResponses[i] != undefined) {
+                aWV = Math.abs(parseInt(dailyReviewResponses[i].wellness));
+            }
+            
+            console.log(aWV);
+            
+            if (aWV == 0) {
+                intensityCount[0] = intensityCount[0] + 1
+            } else if (aWV == 1) {
+                intensityCount[1] = intensityCount[1] + 1
+            } else if (aWV == 2) {
+                intensityCount[2] = intensityCount[2] + 1
+            } else if (aWV == 3) {
+                intensityCount[3] = intensityCount[3] + 1
+            } else if (aWV == 4) {
+                intensityCount[4] = intensityCount[4] + 1
+            }
+        }
+
+        returnStatus.intensityCount = intensityCount;
+        
+        var weeklyReviewResponses = Pound.find('weeklyCheckIn');
+
+        if (weeklyReviewResponses[weeklyReviewResponses.length - 1] != undefined){
+            var lWR = weeklyReviewResponses[weeklyReviewResponses.length - 1].responses;
+
+            var phq8Sum = parseInt(lWR[0].value) + parseInt(lWR[1].value) + parseInt(lWR[2].value) + parseInt(lWR[3].value) + parseInt(lWR[4].value) + parseInt(lWR[5].value) + parseInt(lWR[6].value) + parseInt(lWR[7].value);
+            var amrsSum = parseInt(lWR[8].value) + parseInt(lWR[9].value) + parseInt(lWR[10].value) + parseInt(lWR[11].value) + parseInt(lWR[12].value);
+
+            returnStatus.amrsSum = amrsSum;
+            returnStatus.phq8Sum = phq8Sum;
+        }
+        
+        returnStatus.oldStatus = currentClinicalStatusCode();
+        returnStatus.newStatus = currentClinicalStatusCode();
+
+        return returnStatus
+    }
+
     return contents;
 });

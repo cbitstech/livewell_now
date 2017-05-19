@@ -15,28 +15,38 @@ angular.module('livewellApp')
         $scope.onClick=function(){
             var responses = $('form').serializeArray();
 
-            console.log('EWS RESPONSE LENGTH: ' + responses.length);
-
             if (responses.length > 0) {
-                var el = JSON.stringify(responses || {name:'ews', value:null}); 
-                var sessionID = Guid.create();
+            	var hasNone = false;
+            	
+            	for (var i = 0; i < responses.length; i++) {
+            		if (responses[i]['value'] == 'None') {
+            			hasNone = true;
+            		}
+            	}
 
-				var clinicalStatus = JSON.parse(localStorage['clinicalStatus']);
+				if (hasNone && responses.length > 1) {
+					alert('"None" cannot be selected with other options.');
+				} else {
+					var el = JSON.stringify(responses || {name:'ews', value:null}); 
+					var sessionID = Guid.create();
 
-                var payload = {
-                    userId: UserDetails.find,
-                    survey: 'ews2',
-                    questionDataLabel: 'ews2',
-                    questionValue: el,
-                    sessionGUID: sessionID,
-                    savedAt: new Date(),
-					clinicalStatus: clinicalStatus 
-                };
+					var clinicalStatus = JSON.parse(localStorage['clinicalStatus']);
 
-                (new PurpleRobot()).emitReading('livewell_survey_data',payload).execute();
-                console.log(JSON.stringify(payload));
+					var payload = {
+						userId: UserDetails.find,
+						survey: 'ews2',
+						questionDataLabel: 'ews2',
+						questionValue: el,
+						sessionGUID: sessionID,
+						savedAt: new Date(),
+						clinicalStatus: clinicalStatus 
+					};
 
-                $location.path('/');            
+					(new PurpleRobot()).emitReading('livewell_survey_data',payload).execute();
+					console.log(JSON.stringify(payload));
+
+					$location.path('/');            
+				}
             } else {
                 alert('Please choose at least one answer to continue. Select "None" if no other answer applies.');
             }

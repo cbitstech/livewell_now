@@ -23,113 +23,112 @@ angular.module('livewellApp').controller('WeeklyCheckInCtrl', function($scope, $
 
 	//overrides questiongroup default submit action to send data to PR
 	$scope.submit = function() {
+		var _SAVE_LOCATION = 'livewell_survey_data';
 
-	var _SAVE_LOCATION = 'livewell_survey_data';
+		$scope.responseArray[$scope.currentIndex] = $('form').serializeArray()[0];
 
-	$scope.responseArray[$scope.currentIndex] = $('form').serializeArray()[0];
+		var responses = _.flatten($scope.responseArray);
 
-	var responses = _.flatten($scope.responseArray);
+		var sessionID = Guid.create();
 
-	var sessionID = Guid.create();
-
-	var clinicalStatus = JSON.parse(localStorage['clinicalStatus']);
+		var clinicalStatus = JSON.parse(localStorage['clinicalStatus']);
 	
-	_.each(responses, function(el) {
-		var payload = {
-			userId: UserDetails.find,
-			survey: $scope.pageTitle,
-			questionDataLabel: el.name,
-			questionValue: el.value,
-			sessionGUID: sessionID,
-			savedAt: new Date(),
-			clinicalStatus: clinicalStatus
+		_.each(responses, function(el) {
+			var payload = {
+				userId: UserDetails.find,
+				survey: $scope.pageTitle,
+				questionDataLabel: el.name,
+				questionValue: el.value,
+				sessionGUID: sessionID,
+				savedAt: new Date(),
+				clinicalStatus: clinicalStatus
+			};
+
+			(new PurpleRobot()).emitReading(_SAVE_LOCATION, payload).execute();
+			console.log(payload);
+		});
+
+		var responsePayload = {
+			sessionID: sessionID,
+			responses: responses
 		};
 
-		(new PurpleRobot()).emitReading(_SAVE_LOCATION, payload).execute();
-		console.log(payload);
-	});
+		Pound.add('weeklyCheckIn', responsePayload);
 
-	var responsePayload = {
-		sessionID: sessionID,
-		responses: responses
-	};
+		var lWR = responses;
+		var phq8Sum = parseInt(lWR[0].value) + parseInt(lWR[1].value) + parseInt(lWR[2].value) + parseInt(lWR[3].value) + parseInt(lWR[4].value) + parseInt(lWR[5].value) + parseInt(lWR[6].value) + parseInt(lWR[7].value);
+		var amrsSum = parseInt(lWR[8].value) + parseInt(lWR[9].value) + parseInt(lWR[10].value) + parseInt(lWR[11].value) + parseInt(lWR[12].value);
 
-	Pound.add('weeklyCheckIn', responsePayload);
+		if (_.where(JSON.parse(localStorage.team, { role: 'Psychiatrist' })[0] != undefined)) {
+			$scope.psychiatristEmail = _.where(JSON.parse(localStorage.team), {
+				role: 'Psychiatrist'
+			})[0].email;
+		} else {
+			$scope.psychiatristEmail = '';
+		}
 
-	var lWR = responses;
-	var phq8Sum = parseInt(lWR[0].value) + parseInt(lWR[1].value) + parseInt(lWR[2].value) + parseInt(lWR[3].value) + parseInt(lWR[4].value) + parseInt(lWR[5].value) + parseInt(lWR[6].value) + parseInt(lWR[7].value);
-	var amrsSum = parseInt(lWR[8].value) + parseInt(lWR[9].value) + parseInt(lWR[10].value) + parseInt(lWR[11].value) + parseInt(lWR[12].value);
+		if (_.where(JSON.parse(localStorage.team), { role: 'Coach' })[0] != undefined) {
+			$scope.coachEmail = _.where(JSON.parse(localStorage.team), {
+				role: 'Coach'
+			})[0].email;
+		} else {
+			$scope.coachEmail = ''
+		}
 
-	if (_.where(JSON.parse(localStorage.team, { role: 'Psychiatrist' })[0] != undefined)) {
-		$scope.psychiatristEmail = _.where(JSON.parse(localStorage.team), {
-			role: 'Psychiatrist'
-		})[0].email;
-	} else {
-		$scope.psychiatristEmail = '';
-	}
-
-	if (_.where(JSON.parse(localStorage.team), { role: 'Coach' })[0] != undefined) {
-		$scope.coachEmail = _.where(JSON.parse(localStorage.team), {
-			role: 'Coach'
-		})[0].email;
-	} else {
-		$scope.coachEmail = ''
-	}
-
-	if (amrsSum >= 10) {
-		(new PurpleRobot()).emitReading('livewell_clinicalreachout', {
-			call: 'coach',
-			message: 'Altman Mania Rating Scale >= 10',
-			clinicalStatus: clinicalStatus
-		}).execute();
+		if (amrsSum >= 10) {
+			(new PurpleRobot()).emitReading('livewell_clinicalreachout', {
+				call: 'coach',
+				message: 'Altman Mania Rating Scale >= 10',
+				clinicalStatus: clinicalStatus
+			}).execute();
 		
-		(new PurpleRobot()).emitReading('livewell_email', {
-			coachEmail: $scope.coachEmail,
-			message: 'Altman Mania Rating Scale >= 10',
-			clinicalStatus: clinicalStatus
-		}).execute();
-	}
-	if (amrsSum >= 16) {
-		(new PurpleRobot()).emitReading('livewell_clinicalreachout', {
-			call: 'psychiatrist',
-			message: 'Altman Mania Rating Scale >= 16',
-			clinicalStatus: clinicalStatus
-		}).execute();
+			(new PurpleRobot()).emitReading('livewell_email', {
+				coachEmail: $scope.coachEmail,
+				message: 'Altman Mania Rating Scale >= 10',
+				clinicalStatus: clinicalStatus
+			}).execute();
+		}
+		if (amrsSum >= 16) {
+			(new PurpleRobot()).emitReading('livewell_clinicalreachout', {
+				call: 'psychiatrist',
+				message: 'Altman Mania Rating Scale >= 16',
+				clinicalStatus: clinicalStatus
+			}).execute();
 
-		(new PurpleRobot()).emitReading('livewell_email', {
-			psychiatristEmail: $scope.psychiatristEmail,
-			message: 'Altman Mania Rating Scale >= 16',
-			clinicalStatus: clinicalStatus
-		}).execute();
-	}
+			(new PurpleRobot()).emitReading('livewell_email', {
+				psychiatristEmail: $scope.psychiatristEmail,
+				message: 'Altman Mania Rating Scale >= 16',
+				clinicalStatus: clinicalStatus
+			}).execute();
+		}
 
-	if (phq8Sum >= 15) {
-		(new PurpleRobot()).emitReading('livewell_clinicalreachout', {
-			call: 'coach',
-			message: 'PHQ8 >= 15',
-			clinicalStatus: clinicalStatus
-		}).execute();
+		if (phq8Sum >= 15) {
+			(new PurpleRobot()).emitReading('livewell_clinicalreachout', {
+				call: 'coach',
+				message: 'PHQ8 >= 15',
+				clinicalStatus: clinicalStatus
+			}).execute();
 
-		(new PurpleRobot()).emitReading('livewell_email', {
-			coachEmail: $scope.coachEmail,
-			message: 'PHQ8 >= 15',
-			clinicalStatus: clinicalStatus
-		}).execute();
-	}
-	if (phq8Sum >= 20) {
-		(new PurpleRobot()).emitReading('livewell_clinicalreachout', {
-			call: 'psychiatrist',
-			message: 'PHQ8 >= 20',
-			clinicalStatus: clinicalStatus
-		}).execute();
+			(new PurpleRobot()).emitReading('livewell_email', {
+				coachEmail: $scope.coachEmail,
+				message: 'PHQ8 >= 15',
+				clinicalStatus: clinicalStatus
+			}).execute();
+		}
+		if (phq8Sum >= 20) {
+			(new PurpleRobot()).emitReading('livewell_clinicalreachout', {
+				call: 'psychiatrist',
+				message: 'PHQ8 >= 20',
+				clinicalStatus: clinicalStatus
+			}).execute();
 
-		(new PurpleRobot()).emitReading('livewell_email', {
-			psychiatristEmail: $scope.psychiatristEmail,
-			message: 'PHQ8 >= 20',
-			clinicalStatus: clinicalStatus
-		}).execute();
-	}
+			(new PurpleRobot()).emitReading('livewell_email', {
+				psychiatristEmail: $scope.psychiatristEmail,
+				message: 'PHQ8 >= 20',
+				clinicalStatus: clinicalStatus
+			}).execute();
+		}
 
-	$location.path("/ews");
+		$location.path("/ews");
 	}
 });

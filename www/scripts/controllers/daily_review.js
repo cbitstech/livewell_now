@@ -56,9 +56,15 @@ angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $ro
             dailyCount = parseInt(localStorage['dailyCheckInCount']);
         }
         
-        if (dailyCount >= 4) {
+        var toReport = null;
+        
+        if (dailyCount >= 5) {
             $scope.updatedClinicalStatus = ClinicalStatusUpdate.execute();
+            
+            toReport = $scope.updatedClinicalStatus;
         } else {
+
+            toReport = ClinicalStatusUpdate.noExecute();
 //            console.log('4 OR FEWER RESPONSES -- NOT UPDATING STATUS CODE');
         }
 
@@ -79,7 +85,7 @@ angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $ro
         
         (new PurpleRobot()).emitReading('livewell_clinicalstatus', {
             sessionGUID: sessionID,
-            status: $scope.updatedClinicalStatus,
+            status: toReport,
             clinicalStatus: clinicalStatus
         }).execute();
 
