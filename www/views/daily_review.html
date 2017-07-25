@@ -3,8 +3,8 @@
 		<div class="modal-body alert-danger">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title">Ask for help</h4>
-			{{warningMessage}}<br/><br/>
-			<a href="tel:{{phoneNumber}}" class="btn btn-primary">Call Now</a>
+			{{ warningMessage }}<br/><br/>
+			<a href="tel:{{ phoneNumber }}" class="btn btn-primary">Call Now</a>
 		</div>
 	<!-- /.modal-content -->
 	</div>
@@ -70,29 +70,5 @@
 		<div class="col-md-12 col-xs-12">
 			<a ng-href="#/intervention/{{dailyReviewCategory}}" class="btn btn-primary btn-full">Continue</a>
 		</div>
-		<!-- 	
-			<div class="col-md-5 col-xs-5">
-				<a ng-href="#/exit" class="btn btn-default wide">Exit</a>
-			</div> 
-		-->
 	</div>
 </div>
-<!-- <a ng-href="#/daily_check_in" class="btn btn-primary btn-full">Daily Check In</a>
--->
-<!-- <h2>{{code}} {{dailyReviewCategory}}</h2>
-<h3>Daily Check Ins (last 7)</h3>
-<div class="well">{{dailyCheckInResponses}}</div>
-
-<h3>Recoded Responses</h3>
-<div class="well">{{recodedResponses}}</div>
-
-<h3>Status Update Logic</h3>
-
-<div class="well">
-Previous Status: {{updatedClinicalStatus.oldStatus}}<br/>
-New Status: {{updatedClinicalStatus.newStatus}}<br/>
-Last AMRS Score: {{updatedClinicalStatus.amrsSum}}<br/>
-Last PHQ Score: {{updatedClinicalStatus.phq8Sum}}<br/><br/>
-Wellness Rating Counts:in last 7 days: <br/>{{updatedClinicalStatus.intensityCount}}
-
-<Br/></div> -->

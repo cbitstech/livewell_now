@@ -7,7 +7,7 @@
  * # DailyReviewCtrl
  * Controller of the livewellApp
  */
-angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $routeParams, $timeout, UserData, Pound, DailyReviewAlgorithm, ClinicalStatusUpdate, Guid) {
+angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $routeParams, $timeout, UserData, Pound, DailyReviewAlgorithm, ClinicalStatusUpdate, Guid, Database) {
     $scope.pageTitle = "Daily Review";
 
     Pound.add('dailyReviewStarted', {
@@ -15,7 +15,9 @@ angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $ro
         code: $scope.code
     });
 
-    $timeout(function(){$('.add-tooltip').tooltip()});
+    $timeout(function() {
+    	$('.add-tooltip').tooltip()
+    });
 
     $scope.routineData = UserData.query('sleepRoutineRanges');
 
@@ -91,8 +93,18 @@ angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $ro
 
         return object
     }
-
+    
+//    var dbObject = {
+//		started: Date.now(),
+//		userStarted: true,
+//		initialCode: $scope.code
+//	};
+//
     $scope.code = runAlgorithm().code;
+    
+//    dbObject['finalCode'] = $scope.code;
+
+//	Database.insert('daily_review', dbObject);
 
     //TO REMOVE
     $scope.recodedResponses = DailyReviewAlgorithm.recodedResponses();
@@ -104,43 +116,6 @@ angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $ro
     $scope.percentages = DailyReviewAlgorithm.percentages();
 
     $(".modal-backdrop").remove();
-
-    var latestWarning = Pound.find('clinical_reachout')[Pound.find('clinical_reachout').length - 1];
-
-    if (latestWarning != undefined) {
-        if (latestWarning.shownToUser == undefined) {
-            $scope.warningMessage = Pound.find('clinical_reachout')[Pound.find('clinical_reachout').length - 1].message
-            $scope.psychiatristEmail = _.where(JSON.parse(localStorage.team), {
-                role: 'Psychiatrist'
-            })[0].email;
-
-            $scope.phoneNumber = _.where(JSON.parse(localStorage.team), {
-                role: 'Psychiatrist'
-            })[0].phone;
-
-            if (_.where(JSON.parse(localStorage.team), { role: 'Coach' })[0] != undefined) {
-                $scope.coachEmail = _.where(JSON.parse(localStorage.team), {
-                    role: 'Coach'
-                })[0].email;
-            } else {
-                $scope.coachEmail = ''
-            }
-
-            var clinicalStatus = JSON.parse(localStorage['clinicalStatus']);
-
-            (new PurpleRobot()).emitReading('livewell_email', {
-                psychiatristEmail: $scope.psychiatristEmail,
-                coachEmail: $scope.coachEmail,
-                message: $scope.warningMessage,
-                clinicalStatus: clinicalStatus
-            }).execute();
-
-            latestWarning.shownToUser = true;
-            Pound.update('clinical_reachout', latestWarning);
-            $scope.showWarning = true;
-            $("#warning").modal();
-        }
-    }
 
     $scope.dailyReviewCategory = _.where($scope.interventionGroups, {
         code: $scope.code

@@ -4,7 +4,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body alert-danger">
-				{{selectedWarningMessage}}
+				{{ selectedWarningMessage }}
 				<br/>
 				<br/>
 				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -25,6 +25,9 @@
 					Looks like you are in a crisis we recommend that you call your psychiatrist, call 9-1-1, or go to the nearest emergency room.
 					<br/>
 					<a ng-show="warningPhoneNumber != null" class="btn btn-primary" href="tel:{{warningPhoneNumber}}">Call Your Psychiatrist Now</a>
+				</div>
+				<div class="alert alert-wadning" ng-hide="emergency || reachoutMessage == null">
+					{{ reachoutMessage }}
 				</div>
 				<a ng-href="#/daily_review/{{nextId}}" class="btn btn-primary btn-full" >Continue to Daily Review</a>
 				<br/>

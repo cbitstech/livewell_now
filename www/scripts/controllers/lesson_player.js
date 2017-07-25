@@ -11,6 +11,10 @@ angular.module('livewellApp').controller('LessonPlayerCtrl', function ($scope, $
 	$scope.getChapterContents = function (chapter_id, appContent) {
 		console.log("CHAPTER: " + chapter_id + " -- APP_CONTENT: " + appContent);
 		
+		console.log("WRITING  "  + 'lesson-read-' + chapter_id, "" + (new Date()).getTime());
+		 
+		localStorage.setItem('lesson-read-' + chapter_id, "" + (new Date()).getTime());
+		
 		var search_criteria = {
 			id: parseInt(chapter_id)
 		};

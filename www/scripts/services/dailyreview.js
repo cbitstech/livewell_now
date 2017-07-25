@@ -605,6 +605,7 @@ angular.module('livewellApp').service('DailyReviewAlgorithm', function(Pound, Us
 				break;
 		}
 	}
+	
 	contents.getPercentages = function() {
 		var contents = {};
 		var recodedSevenDays = recoder.execute(sleepRoutineRanges, Pound.find('dailyCheckIn'));
