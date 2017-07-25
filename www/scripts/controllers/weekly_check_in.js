@@ -77,6 +77,8 @@ angular.module('livewellApp').controller('WeeklyCheckInCtrl', function($scope, $
         } else {
             $scope.coachEmail = ''
         }
+        
+        // Make new PR reading for weekly clinical reachout...
 
         if (amrsSum >= 10) {
             (new PurpleRobot()).emitReading('livewell_clinicalreachout', {

@@ -408,7 +408,7 @@ angular.module('livewellApp').controller('DailyCheckInCtrl', function($scope, $l
             if (clinicalStatusJson == undefined) {
             	clinicalStatus = {
             		currentCode: 1,
-            		version: 1
+            		version: 0
             	};
             	
             	clinicalStatusJson = JSON.stringify(clinicalStatus);
