@@ -148,13 +148,16 @@ angular.module('livewellApp').controller('WeeklyCheckInCtrl', function($scope, $
         }
 
         Database.insertWithCallback('weekly_check_in', dbObject, function() {
-            console.log('000001');
-            
             Database.updateWeeklyReachout(function() {
-                console.log('000002');
-                
                 Database.filter('clinical_weekly_reachout', 'updated', IDBKeyRange.lowerBound(0), "prev", function(cursor) {
-                    console.log("GOT MESSAGE");
+					if (_.where(JSON.parse(localStorage.team), { role: 'Psychiatrist' })[0] != undefined) 
+					{
+						$scope.phoneNumber = _.where(JSON.parse(localStorage.team), {
+							role: 'Psychiatrist'
+						})[0].phone;
+					} else {
+						$scope.phoneNumber = '312-503-1886';
+					}
 
                     $scope.reachoutMessage = null;
 
@@ -162,8 +165,6 @@ angular.module('livewellApp').controller('WeeklyCheckInCtrl', function($scope, $
                         $scope.reachoutMessage = cursor.value.message
                     }
 
-                    console.log("NEW WEEKLY REVIEW MESSAGE: " + $scope.reachoutMessage);
-                    
                     $scope.$apply();
 
 					if ($scope.reachoutMessage != null) {

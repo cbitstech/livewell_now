@@ -489,7 +489,6 @@ angular.module('livewellApp').controller('DailyCheckInCtrl', function($scope, $l
                     dailyCount: dailyCount,
                     appVersion: version 
                 }).execute();
-
             });
 
 			Database.insertWithCallback('daily_check_in', {
@@ -508,11 +507,17 @@ angular.module('livewellApp').controller('DailyCheckInCtrl', function($scope, $l
 							$scope.reachoutMessage = null;
 
 							if (cursor != null) {
-								if (cursor.value.reachout_code == 1 || cursor.value.reachout_code == 2) {
-									$scope.emergency = true; 
-					                $scope.warningPhoneNumber = $scope.phoneNumber;
-								} else if (cursor.value.message != null) {
+								if (cursor.value.message != null) {
 									$scope.reachoutMessage = cursor.value.message
+									$scope.warningPhoneNumber = $scope.phoneNumber;
+								}
+							
+								if (cursor.value.reachout_code == 1 || cursor.value.reachout_code == 2) {
+									$("#continue_modal_warning").removeClass("alert-warning");
+									$("#continue_modal_warning").addClass("alert-danger");
+								} else { 
+									$("#continue_modal_warning").removeClass("alert-danger");
+									$("#continue_modal_warning").addClass("alert-warning");
 								}
 							}
 							

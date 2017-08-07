@@ -377,11 +377,11 @@ angular.module('livewellApp').service('Database', function (UserData) {
 
                         if (duration <= sleepRoutineRanges.LessSevere) {
                             sleepDurationList.push(-2);
-                        } else if (duration < sleepRoutineRanges.Less && duration >= sleepRoutineRanges.LessSevere) {
+                        } else if (duration < sleepRoutineRanges.Less && duration > sleepRoutineRanges.LessSevere) {
                             sleepDurationList.push(-1);
                         } else if (duration >= sleepRoutineRanges.Less && duration <= sleepRoutineRanges.More) {
                             sleepDurationList.push(0);
-                        } else if (duration > sleepRoutineRanges.More && duration <= sleepRoutineRanges.MoreSevere) {
+                        } else if (duration > sleepRoutineRanges.More && duration < sleepRoutineRanges.MoreSevere) {
                             sleepDurationList.push(1);
                         } else if (duration >= sleepRoutineRanges.MoreSevere) {
                             sleepDurationList.push(2);
@@ -420,15 +420,19 @@ angular.module('livewellApp').service('Database', function (UserData) {
                                 }
                                 
                                 database.calculateClinicalReachout(statusCodes, wellnessList, medicationList, sleepDurationList, reachoutList, notifyList, function(newReachoutItem) {
-                                    database.insertWithCallback('clinical_reachout', {
+									var dbObject = {
                                         updated: Date.now(),
                                         reachout_code: newReachoutItem['reachout_code'],
                                         provider_call: newReachoutItem['provider_call'],
                                         provider_email: newReachoutItem['provider_email'],
                                         coach_email: newReachoutItem['coach_email'],
                                         message: newReachoutItem['message'],
-                                        notify: newReachoutItem['notify'],
-                                    }, callback);
+                                        notify: newReachoutItem['notify']
+                                    };
+                                    
+									(new PurpleRobot()).emitReading('livewell_app_expert_system_daily_reachout', dbObject).execute();
+
+                                    database.insertWithCallback('clinical_reachout', dbObject, callback);
                                 });
                             }                   
                         }, function() {
@@ -529,6 +533,11 @@ angular.module('livewellApp').service('Database', function (UserData) {
                             newStatusCode = 3;
                         }
                     }
+
+					(new PurpleRobot()).emitReading('livewell_app_expert_system_status_code', {
+						current_code: newStatusCode,
+						prior_code: lastStatusCode
+					}).execute();
                     
                     var lastServerUpdate = 0;
 
@@ -541,6 +550,7 @@ angular.module('livewellApp').service('Database', function (UserData) {
                         } else {
                             if (lastServerUpdate > 0) {
                                 var delta = Date.now() - lastServerUpdate;
+                                
                                 
                                 if (delta > (1000 * 60 * 60 * 24 * 4)) {
                                     database.insertWithCallback('clinical_status', {
@@ -713,19 +723,19 @@ angular.module('livewellApp').service('Database', function (UserData) {
         } else if (statusCodes[0] == 2 && statusCodes[1] == 1) {
             if (wellnessSevenMildModerateUp > wellnessSevenMildModerateDown) { // Clinical Status to Prodromal-Mania (6)
                 reachout['reachout_code'] = 6;
-                reachout['message'] = 'Looks like you may be having early warning signs of mania. Call your psychiatrist to check in.';
+                reachout['message'] = 'Looks like you may be having early warning signs of mania. This could put you at risk for a manic episode. Call your psychiatrist to check in.';
                 reachout['provider_call'] = true;
                 reachout['provider_email'] = true;
                 reachout['coach_email'] = true;
             } else if (wellnessSevenMildModerateUp < wellnessSevenMildModerateDown) { // Clinical Status to Prodromal-Depression (7)
                 reachout['reachout_code'] = 7;
-                reachout['message'] = 'Looks like you may be having early warning signs of depression. Call your psychiatrist to check in.';
+                reachout['message'] = 'Looks like you may be having early warning signs of depression. This could put you at risk for a depressive episode. Call your psychiatrist to check in.';
                 reachout['provider_call'] = true;
                 reachout['provider_email'] = true;
                 reachout['coach_email'] = true;
             } else { // Clinical Status to Prodromal (8)
                 reachout['reachout_code'] = 8;
-                reachout['message'] = 'Looks like you may be having early warning signs. Call your psychiatrist to check in.';
+                reachout['message'] = 'Looks like you may be having early warning signs. This could put you at risk for a mood episode. Call your psychiatrist to check in.';
                 reachout['provider_call'] = true;
                 reachout['provider_email'] = true;
                 reachout['coach_email'] = true;
@@ -739,7 +749,7 @@ angular.module('livewellApp').service('Database', function (UserData) {
                 reachout['coach_email'] = true;
             } else if (wellnessList[0] == -3 && wellnessSevenModerateDown >= 4) { // Worsening Symptoms-Depression (10)
                 reachout['reachout_code'] = 10;
-                reachout['message'] = 'Looks like you may be having worsening symptoms of depression. Call your psychiatrist to check in. ';
+                reachout['message'] = 'Looks like you may be having worsening symptoms of depression. Call your psychiatrist to check in.';
                 reachout['provider_call'] = true;
                 reachout['provider_email'] = true;
                 reachout['coach_email'] = true;
@@ -755,13 +765,13 @@ angular.module('livewellApp').service('Database', function (UserData) {
                 if (medicationList[0] < 2) {
                     if (medicationFourAll == 0) { // High Risk-Medications-Mail (12)
                         reachout['reachout_code'] = 12;
-                        reachout['message'] = 'Looks like you have been missing medication doses. Call your psychiatrist to discuss any problems you may be having.';
+                        reachout['message'] = 'Looks like you have been missing medication doses. This could put you at risk for symptoms. Call your psychiatrist to discuss any problems you may be having.';
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = true;
                         reachout['coach_email'] = true;
                     } else if (medicationFourAll == 1) { // High Risk-Medications-Call (13)
                         reachout['reachout_code'] = 13;
-                        reachout['message'] = 'Looks like you have been missing medication doses. Call your psychiatrist to discuss any problems you may be having.';
+                        reachout['message'] = 'Looks like you have been missing medication doses. This could put you at risk for symptoms. Call your psychiatrist to discuss any problems you may be having.';
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = false;
                         reachout['coach_email'] = false;
@@ -769,13 +779,13 @@ angular.module('livewellApp').service('Database', function (UserData) {
                 } else if (sleepDurationList[0] == -2) {
                     if (sleepDurationFourLessSevere >= 3) { // High Risk-Sleep Less-Mail (14)
                         reachout['reachout_code'] = 14;
-                        reachout['message'] = 'Looks like you have been sleeping too little. Call your psychiatrist to discuss any problems you may be having.';
+                        reachout['message'] = 'Looks like you have been sleeping too little. This could put you at risk for symptoms. Call your psychiatrist to discuss any problems you may be having.';
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = true;
                         reachout['coach_email'] = true;
                     } else if (sleepDurationFourLessSevere == 2) { // High Risk-Sleep Less-Call (15)
                         reachout['reachout_code'] = 15;
-                        reachout['message'] = 'Looks like you have been sleeping less than usual. Call your psychiatrist to discuss any problems you may be having.';
+                        reachout['message'] = 'Looks like you have been sleeping less than usual. This could put you at risk for symptoms. Call your psychiatrist to discuss any problems you may be having.';
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = false;
                         reachout['coach_email'] = false;
@@ -783,13 +793,13 @@ angular.module('livewellApp').service('Database', function (UserData) {
                 } else if (sleepDurationList[0] == 2) {
                     if (sleepDurationFourMoreSevere == 4) { // High Risk-Sleep More-Mail (16)
                         reachout['reachout_code'] = 16;
-                        reachout['message'] = 'Looks like you have been sleeping too much. Call your psychiatrist to discuss any problems you may be having.';
+                        reachout['message'] = 'Looks like you have been sleeping too much. This could put you at risk for symptoms. Call your psychiatrist to discuss any problems you may be having.';
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = true;
                         reachout['coach_email'] = true;
                     } else if (sleepDurationFourMoreSevere == 3) { // High Risk-Sleep More-Call (17)
                         reachout['reachout_code'] = 17;
-                        reachout['message'] = 'Looks like you have been sleeping more than usual. Call your psychiatrist to discuss any problems you may be having.';
+                        reachout['message'] = 'Looks like you have been sleeping more than usual. This could put you at risk for symptoms. Call your psychiatrist to discuss any problems you may be having.';
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = false;
                         reachout['coach_email'] = false;
@@ -1057,6 +1067,10 @@ angular.module('livewellApp').service('Database', function (UserData) {
                                     }
                                 }
                             }
+
+							(new PurpleRobot()).emitReading('livewell_app_expert_system_daily_review', {
+								review_code: dbObject['finalCode']
+							}).execute();
                             
                             database.insertWithCallback('daily_review', dbObject, function() {
                                 callback(dbObject['finalCode']);

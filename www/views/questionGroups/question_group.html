@@ -2,8 +2,14 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body alert-warning">
-				<div class="alert alert-warning" ng-hide="reachoutMessage == null">
-					{{ reachoutMessage }}
+				<br/>
+				<div class="alert alert-warning">
+					<p>{{ reachoutMessage }}</p>
+
+					<br />
+					<center>
+						<a class="btn btn-primary" href="tel:{{ phoneNumber }}">Call Your Psychiatrist Now</a>
+					</center>
 				</div>
 				<button type="button" class="btn btn-primary btn-full" data-dismiss="modal">Continue</button>
 			</div>
