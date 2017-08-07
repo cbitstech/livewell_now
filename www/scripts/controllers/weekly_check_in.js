@@ -166,15 +166,20 @@ angular.module('livewellApp').controller('WeeklyCheckInCtrl', function($scope, $
                     
                     $scope.$apply();
 
-                    $("#continue").modal();
+					if ($scope.reachoutMessage != null) {
+						$("#continue").modal();
 
-                    $('#continue').on('hide.bs.modal', function (e) {
-                        console.log('HIDE');
-                        console.log($location);
-                        
-                        $location.path("/ews");
-	                    $scope.$apply();
-                    });
+						$('#continue').on('hide.bs.modal', function (e) {
+							console.log('HIDE');
+							console.log($location);
+						
+							$location.path("/ews");
+							$scope.$apply();
+						});
+					} else {
+						$location.path("/ews");
+						$scope.$apply();
+					}
                 });
             });
         });
