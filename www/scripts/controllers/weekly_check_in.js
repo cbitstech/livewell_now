@@ -147,8 +147,36 @@ angular.module('livewellApp').controller('WeeklyCheckInCtrl', function($scope, $
             dbObject[response['name']] = parseInt(response['value']);
         }
 
-        Database.insert('weekly_check_in', dbObject);
+        Database.insertWithCallback('weekly_check_in', dbObject, function() {
+            console.log('000001');
+            
+            Database.updateWeeklyReachout(function() {
+                console.log('000002');
+                
+                Database.filter('clinical_weekly_reachout', 'updated', IDBKeyRange.lowerBound(0), "prev", function(cursor) {
+                    console.log("GOT MESSAGE");
 
-        $location.path("/ews");
+                    $scope.reachoutMessage = null;
+
+                    if (cursor != null) {
+                        $scope.reachoutMessage = cursor.value.message
+                    }
+
+                    console.log("NEW WEEKLY REVIEW MESSAGE: " + $scope.reachoutMessage);
+                    
+                    $scope.$apply();
+
+                    $("#continue").modal();
+
+                    $('#continue').on('hide.bs.modal', function (e) {
+                        console.log('HIDE');
+                        console.log($location);
+                        
+                        $location.path("/ews");
+	                    $scope.$apply();
+                    });
+                });
+            });
+        });
     }
 });

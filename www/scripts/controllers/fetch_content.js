@@ -8,7 +8,7 @@
  * Controller of the livewellApp
  */
  
-angular.module('livewellApp').controller('FetchContentCtrl', function ($scope,$http) {
+angular.module('livewellApp').controller('FetchContentCtrl', function ($scope, $http, Database) {
 //  var SERVER_LOCATION = 'https://livewell2.firebaseio.com/';
     var SERVER_LOCATION = 'https://livewellcss.northwestern.edu/firebase-proxy/';
     var SECURE_CONTENT = 'https://mohrlab.northwestern.edu/livewell-dash/content/'; 
@@ -75,6 +75,17 @@ angular.module('livewellApp').controller('FetchContentCtrl', function ($scope,$h
                     if (oldStatus == undefined || oldStatus == null) {
 	                    console.log('SAVE 1: ' + JSON.stringify(response));
                         localStorage[el.route] = JSON.stringify(response);
+                        
+                        var dbObject = {
+							updated: Date.now(),
+							status_code: response['currentCode'],
+							version: response['version'],
+							source: 'server'
+						};
+
+				        Database.insertWithCallback('clinical_status', dbObject, function() {
+				        	console.log('STATUS CODE INITED: ' + JSON.stringify(dbObject))
+                        });
                     } else {
                         oldStatus = JSON.parse(oldStatus);
 
@@ -90,7 +101,16 @@ angular.module('livewellApp').controller('FetchContentCtrl', function ($scope,$h
 
                                 localStorage[el.route] = JSON.stringify(newStatus);
                                 
-                                // TODO
+								var dbObject = {
+									updated: Date.now(),
+									status_code: response['currentCode'],
+									version: response['version'],
+									source: 'server'
+								};
+
+								Database.insertWithCallback('clinical_status', dbObject, function() {
+									console.log('STATUS CODE UPDATED: ' + JSON.stringify(dbObject))
+								});
                             }
                         }
                     }

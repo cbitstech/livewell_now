@@ -503,7 +503,7 @@ angular.module('livewellApp').controller('DailyCheckInCtrl', function($scope, $l
 			}, function() {
 				Database.updateClinicalStatus(function() {
 					Database.updateDailyReachout(function() {
-						Database.filter('clinial_reachout', 'updated', IDBKeyRange.lowerBound(0), "prev", function(cursor) {
+						Database.filter('clinical_reachout', 'updated', IDBKeyRange.lowerBound(0), "prev", function(cursor) {
 							$scope.emergency = false; 
 							$scope.reachoutMessage = null;
 

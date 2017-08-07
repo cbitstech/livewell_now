@@ -15,6 +15,8 @@ angular.module('livewellApp').controller('HomeCtrl', function ($scope, Pound, Da
         {name:"Toolbox", href:"skills", class: "btn-info"},
         {name:"Wellness Plan", href:"wellness/resources", class: "btn-info"},
     ];
+    
+    console.log('LIVEWELL');
 
     var now = Date.now()
     var studyStart = parseFloat(localStorage['startDate']);

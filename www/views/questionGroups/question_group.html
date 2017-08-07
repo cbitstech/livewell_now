@@ -1,3 +1,17 @@
+<div id="continue" class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body alert-warning">
+				<div class="alert alert-warning" ng-hide="reachoutMessage == null">
+					{{ reachoutMessage }}
+				</div>
+				<button type="button" class="btn btn-primary btn-full" data-dismiss="modal">Continue</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /.modal -->
+
 <form>
 	<div ng-repeat="question in questionGroups" class="question-group" data-idx="{{$index}}" ng-if='showQuestion($index)' >
 		<label> 
