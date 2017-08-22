@@ -545,12 +545,12 @@ angular.module('livewellApp').service('Database', function (UserData) {
                         if (cursor && lastServerUpdate == 0) {
                             if (cursor.value.source == 'server') {
                                 lastServerUpdate = cursor.value.updated;
-                                cursor.continue();
                             }
+
+							cursor.continue();
                         } else {
                             if (lastServerUpdate > 0) {
                                 var delta = Date.now() - lastServerUpdate;
-                                
                                 
                                 if (delta > (1000 * 60 * 60 * 24 * 4)) {
                                     database.insertWithCallback('clinical_status', {
