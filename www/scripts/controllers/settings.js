@@ -6,8 +6,7 @@
  * # SettingsCtrl
  * Controller of the livewellApp
  */
-angular.module('livewellApp')
-    .controller('SettingsCtrl', function($scope) {
+angular.module('livewellApp').controller('SettingsCtrl', function($scope) {
         $scope.pageTitle = 'Settings';
         $scope.times = [{
             value: "00:00",
