@@ -241,7 +241,7 @@ angular.module('livewellApp').service('DailyReviewAlgorithm', function(Pound, Us
 	
 	conditions[21] = function(data, code) {
 		//at risk medications
-		return code == 1 && Math.abs(data.wellness[6]) < 2 && data.medications[6] != 1
+		return code == 1 && Math.abs(data.wellness[6]) < 2 && data.medications[6] != 2
 	};
 	
 	conditions[20] = function(data, code) {
