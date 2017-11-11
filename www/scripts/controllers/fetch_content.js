@@ -85,6 +85,8 @@ angular.module('livewellApp').controller('FetchContentCtrl', function ($scope, $
 
 				        Database.insertWithCallback('clinical_status', dbObject, function() {
 				        	console.log('STATUS CODE INITED: ' + JSON.stringify(dbObject))
+				        	
+				        	localStorage['dailyCheckInCount'] = "0";
                         });
                     } else {
                         oldStatus = JSON.parse(oldStatus);
@@ -110,6 +112,8 @@ angular.module('livewellApp').controller('FetchContentCtrl', function ($scope, $
 
 								Database.insertWithCallback('clinical_status', dbObject, function() {
 									console.log('STATUS CODE UPDATED: ' + JSON.stringify(dbObject))
+
+						        	localStorage['dailyCheckInCount'] = "0";
 								});
                             }
                         }

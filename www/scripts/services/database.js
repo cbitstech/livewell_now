@@ -459,115 +459,94 @@ angular.module('livewellApp').service('Database', function (UserData) {
             var lastSevenResponses = [];
 
             database.filter('daily_check_in', 'created', IDBKeyRange.lowerBound(0), "prev", function(cursor) {
-                // TODO: Add check if last status is an override and add tests to 
-                // determine if enough data has been submitted to move out of overridden 
-                // state. Example: at least 5 days passed since clinical status was 
-                // overridden...
+				var dailyCount = 0;
+	
+				if (localStorage['dailyCheckInCount'] != undefined) {
+					dailyCount = parseInt(localStorage['dailyCheckInCount']);
+				}
+				
+				if (dailyCount > 7) {
+					dailyCount = 7;
+				}
             
-                if (cursor && lastSevenResponses.length < 7) {
+                if (cursor && lastSevenResponses.length < dailyCount) {
                     lastSevenResponses.push(parseInt("" + cursor.value.wellness));
                     cursor.continue();              
                 } else {
-                    while (lastSevenResponses.length < 7) {
-                        lastSevenResponses.push(0);
-                    }
-
                     var newStatusCode = lastStatusCode;
-            
-                    if (lastStatusCode == 1) { // Well 
-                        var prodromalCount = 0;
                     
-                        for (var i = 0; i < lastSevenResponses.length; i++) {
-                            if (Math.abs(lastSevenResponses[i]) >= 2) {
-                                prodromalCount += 1;
-                            }
-                        }
-                    
-                        if (prodromalCount >= 4) {
-                            newStatusCode = 2;
-                        }
-                    } else if (lastStatusCode == 2) { // Prodromal
-                        var wellCount = 0;
-                        var unwellCount = 0;
-                    
-                        for (var i = 0; i < lastSevenResponses.length; i++) {
-                            if (Math.abs(lastSevenResponses[i]) <= 1) {
-                                wellCount += 1;
-                            } else if (Math.abs(lastSevenResponses[i]) >= 3) {
-                                unwellCount += 1;
-                            }
-                        }
-                    
-                        if (wellCount >= 5) {
-                            newStatusCode = 1;
-                        } else if (unwellCount >= 5) {
-                            newStatusCode = 4;
-                        }
-                    } else if (lastStatusCode == 3) { // Recovering
-                        var wellCount = 0;
-                        var unwellCount = 0;
-                    
-                        for (var i = 0; i < lastSevenResponses.length; i++) {
-                            if (Math.abs(lastSevenResponses[i]) <= 1) {
-                                wellCount += 1;
-                            } else if (Math.abs(lastSevenResponses[i]) >= 3) {
-                                unwellCount += 1;
-                            }
-                        }
-                    
-                        if (wellCount >= 5) {
-                            newStatusCode = 1;
-                        } else if (unwellCount >= 5) {
-                            newStatusCode = 4;
-                        }
-                    } else if (lastStatusCode == 4) {
-                        var recoveringCount = 0;
-                    
-                        for (var i = 0; i < lastSevenResponses.length; i++) {
-                            if (Math.abs(lastSevenResponses[i]) <= 2) {
-                                recoveringCount += 1;
-                            }
-                        }
-                    
-                        if (recoveringCount >= 5) {
-                            newStatusCode = 3;
-                        }
-                    }
+                    if (dailyCount >= 5) {
+						if (lastStatusCode == 1) { // Well 
+							var prodromalCount = 0;
+					
+							for (var i = 0; i < lastSevenResponses.length; i++) {
+								if (Math.abs(lastSevenResponses[i]) >= 2) {
+									prodromalCount += 1;
+								}
+							}
+					
+							if (prodromalCount >= 4) {
+								newStatusCode = 2;
+							}
+						} else if (lastStatusCode == 2) { // Prodromal
+							var wellCount = 0;
+							var unwellCount = 0;
+					
+							for (var i = 0; i < lastSevenResponses.length; i++) {
+								if (Math.abs(lastSevenResponses[i]) <= 1) {
+									wellCount += 1;
+								} else if (Math.abs(lastSevenResponses[i]) >= 3) {
+									unwellCount += 1;
+								}
+							}
+					
+							if (wellCount >= 5) {
+								newStatusCode = 1;
+							} else if (unwellCount >= 5) {
+								newStatusCode = 4;
+							}
+						} else if (lastStatusCode == 3) { // Recovering
+							var wellCount = 0;
+							var unwellCount = 0;
+					
+							for (var i = 0; i < lastSevenResponses.length; i++) {
+								if (Math.abs(lastSevenResponses[i]) <= 1) {
+									wellCount += 1;
+								} else if (Math.abs(lastSevenResponses[i]) >= 3) {
+									unwellCount += 1;
+								}
+							}
+					
+							if (wellCount >= 5) {
+								newStatusCode = 1;
+							} else if (unwellCount >= 5) {
+								newStatusCode = 4;
+							}
+						} else if (lastStatusCode == 4) {
+							var recoveringCount = 0;
+					
+							for (var i = 0; i < lastSevenResponses.length; i++) {
+								if (Math.abs(lastSevenResponses[i]) <= 2) {
+									recoveringCount += 1;
+								}
+							}
+					
+							if (recoveringCount >= 5) {
+								newStatusCode = 3;
+							}
+						}
+					}
 
 					(new PurpleRobot()).emitReading('livewell_app_expert_system_status_code', {
 						current_code: newStatusCode,
 						prior_code: lastStatusCode
 					}).execute();
                     
-                    var lastServerUpdate = 0;
-
-                    database.filter('clinical_status', 'updated', IDBKeyRange.lowerBound(0), "prev", function(cursor) {
-                        if (cursor && lastServerUpdate == 0) {
-                            if (cursor.value.source == 'server') {
-                                lastServerUpdate = cursor.value.updated;
-                            }
-
-							cursor.continue();
-                        } else {
-                            if (lastServerUpdate > 0) {
-                                var delta = Date.now() - lastServerUpdate;
-                                
-                                if (delta > (1000 * 60 * 60 * 24 * 4)) {
-                                    database.insertWithCallback('clinical_status', {
-                                        updated: Date.now(),
-                                        status_code: newStatusCode,
-                                        source: 'app'
-                                    }, callback);
-                                } else {
-                                    console.log("NOT UPDATING. DELTA = " + (delta / (1000 * 60 * 60 * 24)));
-                                    callback();
-                                }
-                            } else {
-                                console.log("NOT UPDATING. NO DELTA");
-                                callback();
-                            }
-                        }
-                    });
+					database.insertWithCallback('clinical_status', {
+						updated: Date.now(),
+						status_code: newStatusCode,
+						source: 'app'
+					}, callback);
                 }
             }, function() {
                 console.log('DATABASE: Unable to fetch daily reviews to update clinical status...');

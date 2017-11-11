@@ -15,6 +15,7 @@ angular.module('livewellApp').service('DailyReviewAlgorithm', function(Pound, Us
 		conditions = [];
 
 	var sleepRoutineRanges = UserData.query('sleepRoutineRanges');
+
 	var currentClinicalStatusCode = function() {
 		return UserData.query('clinicalStatus').currentCode
 	};
@@ -396,7 +397,7 @@ angular.module('livewellApp').service('DailyReviewAlgorithm', function(Pound, Us
 	
 	conditions[16] = function(data, code) {
 		//mild up well
-		var dailyReviewIsTrueWhen = data.wellness[6] == 2 && code == 1;
+		var dailyReviewIsTrueWhen = (data.wellness[6] == 2 && code == 1);
 
 		if (dailyReviewIsTrueWhen){
 			var sum = 0;
@@ -625,13 +626,15 @@ angular.module('livewellApp').service('DailyReviewAlgorithm', function(Pound, Us
 	contents.getCode = function() {
 		//look for the highest TRUE value in the condition set
 		var recodedSevenDays = recoder.execute(sleepRoutineRanges, Pound.find('dailyCheckIn'));
+		var clinicalStatusCode = currentClinicalStatusCode()
+
 		console.log(recodedSevenDays);
+
 		for (var i = 0; i < conditions.length; i++) {
-			var selection = conditions[i](recodedSevenDays, currentClinicalStatusCode());
+			var selection = conditions[i](recodedSevenDays, clinicalStatusCode);
 			
 			if (selection == true) {
-				return i
-				break;
+				return i;
 			}
 		}
 	};
