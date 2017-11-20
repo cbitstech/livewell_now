@@ -606,6 +606,8 @@ angular.module('livewellApp').service('Database', function (UserData) {
                         reachout['coach_email'] = true;
                     }
                 }
+				
+				(new PurpleRobot()).emitReading('livewell_app_expert_system_weekly_reachout', reachout).execute();
 
                 database.insertWithCallback('clinical_weekly_reachout', reachout, callback);
             }
@@ -839,11 +841,11 @@ angular.module('livewellApp').service('Database', function (UserData) {
     };
 
     database.updateDailyReview = function(callback) {
+		var codes = [];
+
         database.filter('clinical_status', 'updated', IDBKeyRange.lowerBound(0), "prev", function(cursor) {
-            var codes = [];
-            
             if (cursor && codes.length < 2) {
-                codes.push(cursor.value.status_code);
+                codes.push(parseInt(cursor.value.status_code));
                 cursor.continue();
             } else {
                 var currentStatusCode = codes[1];
