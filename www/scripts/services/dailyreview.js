@@ -64,7 +64,7 @@ angular.module('livewellApp').service('DailyReviewAlgorithm', function(Pound, Us
 		// duration = gotUp - toBed
 		// look at ranges defined in sleepRoutineRanges, which range is it in?
 
-		var duration = parseInt(sleepDuration);
+		var duration = parseFloat(sleepDuration);
 
 		if (duration <= sleepRoutineRanges.LessSevere) {
 			score = -1;

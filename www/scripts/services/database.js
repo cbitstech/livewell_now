@@ -876,15 +876,15 @@ angular.module('livewellApp').service('Database', function (UserData) {
                         
                         dailyMedications.push(parseInt("" + cursor.value.medications));
 
-                        var duration = parseInt("" + cursor.value.sleepDuration);
+                        var duration = parseFloat("" + cursor.value.sleepDuration);
 
                         if (duration <= sleepRoutineRanges.LessSevere) {
                             dailySleepDurations.push(-2);
-                        } else if (duration < sleepRoutineRanges.Less && duration >= sleepRoutineRanges.LessSevere) {
-                            dailySleepDurations.push(1);
+                        } else if (duration < sleepRoutineRanges.Less && duration > sleepRoutineRanges.LessSevere) {
+                            dailySleepDurations.push(-1);
                         } else if (duration >= sleepRoutineRanges.Less && duration <= sleepRoutineRanges.More) {
                             dailySleepDurations.push(0);
-                        } else if (duration > sleepRoutineRanges.More && duration <= sleepRoutineRanges.MoreSevere) {
+                        } else if (duration > sleepRoutineRanges.More && duration < sleepRoutineRanges.MoreSevere) {
                             dailySleepDurations.push(1);
                         } else if (duration >= sleepRoutineRanges.MoreSevere) {
                             dailySleepDurations.push(2);
@@ -935,7 +935,7 @@ angular.module('livewellApp').service('Database', function (UserData) {
                             var lastCode = 26; 
                             
                             if (cursor) {
-                                lastCode = cursor.value.finalCode;
+                                lastCode = parseInt(cursor.value.finalCode);
                             }
                             
                             var dbObject = {
@@ -961,7 +961,8 @@ angular.module('livewellApp').service('Database', function (UserData) {
                                 } else if (Math.abs(dailyWellnesses[0]) <= 1) { // Episode-Improving-Balanced (7)
                                     dbObject['finalCode'] = 7;
                                 } 
-                            } else {
+                            } 
+                            else {
                                 if (dailyWellnesses[0] == 3) { // Worsening Symptoms-Up (8)
                                     dbObject['finalCode'] = 8;
                                 } else if (dailyWellnesses[0] == -3) { // Worsening Symptoms-Down (9)
@@ -993,7 +994,8 @@ angular.module('livewellApp').service('Database', function (UserData) {
                                     
                                     if (dailyMedications[0] < 2 && medicationsPastFourAll <= 1) { // High Risk-Medication Adherence (18)
                                         dbObject['finalCode'] = 18;
-                                    } else {
+                                    } 
+                                    else {
                                         var moreSevere = 0;
                                         var more = 0;
                                         var baseline = 0;

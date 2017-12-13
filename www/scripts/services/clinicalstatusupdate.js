@@ -136,6 +136,9 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
                 break;
         }
 
+        var returnStatus = {};
+        returnStatus.oldStatus = currentClinicalStatusCode();
+
         if (localStorage['clinicalStatus'] != undefined) {
             var statusObject = JSON.parse(localStorage['clinicalStatus']);
 
@@ -149,11 +152,9 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
             });
         }
 
-        var returnStatus = {};
         returnStatus.amrsSum = amrsSum;
         returnStatus.phq8Sum = phq8Sum;
         returnStatus.intensityCount = intensityCount;
-        returnStatus.oldStatus = currentClinicalStatusCode();
         returnStatus.newStatus = newClinicalStatus;
         
         return returnStatus
