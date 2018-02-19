@@ -15,8 +15,13 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
     };
     
     contents.execute = function() {
+        // "[
+        //   {"code":1,"label":"well"},
+        //   {"code":2,"label":"prodromal"},
+        //   {"code":3,"label":"recovering"},
+        //   {"code":4,"label":"unwell"}
+        //  ]"
         
-        //"[{"code":1,"label":"well"},{"code":2,"label":"prodromal"},{"code":3,"label":"recovering"},{"code":4,"label":"unwell"}]"
         var dailyReviewResponses = Pound.find('dailyCheckIn');
         var weeklyReviewResponses = Pound.find('weeklyCheckIn');
         var newClinicalStatus = currentClinicalStatusCode();
@@ -31,7 +36,10 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
         };
 
         for (var i = dailyReviewResponses.length - 1; i > dailyReviewResponses.length - 8; i--) {
-            var aWV = 0;
+            // ???: What to do when less than 7 entries? Alg. currently runs on 5 or more...
+            // ???: Set aWV to -1 initially so count isn't included?
+            
+            var aWV = -1;
             
             if (dailyReviewResponses[i] != undefined) {
                 aWV = Math.abs(parseInt(dailyReviewResponses[i].wellness));
@@ -56,7 +64,10 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
 
         if (weeklyReviewResponses[weeklyReviewResponses.length - 1] != undefined){
             lastWeeklyResponses = weeklyReviewResponses[weeklyReviewResponses.length - 1].responses;
-        } else{
+        } else {
+        	// ???: Is safe to use these values when not enough data submitted? 
+        	// ???: May have 5 checkins, but no weekly?
+        	
             lastWeeklyResponses = [
                 {name:'phq1', value:'0'},
                 {name:'phq2', value:'0'},
@@ -83,10 +94,12 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
                 if ((intensityCount[2] + intensityCount[3] + intensityCount[4]) >= 4) {
                     newClinicalStatus = 2;
                 }
+                
                 // //Well   if last ASRM ≥ 6    Well, email alert to coach
                 if (amrsSum >= 6) {
                     sendEmail = true;
                 }
+                
                 // //Well   if last PHQ8 ≥ 10   Well, email alert to coach
                 if (phq8Sum >= 10) {
                     sendEmail = true;
@@ -97,14 +110,17 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
                 if ((intensityCount[1] + intensityCount[0]) >= 5) {
                     newClinicalStatus = 1;
                 }
+                
                 //Prodromal if abs(wr) ≥ 3 for 5 of last 7 days Unwell
                 if ((intensityCount[3] + intensityCount[4]) >= 5) {
                     newClinicalStatus = 4;
                 }
+                
                 //Prodromal if last ASRM ≥ 6    Prodromal, email alert to coach
                 if (amrsSum >= 6) {
                     sendEmail = true;
                 }
+                
                 //Prodromal if last PHQ8 ≥ 10   Prodromal, email alert to coach
                 if (phq8Sum >= 10) {
                     sendEmail = true;
@@ -115,14 +131,17 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
                 if ((intensityCount[1] + intensityCount[0]) >= 5) {
                     newClinicalStatus = 1;
                 }
+                
                 //Recovering    if abs(wr) ≥ 3 for 5 of last 7 days Unwell
                 if ((intensityCount[3] + intensityCount[4]) >= 5) {
                     newClinicalStatus = 4;
                 }
+                
                 //Recovering    if last ASRM ≥ 6    Recovering, email alert to coach
                 if (amrsSum >= 6) {
                     sendEmail = true;
                 }
+                
                 //Recovering    if last PHQ8 ≥ 10   Recovering, email alert to coach
                 if (phq8Sum >= 10) {
                     sendEmail = true;
@@ -161,6 +180,8 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
     }
     
     contents.noExecute = function() {
+    	// ???: Do we send e-mail based on weekly check-in in this case (checkins < 5)?
+    	
         var returnStatus = {};
 
         var dailyReviewResponses = Pound.find('dailyCheckIn');
@@ -174,7 +195,9 @@ angular.module('livewellApp').service('ClinicalStatusUpdate', function(Pound, Us
         };
 
         for (var i = dailyReviewResponses.length - 1; i > dailyReviewResponses.length - 8; i--) {
-            var aWV = 0;
+        	// ???: As per comment above, use -1 as the default below so counts are accurate?
+        	
+            var aWV = -1;
             
             if (dailyReviewResponses[i] != undefined) {
                 aWV = Math.abs(parseInt(dailyReviewResponses[i].wellness));

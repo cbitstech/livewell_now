@@ -401,6 +401,10 @@ angular.module('livewellApp').controller('DailyCheckInCtrl', function($scope, $l
           						 $scope.dailyCheckIn.sleepDuration != undefined;
 
         if (allAnswersFinished) {
+        	$scope.saveCheckIn = function() { 
+        		// No-op for button already pressed.
+        	};
+        	
             $scope.dailyCheckIn.endTime = new Date();
             
             var clinicalStatusJson = localStorage['clinicalStatus'];

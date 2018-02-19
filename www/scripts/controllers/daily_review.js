@@ -49,6 +49,8 @@ angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $ro
     var runAlgorithm = function(Pound) {
         var object = {};
         var sessionID = Guid.create();
+        
+        // ???: What to do if less than 5 checkins?
 
         object.code = DailyReviewAlgorithm.code();
         
@@ -65,7 +67,6 @@ angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $ro
             
             toReport = $scope.updatedClinicalStatus;
         } else {
-
             toReport = ClinicalStatusUpdate.noExecute();
 //            console.log('4 OR FEWER RESPONSES -- NOT UPDATING STATUS CODE');
         }
@@ -94,24 +95,7 @@ angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $ro
         return object
     }
     
-//    var dbObject = {
-//		started: Date.now(),
-//		userStarted: true,
-//		initialCode: $scope.code
-//	};
-//
     $scope.code = runAlgorithm().code;
-    
-//    dbObject['finalCode'] = $scope.code;
-
-//	Database.insert('daily_review', dbObject);
-
-    //TO REMOVE
-    $scope.recodedResponses = DailyReviewAlgorithm.recodedResponses();
-    $scope.dailyCheckInResponseArray = Pound.find('dailyCheckIn')
-    $scope.dailyCheckInResponses = ' |today| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length - 1]) + ' |t-1| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length - 2]) + ' |t-2| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length - 3]) + ' |t-3| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length - 4]) + ' |t-4| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length - 5]) + ' |t-5| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length - 6]) + ' |t-6| ' + JSON.stringify($scope.dailyCheckInResponseArray[$scope.dailyCheckInResponseArray.length - 7]);
-
-    //STOP REMOVE
 
     $scope.percentages = DailyReviewAlgorithm.percentages();
 

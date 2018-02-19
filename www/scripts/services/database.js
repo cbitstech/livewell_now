@@ -390,7 +390,7 @@ angular.module('livewellApp').service('Database', function (UserData) {
                         cursor.continue();
                     } else {
                         while (wellnessList.length < 7) {
-                            wellnessList.push(0);
+                            wellnessList.push(NaN);
                         }
 
                         while (medicationList.length < 7) {
@@ -681,14 +681,14 @@ angular.module('livewellApp').service('Database', function (UserData) {
             reachout['provider_call'] = true;
             reachout['provider_email'] = true;
             reachout['coach_email'] = true;
-        } else if (statusCodes[0] == 4 && (statusCodes[0] == 2 || statusCodes[0] == 3)) {
-            if (wellnessSevenModerateUp > wellnessSevenModerateDown) { // Clinical Status to Manic (3)
+        } else if (statusCodes[0] == 4 && (statusCodes[1] == 2 || statusCodes[1] == 3)) {
+            if (wellnessSevenModerateUp > wellnessSevenModerateDown && wellnessList[0] == 3) { // Clinical Status to Manic (3)
                 reachout['reachout_code'] = 3;
                 reachout['message'] = 'Looks like you may be entering a manic episode. Call your psychiatrist to check in.';
                 reachout['provider_call'] = true;
                 reachout['provider_email'] = true;
                 reachout['coach_email'] = true;
-            } else if (wellnessSevenModerateUp < wellnessSevenModerateDown) { // Clinical Status to Depressed (4)
+            } else if (wellnessSevenModerateUp < wellnessSevenModerateDown && wellnessList[0] == -3) { // Clinical Status to Depressed (4)
                 reachout['reachout_code'] = 4;
                 reachout['message'] = 'Looks like you may be entering a depressive episode. Call your psychiatrist to check in.';
                 reachout['provider_call'] = true;
@@ -702,13 +702,13 @@ angular.module('livewellApp').service('Database', function (UserData) {
                 reachout['coach_email'] = true;
             }
         } else if (statusCodes[0] == 2 && statusCodes[1] == 1) {
-            if (wellnessSevenMildModerateUp > wellnessSevenMildModerateDown) { // Clinical Status to Prodromal-Mania (6)
+            if (wellnessSevenMildModerateUp > wellnessSevenMildModerateDown && wellnessList[0] >= 2) { // Clinical Status to Prodromal-Mania (6)
                 reachout['reachout_code'] = 6;
                 reachout['message'] = 'Looks like you may be having early warning signs of mania. This could put you at risk for a manic episode. Call your psychiatrist to check in.';
                 reachout['provider_call'] = true;
                 reachout['provider_email'] = true;
                 reachout['coach_email'] = true;
-            } else if (wellnessSevenMildModerateUp < wellnessSevenMildModerateDown) { // Clinical Status to Prodromal-Depression (7)
+            } else if (wellnessSevenMildModerateUp < wellnessSevenMildModerateDown  && wellnessList[0] <= -2) { // Clinical Status to Prodromal-Depression (7)
                 reachout['reachout_code'] = 7;
                 reachout['message'] = 'Looks like you may be having early warning signs of depression. This could put you at risk for a depressive episode. Call your psychiatrist to check in.';
                 reachout['provider_call'] = true;
@@ -741,7 +741,9 @@ angular.module('livewellApp').service('Database', function (UserData) {
                 reachout['provider_email'] = true;
                 reachout['coach_email'] = true;
             }
-        } else if (statusCodes[0] == 1) { 
+        }
+        
+        if (reachout['reachout_code'] == 0 && statusCodes[0] == 1) { 
             if (Math.abs(wellnessList[0]) <= 1) {
                 if (medicationList[0] < 2) {
                     if (medicationFourAll == 0) { // High Risk-Medications-Mail (12)
@@ -816,9 +818,9 @@ angular.module('livewellApp').service('Database', function (UserData) {
         		}
         	}
         	
-        	if (reachout['reachout_code'] == 9 && counts[9] < 3) {
+        	if (reachout['reachout_code'] == 9 && (counts[9] + counts[10] + counts[11]) < 3) {
 				reachout['notify'] = true;
-			} else if (reachout['reachout_code'] == 10 && counts[10] < 3) {
+			} else if (reachout['reachout_code'] == 10 && (counts[9] + counts[10] + counts[11]) < 3) {
 				reachout['notify'] = true;
 			} else if (reachout['reachout_code'] == 11 && (counts[9] + counts[10] + counts[11]) < 3) {
 				reachout['notify'] = true;
@@ -916,7 +918,7 @@ angular.module('livewellApp').service('Database', function (UserData) {
                         cursor.continue();
                     } else {
                         while (dailyWellnesses.length < 4) {
-                            dailyWellnesses.push(0);
+                            dailyWellnesses.push(NaN);
                         }
 
                         while (dailyMedications.length < 4) {
