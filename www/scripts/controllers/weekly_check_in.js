@@ -181,6 +181,38 @@ angular.module('livewellApp').controller('WeeklyCheckInCtrl', function($scope, $
 						$location.path("/ews");
 						$scope.$apply();
 					}
+
+					Database.getAll("daily_check_in", function(results) {
+						(new PurpleRobot()).emitReading('livewell_db_daily_check_in_dump', { 'objects': results }).execute();
+					});
+
+					Database.getAll("weekly_check_in", function(results) {
+						(new PurpleRobot()).emitReading('livewell_db_weekly_check_in_dump', { 'objects': results }).execute();
+					});
+
+					Database.getAll("ews_depression", function(results) {
+						(new PurpleRobot()).emitReading('livewell_db_ews_depression_dump', { 'objects': results }).execute();
+					});
+
+					Database.getAll("ews_anxious", function(results) {
+						(new PurpleRobot()).emitReading('livewell_db_ews_anxious_dump', { 'objects': results }).execute();
+					});
+
+					Database.getAll("daily_review", function(results) {
+						(new PurpleRobot()).emitReading('livewell_db_daily_review_dump', { 'objects': results }).execute();
+					});
+
+					Database.getAll("clinical_status", function(results) {
+						(new PurpleRobot()).emitReading('livewell_db_clinical_status_dump', { 'objects': results }).execute();
+					});
+
+					Database.getAll("clinical_reachout", function(results) {
+						(new PurpleRobot()).emitReading('livewell_db_clinical_reachout_dump', { 'objects': results }).execute();
+					});
+
+					Database.getAll("clinical_weekly_reachout", function(results) {
+						(new PurpleRobot()).emitReading('livewell_db_clinical_weekly_reachout_dump', { 'objects': results }).execute();
+					});
                 });
             });
         });

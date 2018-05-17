@@ -1077,5 +1077,19 @@ angular.module('livewellApp').service('Database', function (UserData) {
         });
     };
 
+    database.getAll = function(tableName, retrieveCallback) {
+        database.waitForDatabase(function() {
+			var transaction = database.db.transaction([ tableName ], "readwrite");
+		
+			var store = transaction.objectStore(tableName);
+		
+			var request = store.getAll();
+		
+			request.onsuccess = function() {
+				retrieveCallback(request.result);
+			};
+		});
+	};
+
     return database;
 });
