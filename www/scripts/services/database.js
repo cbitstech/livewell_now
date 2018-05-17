@@ -584,12 +584,14 @@ angular.module('livewellApp').service('Database', function (UserData) {
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = true;
                         reachout['coach_email'] = true;
+                        reachout['notify'] = true;
                     } else if (phq_composites[0] >= 10 && phq_composites[1] < 10) {
                         reachout['reachout_code'] = 19;
                         reachout['message'] = 'Looks like you may be entering a depressive episode. Call your psychiatrist to check in. ';
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = true;
                         reachout['coach_email'] = true;
+                        reachout['notify'] = true;
                     }
                 } else if (amrs_composites.length == 1) {
                     if (amrs_composites[0] >= 6) {
@@ -598,12 +600,14 @@ angular.module('livewellApp').service('Database', function (UserData) {
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = true;
                         reachout['coach_email'] = true;
+                        reachout['notify'] = true;
                     } else if (phq_composites[0] >= 10) {
                         reachout['reachout_code'] = 19;
                         reachout['message'] = 'Looks like you may be entering a depressive episode. Call your psychiatrist to check in. ';
                         reachout['provider_call'] = true;
                         reachout['provider_email'] = true;
                         reachout['coach_email'] = true;
+                        reachout['notify'] = true;
                     }
                 }
 				
