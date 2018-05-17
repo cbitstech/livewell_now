@@ -404,6 +404,12 @@ angular.module('livewellApp').controller('DailyCheckInCtrl', function($scope, $l
         	$scope.saveCheckIn = function() { 
         		// No-op for button already pressed.
         	};
+
+            if (window.dailyCheckInComplete != undefined) {
+            	return;
+            } 
+
+			window.dailyCheckInComplete = true;
         	
             $scope.dailyCheckIn.endTime = new Date();
             
