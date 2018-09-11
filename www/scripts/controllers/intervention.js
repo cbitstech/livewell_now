@@ -12,6 +12,8 @@ angular.module('livewellApp').controller('InterventionCtrl', function ($scope, $
 
 	console.log($routeParams);
 	$scope.questionGroups = Questions.query($routeParams.code);
+	
+	$scope.code = $routeParams.code;
 
 	$scope.hideProgressBar = true;
 

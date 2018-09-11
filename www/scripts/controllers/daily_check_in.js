@@ -598,4 +598,6 @@ angular.module('livewellApp').controller('DailyCheckInCtrl', function($scope, $l
             $("#warning").modal();
         }
     }
+    
+    window.needsDailyReviewReview = true;
 });

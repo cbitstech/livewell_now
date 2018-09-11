@@ -37,7 +37,9 @@
 			<a ng-href="#/wellness/resources" class="btn btn-info btn-full">Wellness Plan</a><br/>
 			<a ng-href="#/skills" class="btn btn-info btn-full">Toolbox</a><br/>
 			<a ng-href="#/foundations" class="btn btn-info btn-full">Foundations</a><br/><br/>
-			<a ng-href="#/load_interventions" class="btn btn-info btn-full">Review Something Else</a>
+			
+			<a ng-href="#/load_interventions" class="btn btn-info btn-full" ng-show="code != 'severe-up' && code != 'severe-down'">Review Something Else</a>
+			
 			<a ng-href="#/charts" class="btn btn-info btn-full">My Charts</a><br/>
 		</div>    
 

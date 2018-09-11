@@ -38,8 +38,8 @@
 
 		<a class="btn btn-full btn-primary" ng-href="#/weekly_check_in" ng-hide="completedWeeklyCheckIn">Weekly Check In</a>
 		<a class="btn btn-full btn-primary" ng-href="#/daily_check_in" ng-hide="completedDailyCheckIn">Daily Check In</a>
-		<a class="btn btn-full btn-primary" ng-href="#/daily_review" ng-show="completedDailyCheckIn && !startedDailyReview">Daily Review</a>
-		<a class="btn btn-full btn-info" ng-href="#/daily_review" ng-show="completedDailyCheckIn && startedDailyReview">Daily Review</a>
+		<a class="btn btn-full btn-primary" ng-href="#/daily_review" ng-show="completedDailyCheckIn && needsDailyReviewReview">Daily Review</a>
+		<a class="btn btn-full btn-info" ng-href="#/daily_review" ng-show="completedDailyCheckIn && !needsDailyReviewReview">Daily Review</a>
 		<a ng-href="#/load_interventions" class="btn btn-info btn-full" ng-show="completedDailyCheckIn && startedDailyReview && !lastDailyCheckinWasEmergency">Review Something Else</a>
 		<a ng-repeat="link in mainLinks" ng-href="#/{{link.href}}" class="btn {{link.class}} btn-full">{{link.name}}</a>
 		<br/>

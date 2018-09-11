@@ -124,4 +124,7 @@ angular.module('livewellApp').controller('DailyReviewCtrl', function($scope, $ro
             }
         }
     }
+
+    window.needsDailyReviewReview = false;
+    
 });

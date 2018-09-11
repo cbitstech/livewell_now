@@ -16,8 +16,12 @@ angular.module('livewellApp').controller('HomeCtrl', function ($scope, Pound, Da
         {name:"Wellness Plan", href:"wellness/resources", class: "btn-info"},
     ];
     
-    console.log('LIVEWELL');
-
+    $scope.needsDailyReviewReview = window.needsDailyReviewReview;
+    
+    if ($scope.needsDailyReviewReview == undefined) {
+    	$scope.needsDailyReviewReview = false;
+    }
+    
     var now = Date.now()
     var studyStart = parseFloat(localStorage['startDate']);
     var weekIndex = Math.floor((now - studyStart) / (7 * 24 * 60 * 60 * 1000));
@@ -120,14 +124,12 @@ angular.module('livewellApp').controller('HomeCtrl', function ($scope, Pound, Da
 
         var periodStart = studyStart + (15 * 7 * 24 * 60 * 60 * 1000);
 
-        if ($scope.mainLinks[0]['class'] == 'btn-info' && localStorage['lesson-read-378'] != undefined) {
-            var read = parseFloat(localStorage['lesson-read-187']);
+        if (localStorage['lesson-read-378'] != undefined) {
+            var read = parseFloat(localStorage['lesson-read-378']);
             
             if (read > periodStart) {
                 $scope.mainLinks[0]['class'] = 'btn-info';
             }
-        } else {
-            $scope.mainLinks[0]['class'] = 'btn-primary';
         }
     }
 
