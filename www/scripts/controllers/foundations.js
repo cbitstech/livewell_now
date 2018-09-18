@@ -125,7 +125,7 @@ angular.module('livewellApp').controller('FoundationsCtrl', function ($scope) {
         var periodStart = studyStart + (15 * 7 * 24 * 60 * 60 * 1000);
 
         if (localStorage['lesson-read-378'] != undefined) {
-            var read = parseFloat(localStorage['lesson-read-187']);
+            var read = parseFloat(localStorage['lesson-read-378']);
             
             if (read > periodStart) {
                 $scope.mainLinks[8]['class'] = 'btn-info';
